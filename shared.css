@@ -20,7 +20,7 @@
      min/max px numbers below (the middle value drives the fluid part). */
   --fs-xs: clamp(10px, 9.6px + 0.125vw, 12px); /* nav links, tags, labels, meta text — all small UI text */
   --fs-sm: clamp(12px, 11.6px + 0.125vw, 14px); /* default body copy */
-  --fs-md: clamp(13px, 12.4px + 0.1875vw, 16px); /* larger/lead body copy */
+  --fs-md: clamp(18px, 12.4px + 0.1875vw, 20px); /* larger/lead body copy */
 }
 
 /* ╔═══════════════════════════════════════════════════════════════╗
@@ -84,7 +84,7 @@
   --aur-noise-mix:     0.225;  /* grain strength (0 = off, 0.5 = strong)      */
 
   /* ── Site accent ──────────────────────────────────────────── */
-  --mark-blue:      #000000;              /* logo colour — used sparingly      */
+  --mark-blue:      #001aff;              /* logo colour — used sparingly      */
   --mark-blue-soft: rgba(0,0,255,0.08);
   --mark-blue-line: rgba(0,0,255,0.35);
 

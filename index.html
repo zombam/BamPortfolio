@@ -253,7 +253,7 @@ a { text-decoration: none; color: inherit; }
 }
 .hero-tagline {
   font-family: var(--font-accent);
-  font-size: clamp(15px, 1.9vw, 21px);
+  font-size: clamp(18px, 1.9vw, 21px);
   font-style: italic; font-weight: 300;
   color: var(--text-secondary); margin-bottom: 2rem;
   opacity: 0; animation: riseIn .85s ease .75s forwards;
@@ -414,7 +414,7 @@ a { text-decoration: none; color: inherit; }
   -webkit-backdrop-filter: blur(16px);
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
-  cursor: none; transition: background .22s;
+  cursor: none; transition: background .22s, box-shadow .35s ease;
 }
 .pj:hover { background: rgba(255,255,255,0.72); }
 .pj-a { grid-column: span 12; }                  /* hero — full width        */
@@ -440,7 +440,7 @@ a { text-decoration: none; color: inherit; }
 .pj-year { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .1em; color: var(--text-dim); }
 .pj-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text-primary); line-height: 1.1; }
 .pj-latin { font-family: var(--font-accent); font-size: var(--fs-md); font-style: italic; color: var(--text-secondary); }
-.pj-desc { font-size: var(--fs-md); color: var(--text-secondary); line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: .2rem; }
+.pj-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: .2rem; }
 .pj-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: .4rem; }
 .pj-tag {
   font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .09em;
@@ -570,7 +570,7 @@ a { text-decoration: none; color: inherit; }
 .hero-tagline { margin-bottom: 2.4rem; }
 
 /* ── WIP cards: add read-more arrow ── */
-.wip-card { transition: background .22s, transform .22s; }
+.wip-card { transition: background .22s, transform .22s, box-shadow .35s ease; }
 .wip-card:hover { transform: translateY(-2px); }
 
 /* ── Project hero card: more prominent title at full width ── */
@@ -677,6 +677,44 @@ a { text-decoration: none; color: inherit; }
 .drawer-ext { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.2rem; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .18em; text-transform: uppercase; color: var(--text-accent); border: .5px solid rgba(120,130,255,0.35); padding: .6rem 1.1rem; border-radius: 1px; transition: all .2s; }
 .drawer-ext:hover { background: rgba(120,130,255,0.08); }
 .drawer-ext svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  12. OCEAN FLOAT (homepage only)                              ║
+   ╚═══════════════════════════════════════════════════════════════╝
+   Two effects, both intentionally tiny:
+   1. A slow, staggered bob on a few surfaces (role pills, project
+      cards, WIP thumbnails) so they read as gently adrift rather
+      than static — like debris on calm water, not a bounce/wobble.
+   2. A soft blue glow that brightens as the cursor nears one of
+      those surfaces (set via --water-glow, see script G below),
+      like disturbing bioluminescent water. Fades out again once the
+      cursor moves away — never a hard on/off, no layout shift.
+   Respects prefers-reduced-motion; the glow alone (no motion) still
+   applies since it's a colour/opacity change, not movement. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes oceanBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+  }
+  .hero-role, .pj:not(.pj-more), .wip-media {
+    animation: oceanBob 7.4s ease-in-out infinite;
+  }
+  .hero-role:nth-of-type(2) { animation-duration: 8.1s; animation-delay: -2.6s; }
+  .hero-role:nth-of-type(3) { animation-duration: 6.7s; animation-delay: -4.9s; }
+  .pj:nth-of-type(3n+1) { animation-delay: -.8s; }
+  .pj:nth-of-type(3n+2) { animation-duration: 8.3s; animation-delay: -3.2s; }
+  .pj:nth-of-type(3n)   { animation-duration: 6.5s; animation-delay: -5.6s; }
+  .wip-card:nth-child(2) .wip-media { animation-duration: 7.9s; animation-delay: -1.7s; }
+  .wip-card:nth-child(3) .wip-media { animation-duration: 6.6s; animation-delay: -4s; }
+  .wip-card:nth-child(4) .wip-media { animation-duration: 8.7s; animation-delay: -5.9s; }
+}
+.hero-role, .pj:not(.pj-more), .wip-card {
+  /* box-shadow .35s eased in via each element's own `transition` above
+     (merged there, not redeclared here, so their existing background/
+     transform transitions on hover aren't clobbered) */
+  --water-glow: 0;
+  box-shadow: 0 0 calc(var(--water-glow) * 22px) calc(var(--water-glow) * 3px) rgba(120,180,255, calc(var(--water-glow) * 0.4));
+}
 </style>
 </head>
 <body>
@@ -799,7 +837,7 @@ a { text-decoration: none; color: inherit; }
     </div>
   </section>
 
-  <!-- ── SECTION 02: STUDIO / WIP (short strip) ── -->
+  <!-- ── SECTION 02: STUDIO / WIP (short strip) ──
   <section id="wip" class="section-sep">
     <div class="section-inner">
       <div class="wip-header reveal">
@@ -823,7 +861,7 @@ a { text-decoration: none; color: inherit; }
       </div>
       <div class="wip-grid" id="wip-grid"></div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ── SECTION 03: FEATURED PROJECTS ── -->
   <section id="featured" class="section-sep">
@@ -1483,6 +1521,40 @@ function handleForm(e) {
   btn.style.background = 'rgba(120,130,255,1)';
   btn.disabled = true;
 }
+</script>
+
+<!-- ── G. OCEAN FLOAT: mouse-proximity glow ── -->
+<script>
+(function() {
+  // Brightens a soft blue glow (--water-glow, 0–1) on role pills, project
+  // cards and WIP thumbnails as the cursor nears them — re-queried each
+  // frame since WIP cards render asynchronously after the portfolio.json
+  // fetch. Kept separate from the ambient bob animation (CSS, section 12)
+  // which is the only part gated on prefers-reduced-motion — this glow is
+  // a colour change, not movement, so it stays on for everyone.
+  const RADIUS = 220; // px — distance at which the glow starts to appear
+  let mouseX = -9999, mouseY = -9999, scheduled = false;
+
+  function update() {
+    scheduled = false;
+    document.querySelectorAll('.hero-role, .pj:not(.pj-more), .wip-card').forEach(el => {
+      const r = el.getBoundingClientRect();
+      const dx = mouseX - (r.left + r.width / 2);
+      const dy = mouseY - (r.top + r.height / 2);
+      const glow = Math.max(0, 1 - Math.hypot(dx, dy) / RADIUS);
+      el.style.setProperty('--water-glow', glow.toFixed(2));
+    });
+  }
+
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.hero-role, .pj:not(.pj-more), .wip-card').forEach(el => el.style.setProperty('--water-glow', 0));
+  });
+})();
 </script>
 
 </body>
