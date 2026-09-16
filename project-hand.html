@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The H.A.N.D. — Natcha Watcharawittayakul</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ════════════════════════════════════════════
+   PROJECT PAGE — The H.A.N.D.
+   Layout: editorial long-scroll, field.io register
+   Iridophore palette inherited from shared.css
+════════════════════════════════════════════ */
+main { padding-top: var(--nav-h); }
+
+/* ── 1. HERO — full-bleed media + title overlay ── */
+#hero {
+  position: relative;
+  height: 100vh; min-height: 640px;
+  overflow: hidden;
+  border-bottom: var(--hair);
+}
+
+.hero-media {
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--mid);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-media img,
+.hero-media video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+/* placeholder */
+.hero-ph {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .8rem; width: 100%; height: 100%;
+}
+.hero-ph svg { width: 36px; height: 36px; stroke: var(--text-3); fill: none; stroke-width: .7; }
+.hero-ph span { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+
+/* gradient veil — bottom 50% */
+.hero-veil {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(245,245,243,1)   0%,
+    rgba(245,245,243,0.7) 30%,
+    transparent 65%
+  );
+}
+
+/* frame ticks */
+.hero-frame { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.hf { position: absolute; width: 9px; height: 9px; border-color: rgba(90,191,176,.35); border-style: solid; }
+.hf.tl { top:28px; left:28px; border-width:1px 0 0 1px; }
+.hf.tr { top:28px; right:28px; border-width:1px 1px 0 0; }
+.hf.bl { bottom:28px; left:28px; border-width:0 0 1px 1px; }
+.hf.br { bottom:28px; right:28px; border-width:0 1px 1px 0; }
+
+/* breadcrumb */
+.hero-breadcrumb {
+  position: absolute; top: 1.8rem; left: var(--page-pad);
+  z-index: 3; display: flex; align-items: center; gap: .6rem;
+  font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text-3);
+  opacity: 0; animation: fadeIn .6s ease .2s forwards;
+}
+.hero-breadcrumb a { color: var(--text-3); transition: color .2s; }
+.hero-breadcrumb a:hover { color: var(--irid); }
+.hero-breadcrumb span { color: var(--text-4); }
+.hero-breadcrumb svg { width: 10px; height: 10px; stroke: var(--text-3); fill: none; stroke-width: 1.5; }
+
+/* project index — top right */
+.hero-index {
+  position: absolute; top: 1.8rem; right: var(--page-pad);
+  z-index: 3; text-align: right;
+  opacity: 0; animation: fadeIn .6s ease .3s forwards;
+}
+.hero-index .idx-n {
+  font-family: var(--serif); font-size: 40px; font-weight: 300;
+  color: rgba(90,191,176,.2); line-height: 1;
+}
+.hero-index .idx-l {
+  font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: var(--text-3);
+}
+
+/* title block — bottom left */
+.hero-copy {
+  position: absolute; bottom: 3.5rem; left: var(--page-pad);
+  z-index: 3; max-width: 700px;
+}
+.hero-cat {
+  font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--irid); margin-bottom: .9rem;
+  opacity: 0; animation: riseIn .7s ease .4s forwards;
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(52px, 8vw, 106px);
+  font-weight: 300; line-height: .86;
+  color: var(--ink); letter-spacing: -.02em;
+  opacity: 0; animation: riseIn .9s ease .55s forwards;
+}
+.hero-h1 em {
+  font-style: italic; color: var(--text-2);
+  font-size: .55em; display: block; margin-top: .25em;
+  letter-spacing: 0;
+}
+.hero-tagline {
+  font-family: var(--serif); font-size: clamp(14px, 1.8vw, 19px);
+  font-style: italic; color: var(--text-2); margin-top: .9rem;
+  opacity: 0; animation: riseIn .8s ease .8s forwards;
+}
+
+/* meta strip — bottom right of hero */
+.hero-meta-strip {
+  position: absolute; bottom: 3.5rem; right: var(--page-pad);
+  z-index: 3; display: flex; flex-direction: column;
+  align-items: flex-end; gap: .7rem;
+  opacity: 0; animation: fadeIn .8s ease 1s forwards;
+}
+.hms-item { text-align: right; }
+.hms-k { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+.hms-v { font-size: 11px; color: var(--text-1); margin-top: 1px; }
+
+/* ── 2. PROJECT INTRO — 2-col ── */
+#intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: var(--hair);
+}
+.intro-l {
+  padding: 5rem var(--page-pad);
+  border-right: var(--hair);
+}
+.intro-r {
+  padding: 5rem var(--page-pad);
+}
+
+/* section label shared */
+.proj-label {
+  font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.proj-label::after { content: ''; width: 24px; height: .5px; background: var(--text-3); }
+
+.intro-headline {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 46px);
+  font-weight: 300; line-height: 1.12;
+  color: var(--ink); margin-bottom: 2rem;
+}
+.intro-headline em { font-style: italic; color: var(--text-2); }
+
+.intro-body {
+  font-size: 12px; line-height: 2.2;
+  color: var(--text-2); max-width: 460px;
+}
+.intro-body p + p { margin-top: 1.1em; }
+
+/* key specs grid */
+.specs-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: var(--hair);
+}
+.spec-cell {
+  padding: 1.3rem 1.4rem;
+  border-bottom: var(--hair); border-right: var(--hair);
+  transition: background .25s;
+}
+.spec-cell:nth-child(even) { border-right: none; }
+.spec-cell:nth-last-child(-n+2) { border-bottom: none; }
+.spec-cell:hover { background: rgba(90,191,176,.03); }
+.spec-k {
+  font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: .4rem;
+}
+.spec-v {
+  font-size: 12px; color: var(--text-1); line-height: 1.65;
+}
+.spec-v.serif {
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--ink);
+}
+
+/* ── 3. FULL-BLEED IMAGE BREAK ── */
+.img-break {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  background: var(--mid);
+  overflow: hidden; position: relative;
+  border-bottom: var(--hair);
+  display: flex; align-items: center; justify-content: center;
+}
+.img-break img,
+.img-break video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.img-break-ph {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .6rem;
+}
+.img-break-ph svg { width: 28px; height: 28px; stroke: var(--text-3); fill: none; stroke-width: .8; }
+.img-break-ph span { font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); }
+
+/* caption below break */
+.img-caption {
+  padding: .8rem var(--page-pad);
+  font-size: 9px; letter-spacing: .1em; color: var(--text-3);
+  border-bottom: var(--hair);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* ── 4. PROCESS — numbered sections ── */
+#process { border-bottom: var(--hair); }
+
+.process-section {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  border-bottom: var(--hair);
+}
+.process-section:last-child { border-bottom: none; }
+
+.ps-num {
+  padding: 3.5rem 2rem;
+  border-right: var(--hair);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 3.8rem;
+}
+.ps-num-inner {
+  font-family: var(--serif); font-size: 32px; font-weight: 300;
+  color: rgba(90,191,176,.25); line-height: 1;
+}
+
+.ps-copy {
+  padding: 3.5rem 2.5rem 3.5rem var(--page-pad);
+  border-right: var(--hair);
+}
+.ps-title {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 300; line-height: 1.15;
+  color: var(--ink); margin-bottom: 1.4rem;
+}
+.ps-title em { font-style: italic; color: var(--text-2); }
+.ps-body {
+  font-size: 11.5px; line-height: 2.15;
+  color: var(--text-2);
+}
+.ps-body p + p { margin-top: 1em; }
+
+/* highlight pull-quote */
+.ps-pull {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2vw, 22px);
+  font-style: italic; font-weight: 300;
+  color: var(--deep); line-height: 1.5;
+  margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: .5px solid rgba(90,191,176,.25);
+}
+
+.ps-media {
+  padding: 3.5rem 2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.ps-img {
+  width: 100%; aspect-ratio: 4/3;
+  background: var(--mid); border: var(--hair);
+  overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.ps-img img, .ps-img video { width: 100%; height: 100%; object-fit: cover; }
+.ps-img-ph {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .5rem;
+}
+.ps-img-ph svg { width: 22px; height: 22px; stroke: var(--text-3); fill: none; stroke-width: .8; }
+.ps-img-ph span { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+
+/* ── 5. OUTCOMES + TOOLS — 2 col ── */
+#outcomes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: var(--hair);
+}
+.outcomes-l {
+  padding: 4.5rem var(--page-pad);
+  border-right: var(--hair);
+}
+.outcomes-r {
+  padding: 4.5rem var(--page-pad);
+}
+
+.outcome-list {
+  display: flex; flex-direction: column; gap: 0;
+  margin-top: 1rem;
+}
+.outcome-item {
+  display: flex; gap: 1.2rem; padding: 1.1rem 0;
+  border-bottom: var(--hair-mid);
+  align-items: flex-start;
+}
+.outcome-item:last-child { border-bottom: none; }
+.oi-mark {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--irid); flex-shrink: 0; margin-top: .55rem;
+}
+.oi-text { font-size: 11.5px; line-height: 1.9; color: var(--text-2); }
+.oi-text strong { color: var(--ink); font-weight: 400; }
+
+/* tools / stack */
+.tools-group { margin-bottom: 2rem; }
+.tools-group-label {
+  font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: .7rem;
+}
+.tools-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.tool-chip {
+  font-size: 9px; letter-spacing: .09em;
+  background: rgba(90,191,176,.07);
+  border: .5px solid rgba(90,191,176,.2);
+  color: var(--deep); padding: 4px 10px; border-radius: 1px;
+}
+
+/* role badge */
+.role-block {
+  margin-top: 2rem; padding: 1.4rem;
+  border: .5px solid rgba(14,30,28,.08);
+  border-left: 2px solid var(--irid);
+}
+.role-k { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); margin-bottom: .5rem; }
+.role-v { font-size: 11.5px; color: var(--text-1); line-height: 1.8; }
+
+/* ── 6. IMAGE GALLERY — 3 col ── */
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(14,30,28,.07);
+  border-bottom: var(--hair);
+}
+.gallery-cell {
+  aspect-ratio: 4/3;
+  background: var(--mid);
+  overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+}
+.gallery-cell img,
+.gallery-cell video { width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.23,1,.32,1); }
+.gallery-cell:hover img,
+.gallery-cell:hover video { transform: scale(1.04); }
+.gallery-cell-ph {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .5rem;
+  position: absolute; inset: 0;
+}
+.gallery-cell-ph svg { width: 22px; height: 22px; stroke: var(--text-3); fill: none; stroke-width: .8; }
+.gallery-cell-ph span { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+/* wide cell spans 2 cols */
+.gallery-cell.wide { grid-column: span 2; aspect-ratio: 8/3; }
+
+/* ── 7. REFLECTIONS ── */
+#reflections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: var(--hair);
+}
+.ref-l {
+  padding: 5rem var(--page-pad);
+  border-right: var(--hair);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.ref-quote {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 300; font-style: italic;
+  color: var(--ink); line-height: 1.35;
+  position: relative; padding-left: 1.8rem;
+}
+.ref-quote::before {
+  content: '';
+  position: absolute; left: 0; top: .3em;
+  width: 2px; height: calc(100% - .3em);
+  background: var(--irid);
+}
+
+.ref-r {
+  padding: 5rem var(--page-pad);
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.ref-body { font-size: 11.5px; line-height: 2.15; color: var(--text-2); }
+.ref-body p + p { margin-top: 1em; }
+
+/* ── 8. NEXT PROJECT + CTA ── */
+#next-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: var(--hair);
+}
+.next-back {
+  padding: 3rem var(--page-pad);
+  border-right: var(--hair);
+  display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;
+}
+.next-label { font-size: 8.5px; letter-spacing: .25em; text-transform: uppercase; color: var(--text-3); }
+.next-link {
+  display: inline-flex; align-items: center; gap: .7rem;
+  font-family: var(--serif); font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 300; color: var(--ink); transition: color .2s;
+}
+.next-link:hover { color: var(--deep); }
+.next-link svg { width: 16px; height: 16px; stroke: var(--irid); fill: none; stroke-width: 1.5; flex-shrink: 0; }
+
+.next-forward {
+  padding: 3rem var(--page-pad);
+  display: flex; flex-direction: column; justify-content: center;
+  align-items: flex-end; gap: 1.2rem; text-align: right;
+}
+
+/* ── SCROLL PROGRESS BAR ── */
+#progress-bar {
+  position: fixed; top: var(--nav-h); left: 0; right: 0;
+  height: 2px; z-index: 599;
+  background: rgba(90,191,176,.12);
+}
+#progress-fill {
+  height: 100%; background: var(--irid);
+  width: 0%; transition: width .1s linear;
+}
+</style>
+</head>
+<body>
+
+<div class="cur-dot"></div>
+<div class="cur-ring"></div>
+<div class="cur-label"></div>
+
+<!-- Scroll progress -->
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="nav-logo-mark">Bam</span>
+    <div class="nav-logo-rule"></div>
+    <span class="nav-logo-sub">The H.A.N.D.</span>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-link">Gateway</a>
+    <a href="systems.html" class="nav-link">Systems</a>
+    <a href="graphics.html" class="nav-link">Graphics</a>
+    <a href="#contact-strip" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-pip"><div class="pip"></div><span>Open to work</span></div>
+    <a href="systems.html#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     1. HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-media">
+    <!-- HERO MEDIA SLOT — replace with your best image or video -->
+    <!-- <img src="media/hand-hero.jpg" alt="The H.A.N.D. installation"> -->
+    <!-- <video src="media/hand-hero.mp4" autoplay loop muted playsinline></video> -->
+    <div class="hero-ph">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+      <span>Hero image · video · gif</span>
+    </div>
+  </div>
+  <div class="hero-veil"></div>
+  <div class="hero-frame">
+    <div class="hf tl"></div><div class="hf tr"></div>
+    <div class="hf bl"></div><div class="hf br"></div>
+  </div>
+
+  <div class="hero-breadcrumb">
+    <a href="systems.html">Systems</a>
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <span>The H.A.N.D.</span>
+  </div>
+
+  <div class="hero-index">
+    <div class="idx-n">01</div>
+    <div class="idx-l">Systems &<br>Computation</div>
+  </div>
+
+  <div class="hero-copy">
+    <p class="hero-cat">Interaction Design · Industrial Design · Creative Coding · UAL Thesis 2025</p>
+    <h1 class="hero-h1">
+      The H.A.N.D.
+      <em>Hybrid Autonomous Neural Digits</em>
+    </h1>
+    <p class="hero-tagline">
+      Distributed Intelligence in Soft Robotics
+    </p>
+  </div>
+
+  <div class="hero-meta-strip">
+    <div class="hms-item">
+      <div class="hms-k">Year</div>
+      <div class="hms-v">2025</div>
+    </div>
+    <div class="hms-item">
+      <div class="hms-k">Institution</div>
+      <div class="hms-v">UAL — Creative Computing Institute</div>
+    </div>
+    <div class="hms-item">
+      <div class="hms-k">Status</div>
+      <div class="hms-v" style="color:var(--irid)">Thesis — Distinction</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     2. INTRO
+══════════════════════════════════════ -->
+<section id="intro">
+  <div class="intro-l">
+    <div class="proj-label">Overview</div>
+    <h2 class="intro-headline">
+      A body that thinks<br>
+      with its <em>periphery,</em><br>
+      not its centre
+    </h2>
+    <div class="intro-body">
+      <p>The H.A.N.D. is an independent research project translating the decentralised neural architecture of the octopus into a responsive, living artifact. It investigates Embodied Intelligence — the principle that a body's physical form is inseparable from its intelligence.</p>
+      <p>Traditional robotic control relies on a centralised brain, creating bottlenecks in real-time adaptation. Inspired by the octopus (<em>Octopus vulgaris</em>), where two-thirds of neurons reside in the limbs, this system distributes perception and decision-making directly into its silicone skin — allowing the limbs to negotiate context without waiting for a central command.</p>
+    </div>
+  </div>
+  <div class="intro-r">
+    <div class="proj-label">Project Specs</div>
+    <div class="specs-grid">
+      <div class="spec-cell">
+        <div class="spec-k">Type</div>
+        <div class="spec-v">Soft Robotics Installation</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-k">Duration</div>
+        <div class="spec-v">Sep 2024 — Dec 2025</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-k">Role</div>
+        <div class="spec-v">Solo — research, fabrication, code</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-k">Award</div>
+        <div class="spec-v serif">Distinction — M.Sc. UAL</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-k">Material</div>
+        <div class="spec-v">Ecoflex™ 00-30 Silicone</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-k">Core concept</div>
+        <div class="spec-v serif">Embodied AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FULL-BLEED BREAK 1
+══════════════════════════════════════ -->
+<div class="img-break">
+  <!-- <img src="media/hand-full-1.jpg" alt="H.A.N.D. on plinth"> -->
+  <div class="img-break-ph">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+    <span>Full-bleed image — installation view</span>
+  </div>
+</div>
+<div class="img-caption">
+  <span>The H.A.N.D. — installation view, UAL Creative Computing Institute, Dec 2025</span>
+  <span>Ecoflex™ 00-30 silicone · LDR sensory network · pneumatic actuators</span>
+</div>
+
+<!-- ══════════════════════════════════════
+     3. PROCESS — THREE CHAPTERS
+══════════════════════════════════════ -->
+<section id="process">
+
+  <!-- Chapter 01: The Decentralised Paradigm -->
+  <div class="process-section">
+    <div class="ps-num"><div class="ps-num-inner">01</div></div>
+    <div class="ps-copy">
+      <div class="proj-label">Research</div>
+      <h3 class="ps-title">The Decentralised<br><em>Paradigm</em></h3>
+      <div class="ps-body">
+        <p>Traditional robotic systems depend on centralised control — a single processor manages all inputs and outputs, creating latency, single points of failure, and limited adaptability. The H.A.N.D. rejects this model entirely.</p>
+        <p>Drawing on the neurobiology of <em>Octopus vulgaris</em>, where two-thirds of 500 million neurons are distributed across the eight arms, the system implements a <strong>Distributed Finite State Machine (dFSM)</strong>. Each digit operates its own state logic. Rather than polling a central brain, limbs communicate laterally — negotiating shared context and coordinating behaviour emergently.</p>
+        <p>This shift from centralised to peripheral intelligence is not only a computational advantage. It produces a fundamentally different quality of movement — one that reads as organic, tentative, alive.</p>
+      </div>
+      <div class="ps-pull">
+        "When we distribute autonomy, we don't just get better performance — we get emotional resonance that centralised systems lack."
+      </div>
+    </div>
+    <div class="ps-media">
+      <div class="ps-img">
+        <!-- <img src="media/hand-diagram-dfsm.jpg" alt="dFSM diagram"> -->
+        <div class="ps-img-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+          <span>dFSM diagram</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 02: Material Computing -->
+  <div class="process-section">
+    <div class="ps-num"><div class="ps-num-inner">02</div></div>
+    <div class="ps-copy">
+      <div class="proj-label">Fabrication</div>
+      <h3 class="ps-title">Material<br><em>Computing</em></h3>
+      <div class="ps-body">
+        <p>The system's morphology is its primary sensor. Cast in translucent <strong>Ecoflex™ 00-30 silicone</strong> — the same material used in prosthetics and soft robotics research — the digits exploit subsurface scattering to process ambient light before it reaches the embedded LDR network.</p>
+        <p>The silicone acts as a passive optical filter: diffusing and softening incoming light into volumetric gradients that the LDR array reads as spatial data. The material itself computes — transforming environmental information through physics before any digital processing occurs.</p>
+        <p>Pneumatic actuators drive each digit's motion. Custom-fabricated silicone channels route pressurised air in sequences determined by the dFSM, producing gestures that are pre-programmed in logic but unpredictable in exact expression — each inflation curve varies with material temperature and ambient humidity.</p>
+      </div>
+    </div>
+    <div class="ps-media">
+      <div class="ps-img">
+        <!-- <img src="media/hand-fabrication.jpg" alt="Silicone fabrication process"> -->
+        <div class="ps-img-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+          <span>Fabrication process</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 03: Lateral Excitation -->
+  <div class="process-section">
+    <div class="ps-num"><div class="ps-num-inner">03</div></div>
+    <div class="ps-copy">
+      <div class="proj-label">Core Innovation</div>
+      <h3 class="ps-title">Anticipatory<br><em>Awareness</em></h3>
+      <div class="ps-body">
+        <p>The system's most significant breakthrough is <strong>Lateral Excitation</strong>: a mechanism by which each digit communicates with its immediate neighbours, allowing it to "know" that a stimulus is approaching before it physically detects it.</p>
+        <p>As one digit detects light change in its LDR network, it broadcasts an excitation signal to adjacent digits. These neighbours enter a heightened sensitivity state — threshold sensitivity increases, response latency decreases. By the time the stimulus reaches them, they are primed.</p>
+        <p>This produces a ripple of awareness across the body — a biological strategy for survival translated into digital logic. The result is a system that feels not merely reactive, but <em>anticipatory</em>. Visitors consistently report that the artifact seems to notice them before they make contact.</p>
+      </div>
+      <div class="ps-pull">
+        "A digit knows a stimulus is approaching before it physically detects it — a ripple of awareness across the body."
+      </div>
+    </div>
+    <div class="ps-media">
+      <div class="ps-img">
+        <!-- <video src="media/hand-lateral-excitation.mp4" autoplay loop muted playsinline></video> -->
+        <div class="ps-img-ph">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>Lateral excitation demo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     FULL-BLEED BREAK 2
+══════════════════════════════════════ -->
+<div class="img-break" style="aspect-ratio:21/7">
+  <!-- <video src="media/hand-live.mp4" autoplay loop muted playsinline></video> -->
+  <div class="img-break-ph">
+    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <span>Live system video — lateral excitation sequence</span>
+  </div>
+</div>
+<div class="img-caption">
+  <span>Lateral Excitation sequence — LDR network responding to approaching hand</span>
+  <span>Arduino Mega 2560 · C++ · Pneumatic actuators</span>
+</div>
+
+<!-- ══════════════════════════════════════
+     4. OUTCOMES + TOOLS
+══════════════════════════════════════ -->
+<section id="outcomes">
+  <div class="outcomes-l">
+    <div class="proj-label">Outcomes</div>
+    <h2 class="intro-headline" style="font-size:clamp(22px,3vw,38px)">
+      What the project<br><em>demonstrated</em>
+    </h2>
+    <div class="outcome-list">
+      <div class="outcome-item">
+        <div class="oi-mark"></div>
+        <div class="oi-text"><strong>Distributed intelligence is not a tradeoff.</strong> The dFSM architecture achieves both fault tolerance and expressive nuance — qualities that centralised systems must sacrifice one for the other.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="oi-mark"></div>
+        <div class="oi-text"><strong>Material is computation.</strong> The Ecoflex™ silicone performs optical filtering before any digital processing occurs — demonstrating that physical form can be an active element of a computational system, not merely its housing.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="oi-mark"></div>
+        <div class="oi-text"><strong>Anticipatory behaviour creates emotional resonance.</strong> Visitor responses consistently described the artifact as "aware" and "alive" — responses that emerged from the Lateral Excitation mechanism, not from any expressive programming intent.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="oi-mark"></div>
+        <div class="oi-text"><strong>Soft robotics expands the design space.</strong> Silicone fabrication introduces material variability that is typically eliminated in engineering contexts. Here it is embraced — each inflation cycle is slightly different, and the artifact is richer for it.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="oi-mark"></div>
+        <div class="oi-text"><strong>A new model for interactive environments.</strong> Spaces that don't merely react to us, but anticipate and evolve alongside us — this is the territory The H.A.N.D. opens up.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcomes-r">
+    <div class="proj-label">Technology Stack</div>
+
+    <div class="tools-group">
+      <div class="tools-group-label">Hardware & Electronics</div>
+      <div class="tools-chips">
+        <span class="tool-chip">Arduino Mega 2560</span>
+        <span class="tool-chip">LDR Sensory Network</span>
+        <span class="tool-chip">Pneumatic Actuators</span>
+        <span class="tool-chip">Custom PCB</span>
+      </div>
+    </div>
+
+    <div class="tools-group">
+      <div class="tools-group-label">Materials & Fabrication</div>
+      <div class="tools-chips">
+        <span class="tool-chip">Ecoflex™ 00-30 Silicone</span>
+        <span class="tool-chip">Mould fabrication</span>
+        <span class="tool-chip">Laser cutting</span>
+        <span class="tool-chip">3D printing</span>
+      </div>
+    </div>
+
+    <div class="tools-group">
+      <div class="tools-group-label">Software & Code</div>
+      <div class="tools-chips">
+        <span class="tool-chip">C++</span>
+        <span class="tool-chip">TouchDesigner</span>
+        <span class="tool-chip">Houdini</span>
+        <span class="tool-chip">Blender</span>
+        <span class="tool-chip">Fusion 360</span>
+      </div>
+    </div>
+
+    <div class="tools-group">
+      <div class="tools-group-label">Research Frameworks</div>
+      <div class="tools-chips">
+        <span class="tool-chip">Distributed FSM (dFSM)</span>
+        <span class="tool-chip">Lateral Excitation</span>
+        <span class="tool-chip">Embodied Intelligence</span>
+        <span class="tool-chip">Material Computing</span>
+      </div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-k">My Role</div>
+      <div class="role-v">Solo research project — concept development, biological research, silicone fabrication, electronics design, C++ implementation, TouchDesigner integration, and exhibition installation. Supervised by UAL Creative Computing Institute, Dec 2025.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     5. IMAGE GALLERY
+══════════════════════════════════════ -->
+<section id="gallery">
+  <!-- Wide cell — spans 2 cols -->
+  <div class="gallery-cell wide">
+    <!-- <img src="media/hand-gallery-wide.jpg" alt="H.A.N.D. detail"> -->
+    <div class="gallery-cell-ph">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+      <span>Wide image — full system view</span>
+    </div>
+  </div>
+  <!-- Tall cell -->
+  <div class="gallery-cell">
+    <!-- <img src="media/hand-gallery-3.jpg" alt="Silicone digit detail"> -->
+    <div class="gallery-cell-ph">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+      <span>Silicone digit detail</span>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <!-- <img src="media/hand-gallery-4.jpg" alt="Electronics close-up"> -->
+    <div class="gallery-cell-ph">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+      <span>LDR network & electronics</span>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <!-- <img src="media/hand-gallery-5.jpg" alt="Fabrication process"> -->
+    <div class="gallery-cell-ph">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+      <span>Mould fabrication</span>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <!-- <video src="media/hand-gallery-6.mp4" autoplay loop muted playsinline></video> -->
+    <div class="gallery-cell-ph">
+      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <span>Visitor interaction video</span>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <!-- <img src="media/hand-gallery-7.jpg" alt="Exhibition view"> -->
+    <div class="gallery-cell-ph">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+      <span>Exhibition context</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     6. REFLECTIONS
+══════════════════════════════════════ -->
+<section id="reflections">
+  <div class="ref-l">
+    <div class="proj-label">Reflection</div>
+    <div class="ref-quote">
+      "The H.A.N.D. marks a shift from designing interfaces to designing behaviours."
+    </div>
+  </div>
+  <div class="ref-r">
+    <div class="ref-body">
+      <p>This project began as a technical investigation and became something closer to a philosophical one. The more I distributed autonomy across the limbs, the more the system began to surprise me — not because it malfunctioned, but because it expressed behaviours I had not programmed for.</p>
+      <p>Working at the intersection of soft fabrication and distributed computing taught me that material choices are computational choices. The viscosity of the silicone, the diffusion properties of its translucency, the thermal sensitivity of the LDR network — each is a design decision that shapes what the system can know and when it can know it.</p>
+      <p>The visitors who spent the most time with The H.A.N.D. were not those who understood its architecture. They were those who felt, correctly, that it was paying attention to them. That emotional resonance — emerging from a state machine and a silicone mould — is the result I am most interested in pursuing further.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     7. NEXT PROJECT
+══════════════════════════════════════ -->
+<section id="next-section">
+  <div class="next-back">
+    <span class="next-label">← Back to</span>
+    <a href="systems.html" class="next-link">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Systems & Computation
+    </a>
+  </div>
+  <div class="next-forward">
+    <span class="next-label">Next project →</span>
+    <a href="project-marine-pulse.html" class="next-link" style="flex-direction:row-reverse">
+      Marine Pulse
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACT STRIP
+══════════════════════════════════════ -->
+<section id="contact-strip" style="border-top:var(--hair);padding:3rem var(--page-pad);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;background:rgba(220,222,218,.18)">
+  <div>
+    <div class="proj-label" style="margin-bottom:.6rem">Interested in collaborating?</div>
+    <p style="font-family:var(--serif);font-size:clamp(18px,2.5vw,28px);font-weight:300;font-style:italic;color:var(--ink)">I'm open to studios, residencies,<br>and full-time roles.</p>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap">
+    <a href="mailto:n.watcharawittayakul@icloud.com" style="display:inline-flex;align-items:center;gap:.6rem;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);background:var(--irid);padding:.8rem 1.6rem;border-radius:1px;transition:background .2s">
+      Email me
+    </a>
+    <a href="https://www.linkedin.com/in/natcha-watcharawittayakul" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--deep);border:.5px solid rgba(90,191,176,.35);padding:.8rem 1.6rem;border-radius:1px;transition:all .2s">
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span class="footer-l">© 2025 Natcha Watcharawittayakul · London</span>
+  <div class="footer-links">
+    <a href="index.html" class="footer-link">Gateway</a>
+    <a href="systems.html" class="footer-link">Systems</a>
+    <a href="graphics.html" class="footer-link">Graphics</a>
+  </div>
+  <span class="footer-r">Interaction · Data · Nature · Code</span>
+</footer>
+
+<!-- Cursor (no drawer needed on project page) -->
+<script>
+(function(){
+  const dot=document.querySelector('.cur-dot'),ring=document.querySelector('.cur-ring');
+  const lbl=document.querySelector('.cur-label');
+  let rx=0,ry=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{
+    cx=e.clientX;cy=e.clientY;
+    dot.style.left=cx+'px';dot.style.top=cy+'px';
+    if(lbl){lbl.style.left=cx+'px';lbl.style.top=cy+'px';}
+  });
+  (function a(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='42px';ring.style.height='42px';ring.style.borderColor='rgba(90,191,176,.6)';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(90,191,176,.45)';});
+  });
+  document.querySelectorAll('.gallery-cell').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';if(lbl){lbl.textContent='View';lbl.classList.add('show');}});
+    el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';if(lbl)lbl.classList.remove('show');});
+  });
+})();
+</script>
+
+<!-- Scroll progress bar -->
+<script>
+(function(){
+  const fill=document.getElementById('progress-fill');
+  window.addEventListener('scroll',()=>{
+    const total=document.documentElement.scrollHeight-window.innerHeight;
+    fill.style.width=(window.scrollY/total*100)+'%';
+  },{passive:true});
+})();
+</script>
+
+</body>
+</html>

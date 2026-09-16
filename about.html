@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Natcha (Bam) Watcharawittayakul</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ════════════════════════════════════════
+   ABOUT PAGE — The Editorial CV
+   field.io register × Iridophore palette
+════════════════════════════════════════ */
+main { padding-top: var(--nav-h); }
+
+/* ── 1. OPENING — typographic hero ── */
+#opening {
+  padding: 5rem var(--page-pad) 4rem;
+  border-bottom: var(--hair);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+/* subtle teal radial behind the text */
+#opening::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 55%; height: 130%;
+  background: radial-gradient(ellipse, rgba(90,191,176,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.opening-l {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.opening-overline {
+  font-size: 8.5px; letter-spacing: .32em;
+  text-transform: uppercase; color: var(--irid);
+  margin-bottom: 1.1rem;
+  opacity: 0; animation: riseIn .7s ease .2s forwards;
+}
+.opening-name {
+  font-family: var(--serif);
+  font-size: clamp(52px, 7.5vw, 100px);
+  font-weight: 300; line-height: .86;
+  color: var(--ink); letter-spacing: -.025em;
+  margin-bottom: .4rem;
+  opacity: 0; animation: riseIn .9s ease .35s forwards;
+}
+.opening-name em {
+  font-style: italic; color: var(--text-2);
+  font-size: .62em; display: block; margin-top: .15em;
+}
+.opening-role {
+  font-family: var(--serif);
+  font-size: clamp(15px, 2vw, 21px);
+  font-style: italic; font-weight: 300;
+  color: var(--text-2); margin-top: 1rem;
+  opacity: 0; animation: riseIn .8s ease .55s forwards;
+}
+
+/* photo + contact block */
+.opening-r {
+  display: flex; flex-direction: column;
+  justify-content: space-between; gap: 2rem;
+}
+.photo-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  max-width: 280px;
+  background: var(--mid);
+  overflow: hidden; position: relative;
+  border: var(--hair);
+  opacity: 0; animation: fadeIn .9s ease .5s forwards;
+}
+.photo-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+}
+.photo-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .6rem;
+}
+.photo-ph svg { width: 28px; height: 28px; stroke: var(--text-3); fill: none; stroke-width: .8; }
+.photo-ph span { font-size: 8px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); }
+
+.opening-quick {
+  opacity: 0; animation: fadeIn .8s ease .8s forwards;
+}
+.oq-item {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .55rem 0;
+  border-bottom: var(--hair-mid);
+  font-size: 10.5px; color: var(--text-2);
+}
+.oq-item:last-child { border-bottom: none; }
+.oq-item svg { width: 12px; height: 12px; stroke: var(--irid); fill: none; stroke-width: 1.5; flex-shrink: 0; }
+.oq-item a { color: var(--text-2); transition: color .2s; }
+.oq-item a:hover { color: var(--irid); }
+
+/* ── 2. BIO — three acts ── */
+#bio {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: var(--hair);
+}
+.bio-rail {
+  padding: 4rem var(--page-pad);
+  border-right: var(--hair);
+  display: flex; flex-direction: column;
+  gap: 0;
+  position: sticky; top: var(--nav-h);
+  height: fit-content;
+}
+.bio-nav-item {
+  font-size: 8.5px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-3);
+  padding: .6rem 0;
+  border-bottom: var(--hair-mid);
+  transition: color .2s; cursor: pointer;
+  text-decoration: none;
+}
+.bio-nav-item:hover { color: var(--irid); }
+.bio-nav-item.active { color: var(--irid); }
+
+.bio-content { padding: 4rem var(--page-pad); }
+.bio-act {
+  margin-bottom: 4.5rem;
+  padding-bottom: 4.5rem;
+  border-bottom: var(--hair);
+}
+.bio-act:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.bio-act-label {
+  font-size: 8px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--text-3);
+  margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.bio-act-label::after { content: ''; width: 24px; height: .5px; background: var(--text-3); }
+
+.bio-act-headline {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300; line-height: 1.08;
+  color: var(--ink); margin-bottom: 2rem;
+}
+.bio-act-headline em { font-style: italic; color: var(--text-2); }
+
+.bio-act-body {
+  font-size: 12px; line-height: 2.2;
+  color: var(--text-2); max-width: 600px;
+}
+.bio-act-body p + p { margin-top: 1.1em; }
+.bio-act-body strong { color: var(--ink); font-weight: 400; }
+
+/* pull-stat inside bio */
+.bio-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border: var(--hair);
+  margin-top: 2.5rem; max-width: 560px;
+}
+.bio-stat {
+  padding: 1.2rem 1.4rem;
+  border-right: var(--hair);
+  transition: background .25s;
+}
+.bio-stat:last-child { border-right: none; }
+.bio-stat:hover { background: rgba(90,191,176,.03); }
+.bs-n {
+  font-family: var(--serif); font-size: 42px;
+  font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: .25rem;
+}
+.bs-n sup { font-size: .45em; color: var(--irid); vertical-align: super; }
+.bs-l { font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); line-height: 1.6; }
+
+/* ── 3. EXPERIENCE TIMELINE ── */
+#experience {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: var(--hair);
+}
+.exp-rail {
+  padding: 4rem var(--page-pad);
+  border-right: var(--hair);
+}
+.exp-rail-label {
+  font-size: 8px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--text-3);
+  position: sticky; top: calc(var(--nav-h) + 1rem);
+}
+
+.exp-content { padding: 4rem var(--page-pad); }
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 2rem;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  border-bottom: var(--hair-mid);
+  position: relative;
+}
+.exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+/* timeline dot + line */
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: 110px;
+  top: .4rem;
+  width: .5px;
+  height: calc(100% + 3rem);
+  background: rgba(14,30,28,.07);
+}
+.exp-item:last-child::before { display: none; }
+
+.exp-dates {
+  font-size: 9px; letter-spacing: .1em;
+  color: var(--text-3); padding-top: .25rem;
+  line-height: 1.7;
+}
+.exp-dates strong { display: block; font-size: 10px; color: var(--text-2); font-weight: 300; }
+
+.exp-body {}
+.exp-role {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 300; color: var(--ink); line-height: 1.1;
+  margin-bottom: .3rem;
+}
+.exp-place {
+  font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--irid);
+  margin-bottom: .9rem;
+}
+.exp-desc {
+  font-size: 11px; line-height: 1.95;
+  color: var(--text-2); max-width: 520px;
+}
+.exp-tags {
+  display: flex; flex-wrap: wrap; gap: 3px;
+  margin-top: .8rem;
+}
+.exp-tag {
+  font-size: 8px; letter-spacing: .09em;
+  background: rgba(90,191,176,.07);
+  border: .5px solid rgba(90,191,176,.2);
+  color: var(--deep); padding: 2px 7px; border-radius: 1px;
+}
+
+/* dot marker */
+.exp-dot {
+  position: absolute;
+  left: calc(110px - 4px);
+  top: .5rem;
+  width: 7px; height: 7px;
+  border-radius: 50%; background: var(--irid);
+  border: 2px solid var(--ground);
+  box-shadow: 0 0 0 .5px rgba(90,191,176,.4);
+}
+
+/* ── 4. EDUCATION ── */
+#education {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: var(--hair);
+}
+.edu-rail {
+  padding: 4rem var(--page-pad);
+  border-right: var(--hair);
+}
+.edu-rail-label {
+  font-size: 8px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--text-3);
+  position: sticky; top: calc(var(--nav-h) + 1rem);
+}
+.edu-content { padding: 4rem var(--page-pad); }
+
+.edu-item {
+  display: grid; grid-template-columns: 110px 1fr;
+  gap: 2rem; margin-bottom: 2.5rem; padding-bottom: 2.5rem;
+  border-bottom: var(--hair-mid); position: relative;
+}
+.edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.edu-item::before {
+  content: ''; position: absolute;
+  left: 110px; top: .4rem;
+  width: .5px; height: calc(100% + 2.5rem);
+  background: rgba(14,30,28,.07);
+}
+.edu-item:last-child::before { display: none; }
+.edu-dot {
+  position: absolute; left: calc(110px - 4px); top: .5rem;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--irid); border: 2px solid var(--ground);
+  box-shadow: 0 0 0 .5px rgba(90,191,176,.4);
+}
+.edu-year { font-size: 9px; letter-spacing: .1em; color: var(--text-3); padding-top: .25rem; }
+.edu-degree {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: .25rem;
+}
+.edu-school { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--irid); margin-bottom: .6rem; }
+.edu-detail { font-size: 11px; line-height: 1.9; color: var(--text-2); max-width: 480px; }
+.edu-award {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-top: .6rem; font-size: 8.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--deep);
+  background: rgba(90,191,176,.07);
+  border: .5px solid rgba(90,191,176,.2);
+  padding: 3px 9px; border-radius: 1px;
+}
+
+/* ── 5. SKILLS GRID ── */
+#skills {
+  border-bottom: var(--hair);
+}
+.skills-inner { padding: 4rem var(--page-pad); }
+.skills-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.5vw, 42px);
+  font-weight: 300; color: var(--ink);
+  margin-bottom: 2.8rem; line-height: 1.1;
+}
+.skills-title em { font-style: italic; color: var(--text-2); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: var(--hair);
+}
+.skill-group {
+  padding: 1.8rem;
+  border-right: var(--hair);
+  border-bottom: var(--hair);
+  transition: background .25s;
+}
+.skill-group:hover { background: rgba(90,191,176,.03); }
+.skill-group:nth-child(4n) { border-right: none; }
+.skill-group:nth-last-child(-n+4) { border-bottom: none; }
+
+.sg-label {
+  font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--irid);
+  margin-bottom: 1rem; display: block;
+}
+.sg-items { display: flex; flex-direction: column; gap: 0; }
+.sg-item {
+  font-size: 11px; color: var(--text-2);
+  padding: .38rem 0;
+  border-bottom: .5px solid rgba(14,30,28,.05);
+  line-height: 1.4;
+  display: flex; align-items: center; gap: .5rem;
+}
+.sg-item:last-child { border-bottom: none; }
+.sg-item::before {
+  content: '';
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--irid); flex-shrink: 0; opacity: .6;
+}
+
+/* proficiency bar variant for key tools */
+.sg-item-bar {
+  display: flex; flex-direction: column; gap: .25rem;
+  padding: .45rem 0;
+  border-bottom: .5px solid rgba(14,30,28,.05);
+}
+.sg-item-bar:last-child { border-bottom: none; }
+.sg-bar-label { font-size: 10.5px; color: var(--text-2); }
+.sg-bar-track {
+  height: 1.5px; background: rgba(14,30,28,.08); width: 100%;
+  position: relative;
+}
+.sg-bar-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: var(--irid);
+  transition: width .8s cubic-bezier(.23,1,.32,1);
+}
+
+/* ── 6. CURRENTLY THINKING ABOUT ── */
+#thinking {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: var(--hair);
+}
+.thinking-l {
+  padding: 4rem var(--page-pad);
+  border-right: var(--hair);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.thinking-headline {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.8vw, 50px);
+  font-weight: 300; line-height: 1.1;
+  color: var(--ink); margin-bottom: 1.5rem;
+}
+.thinking-headline em { font-style: italic; color: var(--text-2); }
+.thinking-body {
+  font-size: 12px; line-height: 2.15;
+  color: var(--text-2); max-width: 420px;
+}
+.thinking-body p + p { margin-top: 1em; }
+
+.thinking-r {
+  padding: 4rem var(--page-pad);
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.thinking-item {
+  padding: 1.4rem;
+  border: var(--hair);
+  border-radius: 1px;
+  transition: background .25s, border-color .25s;
+}
+.thinking-item:hover {
+  background: rgba(90,191,176,.03);
+  border-color: rgba(90,191,176,.3);
+}
+.ti-topic {
+  font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--irid);
+  margin-bottom: .4rem;
+}
+.ti-title {
+  font-family: var(--serif); font-size: 17px;
+  font-weight: 300; color: var(--ink);
+  line-height: 1.2; margin-bottom: .4rem;
+}
+.ti-body { font-size: 10.5px; color: var(--text-2); line-height: 1.8; }
+
+/* ── 7. CV DOWNLOAD ── */
+#cv-strip {
+  padding: 3rem var(--page-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; gap: 1.5rem;
+  border-bottom: var(--hair);
+  background: rgba(220,222,218,.18);
+}
+.cv-strip-l {}
+.cv-strip-label {
+  font-size: 8px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--text-3);
+  margin-bottom: .5rem;
+}
+.cv-strip-headline {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-weight: 300; font-style: italic;
+  color: var(--ink); line-height: 1.3;
+}
+.cv-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+.cv-btn {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: .8rem 1.6rem; border-radius: 1px;
+  border: none; transition: all .2s; cursor: pointer;
+}
+.cv-btn.primary {
+  background: var(--irid); color: var(--dark);
+}
+.cv-btn.primary:hover { background: var(--deep); color: var(--ground); }
+.cv-btn.secondary {
+  background: none; color: var(--deep);
+  border: .5px solid rgba(90,191,176,.35);
+}
+.cv-btn.secondary:hover { background: rgba(90,191,176,.07); border-color: var(--irid); }
+.cv-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+/* ── AVAILABILITY BANNER ── */
+#availability {
+  padding: 4rem var(--page-pad);
+  border-bottom: var(--hair);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.avail-cell {
+  padding: 0 2rem;
+  border-right: var(--hair);
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.avail-cell:first-child { padding-left: 0; }
+.avail-cell:last-child { border-right: none; }
+.avail-k {
+  font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--text-3);
+}
+.avail-v {
+  font-family: var(--serif); font-size: 18px;
+  font-weight: 300; font-style: italic;
+  color: var(--ink); line-height: 1.3;
+}
+.avail-pip {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--irid);
+}
+.avail-pip-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--irid); animation: pipP 2.5s ease-in-out infinite;
+}
+</style>
+</head>
+<body>
+
+<div class="cur-dot"></div>
+<div class="cur-ring"></div>
+<div class="cur-label"></div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="nav-logo-mark">Bam</span>
+    <div class="nav-logo-rule"></div>
+    <span class="nav-logo-sub">About</span>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-link">Gateway</a>
+    <a href="systems.html" class="nav-link">Systems</a>
+    <a href="graphics.html" class="nav-link">Graphics</a>
+    <a href="about.html" class="nav-link active">About</a>
+    <a href="systems.html#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-pip"><div class="pip"></div><span>Open to work</span></div>
+    <a href="mailto:n.watcharawittayakul@icloud.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     1. OPENING
+══════════════════════════════════════ -->
+<section id="opening">
+  <div class="opening-l">
+    <p class="opening-overline">London · Creative Technologist · 2025</p>
+    <h1 class="opening-name">
+      Natcha
+      <em>Watcharawittayakul</em>
+    </h1>
+    <p class="opening-role">
+      Creative Technologist & Motion Designer —<br>
+      making systems that feel alive
+    </p>
+  </div>
+  <div class="opening-r">
+    <div class="photo-frame">
+      <!-- PHOTO SLOT: replace src with your portrait -->
+      <!-- <img src="media/bam-portrait.jpg" alt="Natcha Watcharawittayakul"> -->
+      <div class="photo-ph">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span>Add portrait photo</span>
+      </div>
+    </div>
+    <div class="opening-quick">
+      <div class="oq-item">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        London, England
+      </div>
+      <div class="oq-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:n.watcharawittayakul@icloud.com">n.watcharawittayakul@icloud.com</a>
+      </div>
+      <div class="oq-item">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://www.linkedin.com/in/natcha-watcharawittayakul" target="_blank">linkedin.com/in/natcha-watcharawittayakul</a>
+      </div>
+      <div class="oq-item">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a href="https://www.instagram.com/zombamzzzleepy/" target="_blank">@zombamzzzleepy</a>
+      </div>
+      <div class="oq-item">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
+        <a href="https://www.behance.net/zombam" target="_blank">behance.net/zombam</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     2. BIO — THREE ACTS
+══════════════════════════════════════ -->
+<section id="bio">
+  <div class="bio-rail">
+    <a href="#act-who" class="bio-nav-item active">Who</a>
+    <a href="#act-what" class="bio-nav-item">What</a>
+    <a href="#act-why" class="bio-nav-item">Why</a>
+  </div>
+  <div class="bio-content">
+
+    <!-- Act 1: Who -->
+    <div class="bio-act" id="act-who">
+      <div class="bio-act-label">Who</div>
+      <h2 class="bio-act-headline">
+        A fine artist who<br>
+        learned to <em>write code</em>
+      </h2>
+      <div class="bio-act-body">
+        <p>I'm Bam — a London-based Creative Technologist and motion designer originally from Bangkok, Thailand. I hold an M.Sc. in Creative Computing from the University of the Arts London (Distinction, 2025), and a B.A. in Fine & Applied Arts from Chulalongkorn University (2nd Class Honours, 2019).</p>
+        <p>My background is unusual: I trained first as a visual artist, then spent six years in commercial design studios before returning to research. That sequence shapes everything I make — I approach code with a designer's eye for composition, and I approach design with an engineer's instinct for systems.</p>
+        <p>I have delivered over <strong>twelve interactive and generative projects</strong> from initial concept to on-site execution, across installation, broadcast, UX/UI, and physical computing.</p>
+      </div>
+      <div class="bio-stats">
+        <div class="bio-stat">
+          <div class="bs-n">12<sup>+</sup></div>
+          <div class="bs-l">Projects shipped on-site</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bs-n">6<sup>+</sup></div>
+          <div class="bs-l">Years across design & code</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bs-n">2</div>
+          <div class="bs-l">Degrees: arts & computing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Act 2: What -->
+    <div class="bio-act" id="act-what">
+      <div class="bio-act-label">What</div>
+      <h2 class="bio-act-headline">
+        Specialising in<br>
+        <em>real-time systems</em><br>
+        & embodied AI
+      </h2>
+      <div class="bio-act-body">
+        <p>My technical practice centres on <strong>TouchDesigner</strong>, Python APIs, and generative AI pipelines (ComfyUI, Stable Diffusion, CNNs). I build systems that transform complex data — ocean readings, microplastic datasets, human motion — into experiences that can be felt rather than merely read.</p>
+        <p>My UAL thesis, <strong>The H.A.N.D.</strong>, investigated embodied AI through a soft-robotic system inspired by the decentralised nervous system of the octopus. Each silicone digit operates its own state logic, communicating laterally rather than reporting to a central brain — producing behaviour that visitors consistently describe as alive.</p>
+        <p>On the design side, I've led UX/UI across web, mobile, and app projects, and produced motion graphics for broadcast clients including AIS Thailand. I work comfortably across Figma, the Adobe Creative Suite, Houdini, Blender, and Unity.</p>
+      </div>
+    </div>
+
+    <!-- Act 3: Why -->
+    <div class="bio-act" id="act-why">
+      <div class="bio-act-label">Why</div>
+      <h2 class="bio-act-headline">
+        Making the<br>
+        <em>invisible</em> tangible
+      </h2>
+      <div class="bio-act-body">
+        <p>The thread running through every project I make is a single question: how do you make something abstract — a biological principle, a dataset, an ecological crisis — feel physically present in a room?</p>
+        <p>Coral Bleaching grew coral from hand gestures and let visitors watch it die. Marine Pulse turned ocean wave data into the breath of a glowing globe. The H.A.N.D. translated a neuroscience paper into a silicone artifact that seems to notice you.</p>
+        <p>I'm drawn to work that sits at the boundary between science and sensation — where the rigour of a system produces an experience that is genuinely surprising. I believe the most important question a creative technologist can ask is not <em>"can this be built?"</em> but <em>"what should this feel like?"</em></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     3. EXPERIENCE
+══════════════════════════════════════ -->
+<section id="experience">
+  <div class="exp-rail">
+    <div class="exp-rail-label">Experience</div>
+  </div>
+  <div class="exp-content">
+
+    <!-- OFF.live -->
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-dates">
+        <strong>Jul — Sep 2024</strong>
+        London, UK
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">UX/UI Designer</div>
+        <div class="exp-place">OFF.live</div>
+        <div class="exp-desc">Designed end-to-end UI flows and promotional motion graphics for an AI-powered screenshot-to-scheduling application. Produced visual identity, Lottie animations, and user journey maps translating complex AI interactions into a calm, human-paced experience.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Figma</span>
+          <span class="exp-tag">After Effects</span>
+          <span class="exp-tag">Illustrator</span>
+          <span class="exp-tag">Lottie</span>
+          <span class="exp-tag">UX/UI</span>
+          <span class="exp-tag">Motion Graphics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BrightDolphins -->
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-dates">
+        <strong>May 2022 — Oct 2023</strong>
+        Remote / London
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">UX/UI Designer</div>
+        <div class="exp-place">BrightDolphins</div>
+        <div class="exp-desc">Led responsive web and mobile redesign for an EdTech platform. Rebuilt the onboarding UX from research to handoff, creating a full design system in Figma and implementing in HTML/CSS/WordPress. Focused on reducing cognitive load for young learners without sacrificing brand warmth.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Figma</span>
+          <span class="exp-tag">HTML/CSS</span>
+          <span class="exp-tag">WordPress</span>
+          <span class="exp-tag">UX Research</span>
+          <span class="exp-tag">Design Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DesignFinn -->
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-dates">
+        <strong>Aug 2019 — Apr 2022</strong>
+        Bangkok, Thailand
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Junior Graphic Designer</div>
+        <div class="exp-place">DesignFinn</div>
+        <div class="exp-desc">Delivered brand identity, print, exhibition graphics, and motion graphics across SME and corporate clients. Notable project: motion graphics and brand assets for AIS Thailand's eSports championship broadcast. Developed strong foundations in visual systems, typography, and client communication across three years.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Illustrator</span>
+          <span class="exp-tag">Photoshop</span>
+          <span class="exp-tag">After Effects</span>
+          <span class="exp-tag">InDesign</span>
+          <span class="exp-tag">Brand Identity</span>
+          <span class="exp-tag">Motion Graphics</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     4. EDUCATION
+══════════════════════════════════════ -->
+<section id="education">
+  <div class="edu-rail">
+    <div class="edu-rail-label">Education</div>
+  </div>
+  <div class="edu-content">
+
+    <!-- UAL -->
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-year">2024 — 2025</div>
+      <div>
+        <div class="edu-degree">M.Sc. Creative Computing</div>
+        <div class="edu-school">University of the Arts London — Creative Computing Institute</div>
+        <div class="edu-detail">Thesis: <em>The H.A.N.D. — Hybrid Autonomous Neural Digits.</em> An investigation into distributed intelligence and embodied AI through soft robotics, inspired by the decentralised nervous system of the octopus. Research areas: physical computing, machine learning, generative AI, real-time interaction, and material fabrication.</div>
+        <div class="edu-award">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Distinction
+        </div>
+      </div>
+    </div>
+
+    <!-- Chula -->
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-year">2015 — 2019</div>
+      <div>
+        <div class="edu-degree">B.A. Fine & Applied Arts</div>
+        <div class="edu-school">Chulalongkorn University — Faculty of Fine & Applied Arts, Bangkok</div>
+        <div class="edu-detail">Specialisation in visual communication and illustration. Developed core foundations in composition, typography, colour theory, and conceptual art practice that continue to underpin all technical work. Final project: large-format generative print series exploring biological pattern systems.</div>
+        <div class="edu-award">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          2nd Class Honours
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     5. SKILLS GRID
+══════════════════════════════════════ -->
+<section id="skills">
+  <div class="skills-inner">
+    <h2 class="skills-title">
+      Tools, techniques,<br><em>and ways of thinking</em>
+    </h2>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <span class="sg-label">Real-time & Interactive</span>
+        <div class="sg-items">
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">TouchDesigner</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:95%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">p5.js</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Unity</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:72%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Unreal Engine</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:60%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">AI & Generative</span>
+        <div class="sg-items">
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Python</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">ComfyUI / Stable Diffusion</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">CNN / Autoencoder</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:75%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">C++</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:65%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">3D & Motion</span>
+        <div class="sg-items">
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Blender</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Houdini</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:78%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">After Effects</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Fusion 360</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:65%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">Design & Web</span>
+        <div class="sg-items">
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Figma</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:92%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Adobe Illustrator</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">HTML / CSS / JS</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">WordPress</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:78%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">Physical Computing</span>
+        <div class="sg-items">
+          <div class="sg-item">Arduino / microcontrollers</div>
+          <div class="sg-item">Silicone fabrication</div>
+          <div class="sg-item">Pneumatic actuators</div>
+          <div class="sg-item">Sensor networks (LDR, ultrasonic)</div>
+          <div class="sg-item">Laser cutting & 3D printing</div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">Soft Skills</span>
+        <div class="sg-items">
+          <div class="sg-item">On-site installation oversight</div>
+          <div class="sg-item">Cross-functional collaboration</div>
+          <div class="sg-item">Research & concept development</div>
+          <div class="sg-item">Client communication</div>
+          <div class="sg-item">Independent project leadership</div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">Languages</span>
+        <div class="sg-items">
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">Thai (native)</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="sg-item-bar">
+            <span class="sg-bar-label">English (professional)</span>
+            <div class="sg-bar-track"><div class="sg-bar-fill" style="width:90%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="sg-label">Currently learning</span>
+        <div class="sg-items">
+          <div class="sg-item">WebGPU / WGSL shaders</div>
+          <div class="sg-item">Rust (for embedded systems)</div>
+          <div class="sg-item">Reinforcement learning</div>
+          <div class="sg-item">Bio-inspired computation</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     6. CURRENTLY THINKING ABOUT
+══════════════════════════════════════ -->
+<section id="thinking">
+  <div class="thinking-l">
+    <div class="sec-label" style="margin-bottom:1.5rem">Intellectual territory</div>
+    <h2 class="thinking-headline">
+      Currently<br><em>thinking about</em>
+    </h2>
+    <div class="thinking-body">
+      <p>The territory I'm most interested in is the space where biology and computation genuinely borrow from each other — not as metaphor, but as engineering principle.</p>
+      <p>The octopus has been a recurring reference because its nervous system solves problems that distributed computing is still working on: fault tolerance, local adaptation, and the ability to act without a clear picture of the whole.</p>
+    </div>
+  </div>
+  <div class="thinking-r">
+    <div class="thinking-item">
+      <div class="ti-topic">Research interest</div>
+      <div class="ti-title">Embodied Intelligence</div>
+      <div class="ti-body">How physical form can be a computational medium — where the material itself processes information before it reaches any digital system.</div>
+    </div>
+    <div class="thinking-item">
+      <div class="ti-topic">Technical interest</div>
+      <div class="ti-title">Distributed Finite State Machines</div>
+      <div class="ti-body">Architectures where intelligence is peripheral, not central. The H.A.N.D. was a first experiment. Scaling this to spatial environments is the next question.</div>
+    </div>
+    <div class="thinking-item">
+      <div class="ti-topic">Design interest</div>
+      <div class="ti-title">Interaction as Ecological Argument</div>
+      <div class="ti-body">Using interactive media to make environmental data emotionally legible — Coral Bleaching and Marine Pulse were both attempts at this. There is much more to explore.</div>
+    </div>
+    <div class="thinking-item">
+      <div class="ti-topic">Wider reading</div>
+      <div class="ti-title">Influences</div>
+      <div class="ti-body">Ed Yong — <em>An Immense World.</em> Donna Haraway — <em>Staying with the Trouble.</em> field.io, Marshmallow Laser Feast, Refik Anadol Studio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     AVAILABILITY BANNER
+══════════════════════════════════════ -->
+<section id="availability">
+  <div class="avail-cell">
+    <div class="avail-pip">
+      <div class="avail-pip-dot"></div>
+      Available now
+    </div>
+    <div class="avail-k">Looking for</div>
+    <div class="avail-v">Full-time creative technologist roles — London or remote</div>
+  </div>
+  <div class="avail-cell">
+    <div class="avail-k">Also open to</div>
+    <div class="avail-v">Studio collaborations, artist residencies, commissions</div>
+  </div>
+  <div class="avail-cell">
+    <div class="avail-k">Start date</div>
+    <div class="avail-v">Immediately available</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CV DOWNLOAD STRIP
+══════════════════════════════════════ -->
+<section id="cv-strip">
+  <div class="cv-strip-l">
+    <div class="cv-strip-label">Download</div>
+    <div class="cv-strip-headline">
+      Full CV available as PDF —<br>
+      creative technologist and design versions
+    </div>
+  </div>
+  <div class="cv-actions">
+    <a href="media/NatchaWatcharawittayakul-CV-CreativeTechnologist.pdf"
+       download class="cv-btn primary">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      CV — Creative Technologist
+    </a>
+    <a href="media/NatchaWatcharawittayakul-CV-Designer.pdf"
+       download class="cv-btn secondary">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      CV — Designer
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span class="footer-l">© 2025 Natcha Watcharawittayakul · London</span>
+  <div class="footer-links">
+    <a href="index.html" class="footer-link">Gateway</a>
+    <a href="systems.html" class="footer-link">Systems</a>
+    <a href="graphics.html" class="footer-link">Graphics</a>
+    <a href="about.html" class="footer-link">About</a>
+  </div>
+  <span class="footer-r">Interaction · Data · Nature · Code</span>
+</footer>
+
+<!-- Cursor -->
+<script>
+(function(){
+  const dot=document.querySelector('.cur-dot'),ring=document.querySelector('.cur-ring'),lbl=document.querySelector('.cur-label');
+  let rx=0,ry=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{
+    cx=e.clientX;cy=e.clientY;
+    dot.style.left=cx+'px';dot.style.top=cy+'px';
+    if(lbl){lbl.style.left=cx+'px';lbl.style.top=cy+'px';}
+  });
+  (function a(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='42px';ring.style.height='42px';ring.style.borderColor='rgba(90,191,176,.6)';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(90,191,176,.45)';});
+  });
+})();
+</script>
+
+<!-- Skill bars animate on scroll -->
+<script>
+(function(){
+  const fills = document.querySelectorAll('.sg-bar-fill');
+  const targets = [];
+  fills.forEach(el => {
+    targets.push({ el, w: el.style.width });
+    el.style.width = '0%';
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = targets.find(t => t.el === entry.target);
+        if (target) {
+          setTimeout(() => { target.el.style.width = target.w; }, 120);
+          obs.unobserve(entry.target);
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+  fills.forEach(el => obs.observe(el));
+})();
+</script>
+
+<!-- Bio nav active state on scroll -->
+<script>
+(function(){
+  const acts = ['act-who','act-what','act-why'];
+  const navItems = document.querySelectorAll('.bio-nav-item');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navItems.forEach(n => n.classList.remove('active'));
+        const match = document.querySelector(`.bio-nav-item[href="#${e.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '-100px 0px -50% 0px' });
+  acts.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>

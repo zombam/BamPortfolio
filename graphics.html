@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphics & Motion — Natcha (Bam) Watcharawittayakul</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+main { padding-top: var(--nav-h); }
+
+/* ── HERO — typographic, no canvas ── */
+#hero {
+  min-height: 52vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 4rem var(--page-pad) 3.5rem;
+  border-bottom: var(--hair);
+  position: relative; overflow: hidden;
+}
+/* subtle ink-bleed background */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 60% 50% at 75% 60%, rgba(90,191,176,0.07) 0%, transparent 70%);
+}
+.hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; align-items: flex-end; gap: 2rem; }
+.hero-left {}
+.hero-back { display: inline-flex; align-items: center; gap: .5rem; font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); margin-bottom: 2rem; transition: color .2s; }
+.hero-back:hover { color: var(--irid); }
+.hero-back svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.hero-overline { font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: var(--irid); margin-bottom: .9rem; opacity: 0; animation: riseIn .7s ease .2s forwards; }
+.hero-h1 { font-family: var(--serif); font-size: clamp(48px,7vw,92px); font-weight: 300; line-height: .88; color: var(--ink); letter-spacing: -.02em; margin-bottom: .5rem; opacity: 0; animation: riseIn .85s ease .4s forwards; }
+.hero-h1 em { font-style: italic; color: var(--text-2); font-size: .65em; display: block; }
+.hero-sub { font-family: var(--serif); font-size: clamp(15px,2vw,20px); font-style: italic; color: var(--text-2); opacity: 0; animation: riseIn .85s ease .6s forwards; }
+.hero-right { text-align: right; opacity: 0; animation: fadeIn .8s ease .9s forwards; }
+.hero-count-n { font-family: var(--serif); font-size: 56px; font-weight: 300; color: rgba(90,191,176,.18); line-height: 1; }
+.hero-count-l { font-size: 8px; letter-spacing: .24em; text-transform: uppercase; color: var(--text-3); }
+
+/* ── FEATURED — full-bleed video/image ── */
+#featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 65vh;
+  border-bottom: var(--hair);
+}
+.feat-info {
+  padding: 3.5rem var(--page-pad);
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 1.5rem;
+  border-right: var(--hair);
+  order: 1;
+}
+.feat-media {
+  background: var(--ground-2);
+  overflow: hidden; position: relative;
+  min-height: 440px; order: 2;
+}
+.feat-media-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.feat-media-inner img,.feat-media-inner video { width: 100%; height: 100%; object-fit: cover; }
+.feat-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7rem; width: 100%; height: 100%; }
+.feat-placeholder svg { width: 32px; height: 32px; stroke: var(--text-3); fill: none; stroke-width: .8; }
+.feat-placeholder span { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+.feat-badge { display: inline-flex; align-items: center; gap: .5rem; font-size: 8px; letter-spacing: .25em; text-transform: uppercase; color: var(--irid); }
+.feat-badge::before { content: ''; width: 20px; height: .5px; background: var(--irid); }
+.feat-title { font-family: var(--serif); font-size: clamp(26px,3.5vw,46px); font-weight: 300; color: var(--ink); line-height: 1.1; }
+.feat-title em { font-style: italic; color: var(--text-2); }
+.feat-desc { font-size: 11.5px; color: var(--text-2); line-height: 2.1; }
+.feat-tools { display: flex; flex-wrap: wrap; gap: 4px; }
+.feat-tool { font-size: 8px; letter-spacing: .1em; background: rgba(90,191,176,.07); border: .5px solid rgba(90,191,176,.2); color: var(--deep); padding: 2px 7px; border-radius: 1px; }
+.feat-cta { display: inline-flex; align-items: center; gap: .7rem; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--dark); background: var(--irid); padding: .75rem 1.6rem; border-radius: 1px; align-self: flex-start; border: none; transition: background .2s,color .2s; }
+.feat-cta:hover { background: var(--deep); color: var(--ground); }
+.feat-cta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+/* ── ABOUT + CONTACT (shared with systems) ── */
+#about { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--hair); }
+.about-l { padding: 5rem 3rem 5rem var(--page-pad); border-right: var(--hair); }
+.about-r { padding: 5rem var(--page-pad) 5rem 3rem; display: flex; flex-direction: column; gap: 2.5rem; }
+.about-hed { font-family: var(--serif); font-size: clamp(28px,4vw,52px); font-weight: 300; line-height: 1.08; color: var(--ink); margin-bottom: 2rem; }
+.about-hed em { font-style: italic; color: var(--text-2); }
+.about-body { font-size: 11.5px; line-height: 2.15; color: var(--text-2); max-width: 420px; }
+.about-body p+p { margin-top: 1em; }
+.about-cta { display: inline-flex; align-items: center; gap: .7rem; margin-top: 2.5rem; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--irid); border-bottom: .5px solid rgba(90,191,176,.3); padding-bottom: 4px; transition: border-color .2s; }
+.about-cta:hover { border-color: var(--irid); }
+.about-cta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.stat-card { padding: 1.4rem; border: .5px solid rgba(14,30,28,.08); border-radius: 2px; transition: border-color .3s; }
+.stat-card:hover { border-color: rgba(90,191,176,.3); }
+.stat-n { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: .3rem; }
+.stat-n sup { font-size: .48em; color: var(--irid); vertical-align: super; }
+.stat-l { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); line-height: 1.7; }
+.avail { padding: 1.4rem; border: .5px solid rgba(14,30,28,.08); border-left: 2px solid var(--irid); }
+.avail-top { display: flex; align-items: center; gap: .5rem; font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: var(--irid); margin-bottom: .7rem; }
+.avail-dot { width: 4px; height: 4px; background: var(--irid); border-radius: 50%; animation: pipP 2.5s infinite; }
+.avail-body { font-family: var(--serif); font-size: 17px; font-style: italic; font-weight: 300; color: var(--text-1); line-height: 1.55; }
+
+#contact { border-bottom: var(--hair); }
+.contact-inner { padding: 5rem var(--page-pad); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.contact-hed { font-family: var(--serif); font-size: clamp(36px,5vw,66px); font-weight: 300; line-height: 1.02; color: var(--ink); margin-bottom: 1rem; }
+.contact-hed em { font-style: italic; color: var(--text-2); }
+.contact-sub { font-size: 11px; color: var(--text-2); line-height: 2.1; max-width: 380px; margin-bottom: 2.5rem; }
+.social-list { display: flex; flex-direction: column; }
+.social-item { display: flex; align-items: center; gap: .8rem; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-2); padding: .65rem 0; border-bottom: .5px solid rgba(14,30,28,.05); transition: color .2s; }
+.social-item:hover { color: var(--deep); }
+.social-item svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.4; opacity: .55; flex-shrink: 0; }
+.form-wrap { display: flex; flex-direction: column; gap: .75rem; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.f-field { display: flex; flex-direction: column; gap: .35rem; }
+.f-field.full { grid-column: span 2; }
+.f-lbl { font-size: 8px; letter-spacing: .24em; text-transform: uppercase; color: var(--text-3); }
+.f-field input,.f-field select,.f-field textarea { background: rgba(245,245,243,.85); border: .5px solid rgba(14,30,28,.12); color: var(--text-1); font-family: var(--mono); font-size: 11px; font-weight: 300; padding: .7rem .9rem; outline: none; border-radius: 1px; width: 100%; transition: border-color .22s,background .22s; -webkit-appearance: none; }
+.f-field input::placeholder,.f-field textarea::placeholder { color: var(--text-3); }
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus { border-color: rgba(90,191,176,.5); background: #fff; }
+.f-field textarea { min-height: 110px; resize: vertical; }
+.f-field select option { background: var(--ground); }
+.f-submit { display: inline-flex; align-items: center; gap: .7rem; margin-top: .3rem; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--dark); background: var(--irid); border: none; padding: .85rem 2rem; border-radius: 1px; transition: background .2s,color .2s; align-self: flex-start; }
+.f-submit:hover { background: var(--deep); color: var(--ground); }
+.f-submit svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+</style>
+</head>
+<body>
+<div class="cur-dot"></div>
+<div class="cur-ring"></div>
+<div class="cur-label"></div>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="nav-logo-mark">Bam</span>
+    <div class="nav-logo-rule"></div>
+    <span class="nav-logo-sub">Graphics & Motion</span>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-link">← Gateway</a>
+    <a href="systems.html" class="nav-link">Systems</a>
+    <a href="graphics.html" class="nav-link active">Graphics</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-pip"><div class="pip"></div><span>Open to work</span></div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <a href="index.html" class="hero-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All work
+      </a>
+      <p class="hero-overline">Graphics & Motion — London 2025</p>
+      <h1 class="hero-h1">Visual Design<br><em>& Motion Craft</em></h1>
+      <p class="hero-sub">Brand identity, UX/UI, 3D, and motion graphics — six years of visual systems.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-count-n">05</div>
+      <div class="hero-count-l">Projects<br>catalogued</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED: SPILL -->
+<section id="featured">
+  <div class="feat-info">
+    <span class="feat-badge">Featured — Motion 2024</span>
+    <h2 class="feat-title">SPILL<br><em>Aura Collective — OFFF Festival</em></h2>
+    <p class="feat-desc">Investigates the visual contradiction of an oil spill — thin films of oil create brilliant, fractal-like rainbow sheens that are undeniably beautiful, yet ecologically devastating. Advanced FLIP fluid dynamics and a custom thin-film interference Karma shader create the hypnotic iridescence.</p>
+    <div class="feat-tools">
+      <span class="feat-tool">Houdini</span>
+      <span class="feat-tool">FLIP Fluids</span>
+      <span class="feat-tool">Karma Shader</span>
+      <span class="feat-tool">Thin Film Interference</span>
+    </div>
+    <button class="feat-cta" onclick="document.querySelector('[data-title=\'SPILL\']').click()">
+      View project
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="feat-media proj-card"
+    data-cat="graphics"
+    data-title="SPILL"
+    data-latin="Aura Collective — OFFF Festival open call"
+    data-year="2024" data-status="active"
+    data-desc="Part of the Aura Collective's four-part ocean exploration, submitted to the OFFF Festival screen mapping open call. Investigates the visual contradiction of an oil spill: thin films of oil create brilliant fractal-like rainbow sheens, yet ecologically devastating. Advanced FLIP simulations achieve viscous weight. A custom Karma shader engineers thin-film interference directly into the shader network — creating the hypnotic iridescence as the heavy fluid contorts."
+    data-tools="Houdini,FLIP Fluid Dynamics,Karma Shader,Procedural Shading,Thin Film Interference"
+    data-role="Solo contribution within Aura Collective — fluid simulation and shader development."
+    data-link="https://natchabam.myportfolio.com/spill"
+    data-image="">
+    <div class="feat-media-inner">
+      <!-- ↓ MEDIA SLOT: replace with your image/video -->
+      <!-- <video src="media/spill-hero.mp4" autoplay loop muted playsinline></video> -->
+      <div class="feat-placeholder">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+        <span>Featured project media</span>
+        <span style="font-size:8px;opacity:.6">Replace with image · video · gif</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+
+  <!-- ─── I: 3D & Motion ─── -->
+  <div class="card-sec-head">
+    <span class="csh-roman">I.</span>
+    <span class="csh-name">3D & Motion</span>
+    <div class="csh-rule"></div>
+    <span class="csh-count">2 projects</span>
+  </div>
+
+  <div class="card-grid cols-2">
+
+    <!-- SPILL -->
+    <div class="proj-card" data-cat="graphics"
+      data-title="SPILL"
+      data-latin="Aura Collective — OFFF Festival open call"
+      data-year="2024" data-status="active"
+      data-desc="Part of the Aura Collective's four-part ocean exploration, submitted to the OFFF Festival screen mapping open call. Investigates the visual contradiction of an oil spill: thin films of oil create brilliant fractal-like rainbow sheens, yet ecologically devastating. Advanced FLIP simulations achieve viscous weight. A custom Karma shader engineers thin-film interference directly into the shader network."
+      data-tools="Houdini,FLIP Fluid Dynamics,Karma Shader,Procedural Shading,Thin Film Interference"
+      data-role="Solo contribution within Aura Collective — fluid simulation and shader development."
+      data-link="https://natchabam.myportfolio.com/spill"
+      data-image="" data-video="">
+      <div class="card-media">
+        <!-- MEDIA SLOT ↓ -->
+        <!-- <video src="media/spill.mp4" autoplay loop muted playsinline></video> -->
+        <!-- <img src="media/spill.jpg" alt="SPILL"> -->
+        <div class="card-media-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+          <span>Add image · video · gif</span>
+        </div>
+      </div>
+      <div class="card-sep"></div>
+      <div class="card-info">
+        <div class="card-meta-row">
+          <span class="card-cat">3D · Motion · OFFF Festival</span>
+          <span class="card-year">2024</span>
+        </div>
+        <div class="card-title">SPILL</div>
+        <div class="card-latin">Aura Collective — screen mapping open call</div>
+        <div class="card-desc">FLIP fluid dynamics and a custom Karma thin-film interference shader create the hypnotic iridescence of an oil spill — beautiful and suffocating simultaneously.</div>
+        <div class="card-tags">
+          <span class="card-tag">Houdini</span>
+          <span class="card-tag">FLIP Fluids</span>
+          <span class="card-tag">Karma Shader</span>
+          <span class="card-tag">Thin Film</span>
+        </div>
+        <div class="card-status"><div class="cs-dot active"></div><span class="cs-txt">Active</span></div>
+      </div>
+      <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+
+    <!-- Videography Archive -->
+    <div class="proj-card" data-cat="graphics"
+      data-title="Videography Archive"
+      data-latin="Motion graphics, animation, and video direction"
+      data-year="2019–2024" data-status="archived"
+      data-desc="A catalogue of motion work spanning five years — motion graphics for the AIS Thailand eSports championship broadcast, 2D animation, and experimental video. Work for brand campaigns, personal projects, and collaborative commissions across broadcast and digital."
+      data-tools="After Effects,Premiere Pro,Illustrator,Cinema 4D"
+      data-role="Motion designer — across personal and commercial projects."
+      data-link="https://natchabam.myportfolio.com/videography"
+      data-image="" data-video="">
+      <div class="card-media">
+        <!-- <video src="media/video-archive.mp4" autoplay loop muted playsinline></video> -->
+        <div class="card-media-ph">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>Add video · gif · image</span>
+        </div>
+        <div class="card-media-badge">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg>
+          Video archive
+        </div>
+      </div>
+      <div class="card-sep"></div>
+      <div class="card-info">
+        <div class="card-meta-row">
+          <span class="card-cat">Motion · Video · Broadcast</span>
+          <span class="card-year">2019–2024</span>
+        </div>
+        <div class="card-title">Videography Archive</div>
+        <div class="card-latin">Motion graphics, animation, and video direction</div>
+        <div class="card-desc">Five years of motion work across broadcast and digital — including AIS Thailand eSports championship graphics, 2D animation, and experimental video commissions.</div>
+        <div class="card-tags">
+          <span class="card-tag">After Effects</span>
+          <span class="card-tag">Motion Graphics</span>
+          <span class="card-tag">Broadcast</span>
+        </div>
+        <div class="card-status"><div class="cs-dot archived"></div><span class="cs-txt">Archive</span></div>
+      </div>
+      <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+
+  </div><!-- /card-grid -->
+
+  <!-- ─── II: Brand Identity & UX/UI ─── -->
+  <div class="card-sec-head">
+    <span class="csh-roman">II.</span>
+    <span class="csh-name">Brand Identity & UX/UI</span>
+    <div class="csh-rule"></div>
+    <span class="csh-count">3 projects</span>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- OFF.live -->
+    <div class="proj-card" data-cat="graphics"
+      data-title="OFF.live — UI & Motion"
+      data-latin="AI-powered scheduling app"
+      data-year="2024" data-status="archived"
+      data-desc="End-to-end UX/UI design and promotional motion graphics for an AI-powered screenshot-to-scheduling app. Full UI flows, motion graphics, and visual identity system. The interface needed to feel intelligent and effortless — translating complex AI actions into a calm, human-paced experience."
+      data-tools="Figma,After Effects,Illustrator,Lottie"
+      data-role="UX/UI Designer & Motion — end-to-end, Jul–Sep 2024."
+      data-link="https://natchabam.myportfolio.com"
+      data-image="" data-video="">
+      <div class="card-media">
+        <!-- <img src="media/off.jpg" alt="OFF.live"> -->
+        <div class="card-media-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+          <span>Add image · video · gif</span>
+        </div>
+      </div>
+      <div class="card-sep"></div>
+      <div class="card-info">
+        <div class="card-meta-row">
+          <span class="card-cat">UX/UI · Motion · App</span>
+          <span class="card-year">2024</span>
+        </div>
+        <div class="card-title">OFF.live</div>
+        <div class="card-latin">AI-powered scheduling — UI & Motion</div>
+        <div class="card-desc">Full UX/UI system and motion graphics for an AI screenshot-to-calendar app. Figma flows, Lottie animations, and a visual identity that makes AI feel effortless.</div>
+        <div class="card-tags">
+          <span class="card-tag">Figma</span>
+          <span class="card-tag">After Effects</span>
+          <span class="card-tag">UX/UI</span>
+          <span class="card-tag">Lottie</span>
+        </div>
+        <div class="card-status"><div class="cs-dot archived"></div><span class="cs-txt">Completed</span></div>
+      </div>
+      <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+
+    <!-- BrightDolphins -->
+    <div class="proj-card" data-cat="graphics"
+      data-title="BrightDolphins Platform"
+      data-latin="Responsive web & mobile redesign"
+      data-year="2022–2023" data-status="archived"
+      data-desc="Responsive web and mobile redesign for an EdTech platform. Full onboarding UX overhaul, design system creation, and front-end implementation. Focused on reducing cognitive load for young learners while maintaining brand warmth. Delivered in Figma with HTML/CSS/WordPress handoff."
+      data-tools="Figma,HTML/CSS,WordPress,Illustrator"
+      data-role="UX/UI Designer — May 2022 to Oct 2023."
+      data-link="https://natchabam.myportfolio.com"
+      data-image="" data-video="">
+      <div class="card-media">
+        <!-- <img src="media/brightdolphins.jpg" alt="BrightDolphins"> -->
+        <div class="card-media-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+          <span>Add image · video · gif</span>
+        </div>
+      </div>
+      <div class="card-sep"></div>
+      <div class="card-info">
+        <div class="card-meta-row">
+          <span class="card-cat">UX/UI · Web · Mobile</span>
+          <span class="card-year">2022–2023</span>
+        </div>
+        <div class="card-title">BrightDolphins Platform</div>
+        <div class="card-latin">Responsive web & mobile redesign</div>
+        <div class="card-desc">Full onboarding UX overhaul and design system for an EdTech platform. Reduced cognitive load for young learners across web and mobile. Figma to WordPress handoff.</div>
+        <div class="card-tags">
+          <span class="card-tag">Figma</span>
+          <span class="card-tag">WordPress</span>
+          <span class="card-tag">UX Research</span>
+        </div>
+        <div class="card-status"><div class="cs-dot archived"></div><span class="cs-txt">Completed</span></div>
+      </div>
+      <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+
+    <!-- Graphic Design Archive -->
+    <div class="proj-card" data-cat="graphics"
+      data-title="Graphic Design Archive"
+      data-latin="Brand identity, print, and visual systems"
+      data-year="2019–2022" data-status="archived"
+      data-desc="Brand identity, print, and motion work produced at DesignFinn across three years — clients include AIS (Thailand's largest telecom), corporate event collateral, and SME brand identity systems. Work spans brand guidelines, motion banners, exhibition graphics, and social media campaigns."
+      data-tools="Adobe Illustrator,Photoshop,After Effects,InDesign"
+      data-role="Junior Graphic Designer — DesignFinn, Aug 2019 to Apr 2022."
+      data-link="https://natchabam.myportfolio.com/graphic"
+      data-image="" data-video="">
+      <div class="card-media">
+        <!-- <img src="media/gfx-archive.jpg" alt="Graphic Design Archive"> -->
+        <div class="card-media-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+          <span>Add image · video · gif</span>
+        </div>
+      </div>
+      <div class="card-sep"></div>
+      <div class="card-info">
+        <div class="card-meta-row">
+          <span class="card-cat">Brand ID · Print · Motion</span>
+          <span class="card-year">2019–2022</span>
+        </div>
+        <div class="card-title">Graphic Design Archive</div>
+        <div class="card-latin">Brand identity, print, and visual systems</div>
+        <div class="card-desc">Three years at DesignFinn — brand identity for AIS and corporate clients, exhibition graphics, motion banners, and social campaigns across print and screen.</div>
+        <div class="card-tags">
+          <span class="card-tag">Brand Identity</span>
+          <span class="card-tag">Illustrator</span>
+          <span class="card-tag">After Effects</span>
+        </div>
+        <div class="card-status"><div class="cs-dot archived"></div><span class="cs-txt">Archive</span></div>
+      </div>
+      <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+
+  </div><!-- /card-grid -->
+
+</section>
+
+<!-- ABOUT --> -->
+<section id="about">
+  <div class="about-l">
+    <div class="sec-label" style="margin-bottom:2rem">The designer</div>
+    <h2 class="about-hed">Visual craft<br>grounded in<br><em>systems thinking</em></h2>
+    <div class="about-body">
+      <p>I'm Bam — a London-based Creative Technologist and designer. My graphic and motion work is built with the same rigour as my code: systematic, research-grounded, and biased toward the unexpected.</p>
+      <p>Six years across three studios — DesignFinn, BrightDolphins, and OFF.live — covering brand identity, UX/UI, motion graphics, and 3D. B.A. Fine & Applied Arts, Chulalongkorn University (2nd Class Honours, 2019).</p>
+    </div>
+    <a href="systems.html" class="about-cta">
+      View Systems work
+      <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+  </div>
+  <div class="about-r">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-n">6<sup>+</sup></div><div class="stat-l">Years in<br>visual design</div></div>
+      <div class="stat-card"><div class="stat-n">3</div><div class="stat-l">Studios<br>across 2 countries</div></div>
+      <div class="stat-card"><div class="stat-n">AIS</div><div class="stat-l">Notable client —<br>Thailand's largest telco</div></div>
+      <div class="stat-card"><div class="stat-n">2</div><div class="stat-l">Degrees across<br>arts & computing</div></div>
+    </div>
+    <div class="avail">
+      <div class="avail-top"><div class="avail-dot"></div>Available now</div>
+      <div class="avail-body">Open to design roles, art direction, and hybrid creative technologist positions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="sec-label" style="margin-bottom:2rem">Begin a correspondence</div>
+      <h2 class="contact-hed">Start a<br><em>conversation</em></h2>
+      <p class="contact-sub">Whether you have a brief, a half-formed idea, or a role to discuss — I'm interested.</p>
+      <div class="social-list">
+        <a href="mailto:n.watcharawittayakul@icloud.com" class="social-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>n.watcharawittayakul@icloud.com</a>
+        <a href="https://www.linkedin.com/in/natcha-watcharawittayakul" target="_blank" class="social-item"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>linkedin.com/in/natcha-watcharawittayakul</a>
+        <a href="https://www.behance.net/zombam" target="_blank" class="social-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/></svg>behance.net/zombam</a>
+        <a href="https://www.instagram.com/zombamzzzleepy/" target="_blank" class="social-item"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@zombamzzzleepy</a>
+      </div>
+    </div>
+    <div>
+      <form class="form-wrap" onsubmit="handleForm(event)">
+        <div class="f-row">
+          <div class="f-field"><label class="f-lbl" for="fn">Name</label><input type="text" id="fn" placeholder="Your name" required></div>
+          <div class="f-field"><label class="f-lbl" for="fe">Email</label><input type="email" id="fe" placeholder="your@email.com" required></div>
+        </div>
+        <div class="f-field full"><label class="f-lbl" for="ft">Enquiry type</label>
+          <select id="ft"><option value="">Select a category</option><option>Design role</option><option>Commission</option><option>Collaboration</option><option>Freelance project</option><option>Something else</option></select>
+        </div>
+        <div class="f-field full"><label class="f-lbl" for="fm">Message</label><textarea id="fm" placeholder="Tell me about the project or role." required></textarea></div>
+        <button type="submit" class="f-submit" id="fsub">Send message <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span class="footer-l">© 2025 Natcha Watcharawittayakul · London</span>
+  <div class="footer-links">
+    <a href="index.html" class="footer-link">Gateway</a>
+    <a href="systems.html" class="footer-link">← Systems</a>
+  </div>
+  <span class="footer-r">Interaction · Data · Nature · Code</span>
+</footer>
+
+<!-- DRAWER -->
+<div class="drawer-ov" id="dOv"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-inner">
+    <div class="drawer-media" id="dMedia"></div>
+    <div class="drawer-top">
+      <div><div class="drawer-cat" id="dCat"></div><div class="drawer-title" id="dTitle"></div></div>
+      <button class="drawer-close" id="dClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="drawer-body">
+      <div><div class="drawer-desc" id="dDesc"></div><a class="drawer-ext" id="dLink" target="_blank">View project <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
+      <div class="drawer-meta" id="dMeta"></div>
+    </div>
+  </div>
+</div>
+
+<script src="cursor.js"></script>
+<script>
+function handleForm(e){e.preventDefault();const b=document.getElementById('fsub');b.innerHTML='Sent ✓';b.style.background='var(--deep)';b.style.color='var(--ground)';b.disabled=true;}
+</script>
+</body>
+</html>

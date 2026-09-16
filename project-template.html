@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — Bam Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  0. TOKENS (matches homepage palette)                         ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+:root {
+  --aur-gs-r:255;--aur-gs-g:255;--aur-gs-b:255;
+  --aur-cs-r:148;--aur-cs-g:237;--aur-cs-b:255;
+  --aur-as-r:221;--aur-as-g:242;--aur-as-b:253;
+  --aur-os-r:120;--aur-os-g:130;--aur-os-b:255;
+  --aur-ge-r:214;--aur-ge-g:219;--aur-ge-b:255;
+  --aur-ce-r:255;--aur-ce-g:255;--aur-ce-b:255;
+  --aur-ae-r:255;--aur-ae-g:255;--aur-ae-b:255;
+  --aur-oe-r:60; --aur-oe-g:60; --aur-oe-b:255;
+  --aur-cr:180;--aur-bw:120;--aur-sp:8;--aur-ov:1.4;--aur-nm:0.225;
+  --mark:   #0000FF;
+  --accent: rgba(120,130,255,1);
+  --text:   rgba(14,30,28,0.90);
+  --text2:  rgba(14,30,28,0.52);
+  --text3:  rgba(14,30,28,0.30);
+  --border: rgba(14,30,28,0.07);
+  --glass:  rgba(255,255,255,0.50);
+  --font-d: 'Space Grotesk', sans-serif;
+  --font-a: 'Cormorant Garamond', serif;
+  --font-m: 'IBM Plex Mono', monospace;
+  --font-t: 'Noto Sans Thai', sans-serif;
+  --nav-h:  52px;
+  --pad:    2.5rem;
+  --col:    720px;
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  1. BASE                                                      ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-d);font-size:13px;color:var(--text);
+  background:rgb(255,255,255);cursor:none;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+#aurora{position:fixed;inset:0;z-index:0;pointer-events:none}
+.page{position:relative;z-index:10;padding-top:var(--nav-h)}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  2. NAV                                                       ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+.nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:700;
+  display:flex;align-items:stretch;
+  background:rgba(255,255,255,0.78);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-bottom:.5px solid var(--border);
+  transition:background .4s;
+}
+.nav-logo{display:flex;align-items:center;padding:0 1.6rem;border-right:.5px solid var(--border)}
+.nav-logo-link{display:block;width:28px;height:28px;transform:rotate(-90deg);transition:transform .55s cubic-bezier(.34,1.56,.64,1);color:rgba(14,30,28,0.85)}
+.nav-logo-link:hover{transform:rotate(0deg)}
+.nav-logo-link svg{width:100%;height:100%;display:block}
+.nav-links{flex:1;display:flex;align-items:center;justify-content:center}
+.nav-link{font-family:var(--font-m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);padding:0 1.2rem;height:var(--nav-h);display:flex;align-items:center;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s}
+.nav-link:hover{color:var(--text);border-bottom-color:var(--accent)}
+.nav-link.active{color:var(--text);border-bottom-color:var(--mark)}
+.nav-right{display:flex;align-items:center;gap:1.2rem;padding:0 1.4rem;border-left:.5px solid var(--border)}
+.nav-pip{display:flex;align-items:center;gap:.4rem;font-family:var(--font-m);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3)}
+.pip-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);animation:pip 2.6s ease-in-out infinite}
+@keyframes pip{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+.nav-cta{font-family:var(--font-m);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--mark);padding:6px 14px;border-radius:1px;border:none;cursor:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.82}
+#prog{position:fixed;top:var(--nav-h);left:0;right:0;height:1.5px;z-index:699;background:rgba(120,130,255,.08)}
+#prog-fill{height:100%;background:var(--accent);width:0%;transition:width .1s linear}
+
+/* cursor */
+.cur-dot{position:fixed;z-index:9999;pointer-events:none;width:5px;height:5px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%)}
+.cur-ring{position:fixed;z-index:9998;pointer-events:none;width:30px;height:30px;border-radius:50%;border:.5px solid rgba(120,130,255,.35);transform:translate(-50%,-50%);transition:width .22s,height .22s,border-color .22s}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  3. HERO (fixed template — same for every project)           ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 var(--pad) 5rem;position:relative;
+}
+
+/* corner ticks */
+.ct-wrap{position:absolute;inset:0;pointer-events:none;z-index:1}
+.ct{position:absolute;width:9px;height:9px;border-color:rgba(14,30,28,0.16);border-style:solid}
+.ct.tl{top:28px;left:28px;border-width:1px 0 0 1px}
+.ct.tr{top:28px;right:28px;border-width:1px 1px 0 0}
+.ct.bl{bottom:28px;left:28px;border-width:0 0 1px 1px}
+.ct.br{bottom:28px;right:28px;border-width:0 1px 1px 0}
+
+.hero-back{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-m);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:2rem;transition:color .2s;position:relative;z-index:2}
+.hero-back:hover{color:var(--accent)}
+.hero-back svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+.hero-copy{position:relative;z-index:2;max-width:740px}
+
+/* eyebrow */
+.eyebrow-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
+.eyebrow-mark{font-family:var(--font-t);font-size:11px;font-weight:600;color:var(--mark);letter-spacing:.04em}
+.eyebrow-strokes{display:flex;flex-direction:column;gap:3px}
+.eyebrow-strokes span{display:block;height:1.5px;border-radius:1px;background:var(--mark)}
+.eyebrow-strokes span:nth-child(1){width:14px;opacity:.9}
+.eyebrow-strokes span:nth-child(2){width:10px;opacity:.55}
+.eyebrow-strokes span:nth-child(3){width:6px;opacity:.3}
+.eyebrow-label{font-family:var(--font-m);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+
+/* title */
+.hero-h1{font-family:var(--font-d);font-size:clamp(52px,7.5vw,100px);font-weight:700;line-height:.88;letter-spacing:-.025em;color:var(--text);margin-bottom:.4rem}
+.hero-h1 em{font-family:var(--font-a);font-style:italic;font-weight:300;color:var(--text2);font-size:.58em;display:block;margin-top:.2em}
+
+.hero-meta{display:flex;align-items:flex-start;gap:3rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.hero-role{max-width:380px}
+.hero-role-lbl{font-family:var(--font-m);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.hero-role-txt{font-size:12px;color:var(--text2);line-height:1.85}
+
+.hero-tools{display:flex;flex-wrap:wrap;gap:4px}
+.tool-pill{font-family:var(--font-m);font-size:8px;letter-spacing:.08em;background:rgba(120,130,255,.07);border:.5px solid rgba(120,130,255,.22);color:rgba(60,65,220,.85);padding:3px 8px;border-radius:2px}
+
+/* hero image */
+.hero-img-wrap{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+}
+.hero-img-wrap img,.hero-img-wrap video{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.88);
+}
+/* when there's a hero image, text needs to be light */
+#hero.has-img .hero-back,
+#hero.has-img .eyebrow-label,
+#hero.has-img .eyebrow-mark,
+#hero.has-img .hero-h1,
+#hero.has-img .hero-role-lbl,
+#hero.has-img .hero-role-txt,
+#hero.has-img .tool-pill{
+  color:rgba(255,255,255,.9) !important;
+}
+#hero.has-img .eyebrow-strokes span,
+#hero.has-img .hero-h1 em{ color:rgba(255,255,255,.6) !important }
+#hero.has-img .tool-pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+.hero-img-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top, rgba(14,30,28,.72) 0%, rgba(14,30,28,.18) 55%, transparent 100%);
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  4. PROJECT BODY (flexible block list)                        ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+#body-content{
+  border-top:.5px solid var(--border);
+  position:relative;z-index:10;
+}
+
+/* all blocks share this wrapper */
+.block{padding:4rem var(--pad)}
+.block+.block{border-top:.5px solid var(--border)}
+.block-inner{max-width:var(--col);margin:0 auto}
+
+/* ── text block ── */
+.block-text .block-heading{
+  font-family:var(--font-d);font-size:clamp(20px,2.5vw,30px);
+  font-weight:600;color:var(--text);margin-bottom:1.2rem;line-height:1.15;
+}
+.block-text .block-heading em{font-family:var(--font-a);font-style:italic;font-weight:300;color:var(--text2)}
+.block-text .block-body{
+  font-size:13.5px;line-height:2.15;color:var(--text2);
+}
+.block-text .block-body p+p{margin-top:1.1em}
+
+/* ── image block ── */
+.block-image figure{display:flex;flex-direction:column;gap:.8rem}
+.block-image figure img,.block-image figure video{
+  width:100%;border-radius:2px;display:block;
+  background:rgba(14,30,28,.04);
+}
+.block-image figcaption{
+  font-family:var(--font-m);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text3);
+}
+
+/* ── image-pair block ── */
+.block-image-pair .pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.block-image-pair figure{display:flex;flex-direction:column;gap:.6rem;background:rgba(255,255,255,1);padding-bottom:.6rem}
+.block-image-pair figure img,.block-image-pair figure video{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.block-image-pair figcaption{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:0 .5rem}
+
+/* ── video block ── */
+.block-video .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:2px}
+.block-video .video-wrap iframe,.block-video .video-wrap video{position:absolute;inset:0;width:100%;height:100%;border:none}
+.block-video .video-caption{margin-top:.8rem;font-family:var(--font-m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3)}
+
+/* ── pullquote block ── */
+.block-pullquote{background:rgba(120,130,255,.04);border-left:3px solid var(--mark)}
+.block-pullquote .pq-text{
+  font-family:var(--font-a);font-style:italic;font-weight:300;
+  font-size:clamp(24px,3.5vw,42px);line-height:1.3;color:var(--text);
+}
+.block-pullquote .pq-source{
+  font-family:var(--font-m);font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--text3);margin-top:1rem;
+}
+
+/* ── divider block ── */
+.block-divider{padding:2rem var(--pad)}
+.divider-inner{display:flex;align-items:center;gap:1.2rem}
+.divider-line{flex:1;height:.5px;background:var(--border)}
+.divider-label{font-family:var(--font-m);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--text3);flex-shrink:0}
+
+/* ── stats block ── */
+.block-stats .stats-row{display:grid;gap:1px;background:var(--border)}
+.stat-cell{background:rgba(255,255,255,.5);backdrop-filter:blur(12px);padding:1.6rem 1.8rem}
+.stat-n{font-family:var(--font-d);font-size:clamp(32px,4vw,52px);font-weight:700;color:var(--text);line-height:1;margin-bottom:.3rem}
+.stat-l{font-family:var(--font-m);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3)}
+
+/* ── wide modifier (full bleed) ── */
+.block.wide .block-inner{max-width:100%}
+.block.wide{padding-left:0;padding-right:0}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.23,1,.32,1),transform .65s cubic-bezier(.23,1,.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  5. FOOTER NAV (prev / next)                                  ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+.proj-nav{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:.5px solid var(--border);position:relative;z-index:10;
+}
+.proj-nav-cell{
+  padding:2.5rem var(--pad);display:flex;flex-direction:column;gap:.5rem;
+  transition:background .22s;cursor:none;
+}
+.proj-nav-cell:hover{background:rgba(120,130,255,.04)}
+.proj-nav-cell.next{text-align:right;border-left:.5px solid var(--border)}
+.proj-nav-dir{font-family:var(--font-m);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3)}
+.proj-nav-title{font-family:var(--font-d);font-size:16px;font-weight:600;color:var(--text)}
+.proj-nav-latin{font-family:var(--font-a);font-style:italic;font-size:13px;color:var(--text2)}
+
+/* footer */
+.footer{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:1.6rem var(--pad);border-top:.5px solid var(--border);font-family:var(--font-m);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3)}
+.footer-links{display:flex;gap:1.8rem}
+.footer-link{transition:color .2s}
+.footer-link:hover{color:var(--accent)}
+
+/* empty body state */
+.empty-body{
+  padding:6rem var(--pad);text-align:center;
+  font-family:var(--font-m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text3);border-top:.5px solid var(--border);position:relative;z-index:10;
+}
+.empty-body a{color:var(--accent);border-bottom:.5px solid rgba(120,130,255,.3)}
+
+@media(max-width:768px){
+  :root{--pad:1.2rem}
+  .block-image-pair .pair-grid{grid-template-columns:1fr}
+  .proj-nav{grid-template-columns:1fr}
+  .proj-nav-cell.next{border-left:none;border-top:.5px solid var(--border)}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="aurora"></canvas>
+<div class="cur-dot"></div>
+<div class="cur-ring"></div>
+<div id="prog"><div id="prog-fill"></div></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">
+    <a href="index3.html" class="nav-logo-link" title="Home">
+      <svg viewBox="0 0 801 801" fill-rule="evenodd"><path d="M489,551 L490,573 L493,594 L504,628 L511,641 L522,656 L537,671 L547,678 L561,659 L574,638 L569,635 L557,623 L546,605 L539,581 L537,551 Z M376,551 L377,575 L383,607 L390,626 L398,641 L408,655 L423,670 L434,678 L454,650 L461,638 L457,636 L443,622 L433,605 L426,581 L424,551 Z M263,551 L263,563 L266,590 L270,607 L276,624 L283,638 L294,654 L311,671 L321,678 L348,639 L338,631 L329,621 L319,603 L312,576 L311,551 Z M263,335 L263,437 L266,453 L281,482 L309,504 L333,511 L355,511 L384,501 L400,488 L427,506 L446,511 L468,511 L489,505 L506,495 L521,480 L531,463 L537,441 L537,335 Z M425,383 L488,383 L489,384 L489,438 L487,444 L482,452 L474,459 L468,462 L460,463 L459,464 L449,463 L438,458 L428,447 L424,436 L424,384 Z M312,383 L375,383 L376,384 L376,438 L374,444 L369,452 L361,459 L355,462 L347,463 L346,464 L336,463 L325,458 L316,449 L311,437 L311,384 Z M222,272 L260,301 L368,158 L393,144 L415,146 L434,160 L540,301 L578,271 L460,118 L425,99 L391,96 L364,103 L334,124 Z" fill="currentColor"/></svg>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="index3.html"  class="nav-link">Home</a>
+    <a href="systems.html" class="nav-link active">Systems</a>
+    <a href="graphics.html"class="nav-link">Graphics</a>
+    <a href="about.html"   class="nav-link">About</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-pip"><div class="pip-dot"></div><span>Open to work</span></div>
+    <a href="mailto:n.watcharawittayakul@icloud.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- HERO — populated by JS -->
+<section id="hero">
+  <div class="ct-wrap"><div class="ct tl"></div><div class="ct tr"></div><div class="ct bl"></div><div class="ct br"></div></div>
+  <div id="hero-img-slot"></div>
+  <div class="hero-copy" id="hero-copy"></div>
+</section>
+
+<!-- PROJECT BODY — flexible blocks populated by JS -->
+<div id="body-content"></div>
+
+<!-- PREV / NEXT NAV -->
+<nav class="proj-nav" id="proj-nav"></nav>
+
+</div><!-- /page -->
+
+<footer class="footer">
+  <span id="footer-title">Project</span>
+  <div class="footer-links">
+    <a href="systems.html" class="footer-link">← Systems</a>
+    <a href="index3.html"  class="footer-link">Home</a>
+  </div>
+  <span>Bam · 2025</span>
+</footer>
+
+<!-- ╔═══════════════════════════════════════════════════════════════╗
+     ║  A. AURORA                                                    ║
+     ╚═══════════════════════════════════════════════════════════════╝ -->
+<script>
+(function(){
+  const cv=document.getElementById('aurora'),ctx=cv.getContext('2d');
+  const S=getComputedStyle(document.documentElement);
+  const t=n=>parseFloat(S.getPropertyValue(n))||0;
+  const GRS=t('--aur-gs-r'),GGS=t('--aur-gs-g'),GBS=t('--aur-gs-b');
+  const CRS=t('--aur-cs-r'),CGS=t('--aur-cs-g'),CBS=t('--aur-cs-b');
+  const ARS=t('--aur-as-r'),AGS=t('--aur-as-g'),ABS=t('--aur-as-b');
+  const ORS=t('--aur-os-r'),OGS=t('--aur-os-g'),OBS=t('--aur-os-b');
+  const GRE=t('--aur-ge-r'),GGE=t('--aur-ge-g'),GBE=t('--aur-ge-b');
+  const CRE=t('--aur-ce-r'),CGE=t('--aur-ce-g'),CBE=t('--aur-ce-b');
+  const ARE=t('--aur-ae-r'),AGE=t('--aur-ae-g'),ABE=t('--aur-ae-b');
+  const ORE=t('--aur-oe-r'),OGE=t('--aur-oe-g'),OBE=t('--aur-oe-b');
+  const CR=t('--aur-cr')||180,BW=t('--aur-bw')||120,SP=t('--aur-sp')||8,OV=t('--aur-ov')||1.4,NM=t('--aur-nm')||.225,SC=4;
+  let W,H,f=0,rMx,rMy,mx,my,sc=0;
+  const tmp=document.createElement('canvas'),tc=tmp.getContext('2d');
+  function rs(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;mx=rMx=W/2;my=rMy=H/2}
+  rs();window.addEventListener('resize',rs);
+  window.addEventListener('mousemove',e=>{rMx=e.clientX;rMy=e.clientY});
+  window.addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-window.innerHeight;sc=m>0?Math.min(window.scrollY/m,1):0},{passive:true});
+  const P=new Uint8Array(512);for(let i=0;i<256;i++)P[i]=P[i+256]=i;for(let i=255;i>0;i--){const j=Math.random()*(i+1)|0;[P[i],P[j]]=[P[j],P[i]];}
+  const fd=t2=>t2*t2*t2*(t2*(t2*6-15)+10),lp=(a,b,t2)=>a+t2*(b-a),gd=(h,x,y)=>{h&=3;return((h&1)?-x:x)+((h&2)?-y:y)};
+  function pn(x,y){const xi=Math.floor(x)&255,yi=Math.floor(y)&255,xf=x-Math.floor(x),yf=y-Math.floor(y),u=fd(xf),v=fd(yf);return lp(lp(gd(P[P[xi]+yi],xf,yf),gd(P[P[xi+1]+yi],xf-1,yf),u),lp(gd(P[P[xi]+yi+1],xf,yf-1),gd(P[P[xi+1]+yi+1],xf-1,yf-1),u),v)}
+  function fbm(x,y,ti,o){let v=0,a=1,fn=1,m=0;for(let i=0;i<o;i++){v+=pn(x*fn+ti*.3,y*fn+ti*.2)*a;m+=a;a*=.5;fn*=2.1;}return v/m}
+  const ss=(e0,e1,x)=>{const k=Math.max(0,Math.min((x-e0)/(e1-e0),1));return k*k*(3-2*k)},cl=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  function render(){
+    f++;mx+=(rMx-mx)*.12;my+=(rMy-my)*.12;
+    const ti=f*SP*.0006,s=sc;
+    const GR=lp(GRS,GRE,s),GG=lp(GGS,GGE,s),GB=lp(GBS,GBE,s);
+    const CR2=lp(CRS,CRE,s),CG=lp(CGS,CGE,s),CB=lp(CBS,CBE,s);
+    const AR=lp(ARS,ARE,s),AG=lp(AGS,AGE,s),AB=lp(ABS,ABE,s);
+    const OR=lp(ORS,ORE,s),OG=lp(OGS,OGE,s),OB=lp(OBS,OBE,s);
+    const sw=Math.ceil(W/SC),sh=Math.ceil(H/SC);
+    if(tmp.width!==sw||tmp.height!==sh){tmp.width=sw;tmp.height=sh}
+    const img=tc.createImageData(sw,sh);
+    for(let py=0;py<sh;py++){for(let px=0;px<sw;px++){
+      const wx=px*SC+SC*.5,wy=py*SC+SC*.5;
+      const cd=Math.sqrt((wx-mx)**2+(wy-my)**2);
+      const sw2=ss(CR*.55,0,cd);let cL=cl(ss(CR,0,cd)+sw2*sw2*.5,0,1);
+      let aX=fbm(wy*.004,ti*.5,ti,3)*W*.75+W*.5;
+      const rD=Math.abs(wy-my),mp=ss(CR*1.6,0,rD)*ss(CR*2.2,0,Math.abs(aX-mx));
+      aX+=(mx-aX)*mp*.35;
+      const aD=Math.abs(wx-aX),base=.35+s*.65;
+      let aL=ss(BW,0,aD)*base;
+      const aB=ss(BW*(1+mp*.8),0,aD)*base;
+      aL=Math.max(aL,aB*(.4+mp*.6));
+      const n=NM>0?fbm(wx*.009,wy*.009,ti,2)*NM:0,gr=NM>0?fbm(wx*.025,wy*.025,ti*1.4,2)*NM*40:0;
+      const cl2=cl(cL+n,0,1),al=cl(aL+n*.5,0,1),ov=cl2*al*OV;
+      const i=(py*sw+px)*4;
+      img.data[i]=cl(GR+gr+Math.round((CR2-GR)*cl2+(AR-GR)*al+(OR-GR)*ov),0,255);
+      img.data[i+1]=cl(GG+gr+Math.round((CG-GG)*cl2+(AG-GG)*al+(OG-GG)*ov),0,255);
+      img.data[i+2]=cl(GB+gr+Math.round((CB-GB)*cl2+(AB-GB)*al+(OB-GB)*ov),0,255);
+      img.data[i+3]=255;
+    }}
+    tc.putImageData(img,0,0);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(tmp,0,0,W,H);
+    requestAnimationFrame(render);
+  }
+  ctx.fillStyle=`rgb(${GRS},${GGS},${GBS})`;ctx.fillRect(0,0,W,H);render();
+})();
+</script>
+
+<!-- ╔═══════════════════════════════════════════════════════════════╗
+     ║  B. PAGE LOADER                                               ║
+     ╚═══════════════════════════════════════════════════════════════╝ -->
+<script>
+(function(){
+
+  /* ── get project id from URL ────────────────────────────── */
+  const params = new URLSearchParams(location.search);
+  const pid    = params.get('id');
+  if (!pid) { document.title = 'Project not found'; return; }
+
+  /* ── fetch data ─────────────────────────────────────────── */
+  fetch('portfolio.json?' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      // search across systems + graphics featured and all groups
+      let proj = null, allProjects = [];
+      const sections = ['systems', 'graphics'];
+      sections.forEach(sec => {
+        const sd = data[sec];
+        if (!sd) return;
+        if (sd.featured?.id === pid) proj = sd.featured;
+        (sd.groups||[]).forEach(g => {
+          (g.projects||[]).forEach(p => {
+            allProjects.push(p);
+            if (p.id === pid) proj = p;
+          });
+        });
+      });
+      if (!proj) {
+        document.getElementById('body-content').innerHTML =
+          '<div class="empty-body">Project not found. Check the URL parameter matches a project id in portfolio.json.</div>';
+        return;
+      }
+      renderProject(proj, allProjects);
+    })
+    .catch(() => {
+      document.getElementById('body-content').innerHTML =
+        '<div class="empty-body">Could not load portfolio.json. Run via a local server: <code>python3 -m http.server 8000</code></div>';
+    });
+
+  /* ── render hero ────────────────────────────────────────── */
+  function renderHero(p) {
+    document.title = `${p.title} — Bam Portfolio`;
+    document.getElementById('footer-title').textContent = p.title;
+
+    // hero image
+    const imgSlot = document.getElementById('hero-img-slot');
+    if (p.src) {
+      const hero = document.getElementById('hero');
+      hero.classList.add('has-img');
+      if (p.srcType === 'video') {
+        imgSlot.innerHTML = `<div class="hero-img-wrap"><video src="${p.src}" autoplay loop muted playsinline></video><div class="hero-img-overlay"></div></div>`;
+      } else {
+        imgSlot.innerHTML = `<div class="hero-img-wrap"><img src="${p.src}" alt="${p.title}"><div class="hero-img-overlay"></div></div>`;
+      }
+    }
+
+    // hero copy
+    const copy = document.getElementById('hero-copy');
+    copy.innerHTML = `
+      <a href="systems.html" class="hero-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Systems & Computation
+      </a>
+      <div class="eyebrow-row">
+        <span class="eyebrow-mark">ระบบ</span>
+        <div class="eyebrow-strokes"><span></span><span></span><span></span></div>
+        <span class="eyebrow-label">${p.cat||'Project'}</span>
+      </div>
+      <h1 class="hero-h1">${p.title}<em>${p.latin||''}</em></h1>
+      <div class="hero-meta">
+        <div class="hero-role">
+          <div class="hero-role-lbl">Year</div>
+          <div class="hero-role-txt">${p.year||'—'}</div>
+        </div>
+        ${p.role ? `<div class="hero-role">
+          <div class="hero-role-lbl">Role</div>
+          <div class="hero-role-txt">${p.role}</div>
+        </div>` : ''}
+      </div>
+      <div class="hero-tools">
+        ${(p.tools||[]).map(t=>`<span class="tool-pill">${t}</span>`).join('')}
+      </div>`;
+  }
+
+  /* ── render block ───────────────────────────────────────── */
+  function renderBlock(b) {
+    const wide = b.wide ? 'wide' : '';
+    switch (b.type) {
+
+      case 'text':
+        return `<div class="block block-text ${wide} reveal">
+          <div class="block-inner">
+            ${b.heading ? `<h2 class="block-heading">${b.heading}</h2>` : ''}
+            <div class="block-body">${(b.paragraphs||[b.body||'']).map(p=>`<p>${p}</p>`).join('')}</div>
+          </div>
+        </div>`;
+
+      case 'image':
+        return `<div class="block block-image ${wide} reveal">
+          <div class="block-inner">
+            <figure>
+              ${b.srcType==='video'
+                ? `<video src="${b.src}" autoplay loop muted playsinline></video>`
+                : `<img src="${b.src}" alt="${b.caption||''}"><`}
+              ${b.caption ? `<figcaption>${b.caption}</figcaption>` : ''}
+            </figure>
+          </div>
+        </div>`;
+
+      case 'image-pair':
+        return `<div class="block block-image-pair ${wide} reveal">
+          <div class="block-inner">
+            <div class="pair-grid">
+              <figure>
+                ${b.src1Type==='video' ? `<video src="${b.src1}" autoplay loop muted playsinline></video>` : `<img src="${b.src1}" alt="${b.caption1||''}">`}
+                ${b.caption1?`<figcaption>${b.caption1}</figcaption>`:''}
+              </figure>
+              <figure>
+                ${b.src2Type==='video' ? `<video src="${b.src2}" autoplay loop muted playsinline></video>` : `<img src="${b.src2}" alt="${b.caption2||''}">`}
+                ${b.caption2?`<figcaption>${b.caption2}</figcaption>`:''}
+              </figure>
+            </div>
+          </div>
+        </div>`;
+
+      case 'video': {
+        let embed = '';
+        if (b.src.includes('youtube.com')||b.src.includes('youtu.be')) {
+          const vid = b.src.match(/(?:v=|youtu\.be\/)([^&?]+)/)?.[1];
+          embed = `<iframe src="https://www.youtube.com/embed/${vid}" allow="autoplay;encrypted-media" allowfullscreen></iframe>`;
+        } else if (b.src.includes('vimeo.com')) {
+          const vid = b.src.match(/vimeo\.com\/(\d+)/)?.[1];
+          embed = `<iframe src="https://player.vimeo.com/video/${vid}" allow="autoplay;fullscreen" allowfullscreen></iframe>`;
+        } else {
+          embed = `<video src="${b.src}" controls></video>`;
+        }
+        return `<div class="block block-video ${wide} reveal">
+          <div class="block-inner">
+            <div class="video-wrap">${embed}</div>
+            ${b.caption?`<div class="video-caption">${b.caption}</div>`:''}
+          </div>
+        </div>`;
+      }
+
+      case 'pullquote':
+        return `<div class="block block-pullquote ${wide} reveal">
+          <div class="block-inner">
+            <div class="pq-text">${b.text||''}</div>
+            ${b.source?`<div class="pq-source">— ${b.source}</div>`:''}
+          </div>
+        </div>`;
+
+      case 'divider':
+        return `<div class="block block-divider">
+          <div class="divider-inner">
+            <div class="divider-line"></div>
+            ${b.label?`<div class="divider-label">${b.label}</div><div class="divider-line"></div>`:''}
+          </div>
+        </div>`;
+
+      case 'stats': {
+        const cols = (b.stats||[]).length;
+        return `<div class="block block-stats ${wide} reveal">
+          <div class="block-inner">
+            <div class="stats-row" style="grid-template-columns:repeat(${cols},1fr)">
+              ${(b.stats||[]).map(s=>`<div class="stat-cell"><div class="stat-n">${s.value}</div><div class="stat-l">${s.label}</div></div>`).join('')}
+            </div>
+          </div>
+        </div>`;
+      }
+
+      default: return '';
+    }
+  }
+
+  /* ── render full page ───────────────────────────────────── */
+  function renderProject(proj, allProjects) {
+    renderHero(proj);
+
+    const bodyEl = document.getElementById('body-content');
+    const blocks = proj.blocks || [];
+
+    if (blocks.length === 0) {
+      bodyEl.innerHTML = `<div class="empty-body">
+        No content blocks yet. Open the <a href="project-admin.html?id=${proj.id}">project editor</a> to add content.
+      </div>`;
+    } else {
+      bodyEl.innerHTML = blocks.map(b => renderBlock(b)).join('');
+    }
+
+    // prev / next
+    const idx = allProjects.findIndex(p => p.id === proj.id);
+    const prev = allProjects[idx - 1];
+    const next = allProjects[idx + 1];
+    document.getElementById('proj-nav').innerHTML = `
+      ${prev
+        ? `<a href="project-template.html?id=${prev.id}" class="proj-nav-cell prev">
+            <span class="proj-nav-dir">← Previous</span>
+            <span class="proj-nav-title">${prev.title}</span>
+            <span class="proj-nav-latin">${prev.latin||''}</span>
+           </a>`
+        : `<a href="systems.html" class="proj-nav-cell prev">
+            <span class="proj-nav-dir">← Back</span>
+            <span class="proj-nav-title">Systems & Computation</span>
+           </a>`}
+      ${next
+        ? `<a href="project-template.html?id=${next.id}" class="proj-nav-cell next">
+            <span class="proj-nav-dir">Next →</span>
+            <span class="proj-nav-title">${next.title}</span>
+            <span class="proj-nav-latin">${next.latin||''}</span>
+           </a>`
+        : `<a href="index3.html" class="proj-nav-cell next">
+            <span class="proj-nav-dir">Next →</span>
+            <span class="proj-nav-title">Back to homepage</span>
+           </a>`}`;
+
+    // reveal observer
+    const obs = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  }
+
+})();
+</script>
+
+<!-- ╔═══════════════════════════════════════════════════════════════╗
+     ║  C. NAV SCROLL + CURSOR                                      ║
+     ╚═══════════════════════════════════════════════════════════════╝ -->
+<script>
+(function(){
+  const nav=document.getElementById('nav'),fill=document.getElementById('prog-fill');
+  const logo=nav.querySelector('.nav-logo-link');
+  const lp=(a,b,t)=>Math.round(a+(b-a)*t);
+  window.addEventListener('scroll',()=>{
+    const m=document.documentElement.scrollHeight-window.innerHeight;
+    const s=m>0?Math.min(window.scrollY/m,1):0;
+    nav.style.background=`rgba(${lp(255,214,s)},${lp(255,219,s)},255,0.78)`;
+    logo.style.color=`rgb(14,${lp(30,30,s)},${lp(28,80,s)})`;
+    if(fill)fill.style.width=(s*100)+'%';
+  },{passive:true});
+  const dot=document.querySelector('.cur-dot'),ring=document.querySelector('.cur-ring');
+  let rx=0,ry=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';});
+  (function loop(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+})();
+</script>
+</body>
+</html>
