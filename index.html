@@ -58,10 +58,12 @@
   --font-thai:    'Noto Sans Thai', sans-serif;    /* Thai eyebrow marks      */
 
   /* ── Text on aurora ground ────────────────────────────────── */
+  /* Opacities tuned for WCAG AA contrast (4.5:1+) against both the
+     white (top) and soft-indigo (bottom) aurora ground colours. */
   --text-primary:   rgba(14,30,28,0.90);
-  --text-secondary: rgba(14,30,28,0.52);
-  --text-dim:       rgba(14,30,28,0.30);
-  --text-accent:    rgba(120,130,255,1);           /* periwinkle blue accent  */
+  --text-secondary: rgba(14,30,28,0.70);
+  --text-dim:       rgba(14,30,28,0.65);
+  --text-accent:    rgba(60,68,210,1);             /* periwinkle blue accent, darkened for legibility */
 
   /* ── Nav ─────────────────────────────────────────────────── */
   --nav-h: 52px;
@@ -94,8 +96,10 @@ a { text-decoration: none; color: inherit; }
   position: fixed; top: 0; left: 0; right: 0;
   height: var(--nav-h); z-index: 700;
   display: flex; align-items: stretch;
-  /* background & border update via JS to match aurora scroll colour */
-  background: rgba(214,219,255,0.72);
+  /* background & border update via JS to match aurora scroll colour;
+     this is the scroll=0 (top of page) colour — white — so it's correct
+     before the scroll listener's first run */
+  background: rgba(255,255,255,0.78);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border-bottom: 0.5px solid rgba(14,30,28,0.08);
@@ -1322,10 +1326,10 @@ a { text-decoration: none; color: inherit; }
   // interpolate two RGB values by scroll
   function lerp(a, b, t) { return Math.round(a + (b-a)*t); }
 
-  // Start ground = 214,219,255 / End ground = 255,255,255
+  // Start ground = 255,255,255 (top) / End ground = 214,219,255 (bottom)
   const GRS=[255,255,255], GRE=[214,219,255];
 
-  window.addEventListener('scroll', () => {
+  function updateNav() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const s   = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
 
@@ -1357,7 +1361,10 @@ a { text-decoration: none; color: inherit; }
       const href = link.getAttribute('href');
       link.classList.toggle('active', href === '#' + current || href === '#' + current);
     });
-  }, { passive: true });
+  }
+
+  updateNav();
+  window.addEventListener('scroll', updateNav, { passive: true });
 
   // ── scroll-reveal: animate elements into view ──
   const revealObserver = new IntersectionObserver(entries => {

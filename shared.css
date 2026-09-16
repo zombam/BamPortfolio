@@ -16,7 +16,7 @@
   --ink:      #0E1E1C;
   --text-1:   #0E1E1C;
   --text-2:   #4A6E6A;
-  --text-3:   #8AADA9;
+  --text-3:   #4E7570; /* darkened from #8AADA9 (2.4:1) for WCAG AA contrast on --ground */
   --text-4:   rgba(14,30,28,0.12);
 
   /* Type */
