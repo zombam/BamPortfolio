@@ -51,6 +51,28 @@ START = scroll position 0 (top), END = scroll position 1 (bottom)
 - ground-end: 214,219,255 (soft indigo)
 Change these to retheme the background without touching JS.
 
+## Font sizes — where to adjust
+There's no central size token — every `font-size` is a hardcoded px value on its own
+selector, inline in each page's `<style>` block (or in `shared.css` for
+about/graphics/project-hand). To change a specific piece of text, search that file
+for the class name (e.g. `.nav-link`, `.pj-desc`, `.wip-tag`) and edit its
+`font-size:` directly.
+
+Base body copy size (affects any text that doesn't set its own font-size):
+| File | Line | Current |
+|------|------|---------|
+| `index.html` | `body {` ~L77 | 14px |
+| `systems.html` | `body{` ~L45 | 14px |
+| `shared.css` (about/graphics/project-hand) | `body {` ~L38 | 15px |
+| `project-template.html` | its own `body{}`/base rule near top of `<style>` | ~14px |
+
+Rough scale used across the site (Sep 2026 pass, bumped everything except
+headings/hero titles by ~+2px for legibility):
+- ~8px small mono labels/tags → 10px
+- ~9px nav links / captions → 11px
+- ~11-12px body copy → 13-14px
+- Headings use `clamp(...)` (responsive) or are 16px+ — left untouched, already large enough.
+
 ## Pages still needing rebuild
 - `graphics.html` — old Iridophore palette, needs rewrite to match systems.html
 - `about.html` — old style, needs new Space Grotesk / aurora system
