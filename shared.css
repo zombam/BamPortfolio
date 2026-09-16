@@ -1,9 +1,30 @@
-/* ═══════════════════════════════════════════════════
-   SHARED SPINE — Iridophore palette × field.io register
-   Used by: index.html, systems.html, graphics.html
-═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   SHARED SPINE — linked by every page (index, systems, about,
+   graphics, project-hand, project-template). This is the ONE place
+   to adjust font sizes and colours for the whole site.
+═══════════════════════════════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
 
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  TYPE SCALE — used by every page. Change a value here and it  ║
+   ║  updates everywhere that size is used, site-wide.             ║
+   ║  (Headings/hero titles are NOT in this scale — each is sized  ║
+   ║  per-page, either fixed or via clamp(), since they're already ║
+   ║  large enough and deliberately different per page/context.)   ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+:root {
+  --fs-2xs: 10px;   /* smallest tags, eyebrow labels, meta text */
+  --fs-xs:  10.5px; /* nav links, small buttons/pills */
+  --fs-sm:  11px;   /* secondary small text, captions */
+  --fs-md:  13px;   /* default body copy */
+  --fs-lg:  14px;   /* larger body copy / emphasised small text */
+  --fs-xl:  15px;   /* largest "body-scale" text before headings start */
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  IRIDOPHORE PALETTE — about.html, graphics.html,              ║
+   ║  project-hand.html, project-template.html                     ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
 :root {
   /* Palette */
   --ground:   #F5F5F3;
@@ -32,6 +53,55 @@
   --page-pad: 2.2rem;
 }
 
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  AURORA PALETTE — index.html, systems.html only.               ║
+   ║  Was previously copy-pasted into both pages' own <style>      ║
+   ║  blocks (a "keep in sync by hand" hazard) — now lives here     ║
+   ║  once. AURORA SCROLL JOURNEY: scroll=0 (top) uses the START    ║
+   ║  colours, scroll=1 (bottom) uses END; the render loop in each  ║
+   ║  page's <script> lerps between them continuously.              ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+:root {
+  /* ── START palette (top of page, scroll = 0) — WHITE ────── */
+  --aur-ground-start-r: 255; --aur-ground-start-g: 255; --aur-ground-start-b: 255; /* #FFFFFF white          */
+  --aur-cursor-start-r: 148; --aur-cursor-start-g: 237; --aur-cursor-start-b: 255; /* #94EDFF pale cyan      */
+  --aur-band-start-r:   221; --aur-band-start-g:   242; --aur-band-start-b:   253; /* #DDF2FD ice blue       */
+  --aur-overlap-start-r:120; --aur-overlap-start-g: 130; --aur-overlap-start-b:255; /* #7882FF blue-periwinkle*/
+
+  /* ── END palette (bottom of page, scroll = 1) — SOFT INDIGO  */
+  --aur-ground-end-r: 214; --aur-ground-end-g: 219; --aur-ground-end-b: 255; /* #D6DBFF soft indigo    */
+  --aur-cursor-end-r: 255; --aur-cursor-end-g: 255; --aur-cursor-end-b: 255; /* #FFFFFF white          */
+  --aur-band-end-r:   255; --aur-band-end-g:   255; --aur-band-end-b:   255; /* #FFFFFF white          */
+  --aur-overlap-end-r: 60; --aur-overlap-end-g:  60; --aur-overlap-end-b:255; /* #3C3CFF ultramarine   */
+
+  /* ── Aurora field controls ────────────────────────────────── */
+  --aur-cursor-radius:  180;   /* px: how wide the cursor light pool is       */
+  --aur-band-width:     120;   /* px: how wide the aurora band glow is        */
+  --aur-speed:            8;   /* aurora drift speed multiplier               */
+  --aur-overlap-blend:  1.4;   /* how vivid the overlap zone colour is        */
+  --aur-noise-mix:     0.225;  /* grain strength (0 = off, 0.5 = strong)      */
+
+  /* ── Site accent ──────────────────────────────────────────── */
+  --mark-blue:      #0000FF;              /* logo colour — used sparingly      */
+  --mark-blue-soft: rgba(0,0,255,0.08);
+  --mark-blue-line: rgba(0,0,255,0.35);
+
+  /* ── Font families ────────────────────────────────────────── */
+  --font-display: 'Space Grotesk', sans-serif;     /* headings                */
+  --font-accent:  'Cormorant Garamond', serif;     /* italic em accents       */
+  --font-body:    'Space Grotesk', sans-serif;     /* body prose              */
+  --font-mono:    'IBM Plex Mono', monospace;      /* labels, CTAs, code      */
+  --font-thai:    'Noto Sans Thai', sans-serif;    /* Thai eyebrow marks      */
+
+  /* ── Text on aurora ground ────────────────────────────────── */
+  /* Opacities tuned for WCAG AA contrast (4.5:1+) against both the
+     white (top) and soft-indigo (bottom) aurora ground colours. */
+  --text-primary:   rgba(14,30,28,0.90);
+  --text-secondary: rgba(14,30,28,0.70);
+  --text-dim:       rgba(14,30,28,0.65);
+  --text-accent:    rgba(60,68,210,1);             /* periwinkle blue accent, darkened for legibility */
+}
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -40,7 +110,7 @@ body {
   color: var(--text-1);
   font-family: var(--mono);
   font-weight: 300;
-  font-size: 15px;
+  font-size: var(--fs-xl);
   line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
@@ -84,7 +154,7 @@ body::after {
 }
 .cur-label {
   position: fixed; pointer-events: none; z-index: 9997;
-  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  font-size: var(--fs-xs); letter-spacing: .18em; text-transform: uppercase;
   color: var(--irid); transform: translate(15px,-50%);
   opacity: 0; transition: opacity .18s; white-space: nowrap;
 }
@@ -113,7 +183,7 @@ body::after {
   width: .5px; height: 16px; background: var(--mid);
 }
 .nav-logo-sub {
-  font-size: 10px; letter-spacing: .25em;
+  font-size: var(--fs-2xs); letter-spacing: .25em;
   text-transform: uppercase; color: var(--text-3);
 }
 .nav-center {
@@ -121,7 +191,7 @@ body::after {
   justify-content: center; gap: 0;
 }
 .nav-link {
-  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  font-size: var(--fs-sm); letter-spacing: .2em; text-transform: uppercase;
   color: var(--text-2); padding: 0 1.4rem; height: var(--nav-h);
   display: flex; align-items: center;
   border-bottom: 1.5px solid transparent;
@@ -137,7 +207,7 @@ body::after {
 }
 .nav-pip {
   display: flex; align-items: center; gap: .45rem;
-  font-size: 10.5px; letter-spacing: .14em;
+  font-size: var(--fs-xs); letter-spacing: .14em;
   text-transform: uppercase; color: var(--text-3);
 }
 .pip {
@@ -146,7 +216,7 @@ body::after {
 }
 @keyframes pipP { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:1;transform:scale(1.5)} }
 .nav-cta {
-  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  font-size: var(--fs-xs); letter-spacing: .18em; text-transform: uppercase;
   color: var(--dark); background: var(--irid);
   padding: 6px 14px; border-radius: 1px; border: none;
   transition: background .2s, color .2s;
@@ -159,18 +229,18 @@ body::after {
   display: flex; justify-content: space-between; align-items: center;
   gap: 1rem; flex-wrap: wrap;
 }
-.footer-l { font-size: 11px; color: var(--text-3); letter-spacing: .08em; }
+.footer-l { font-size: var(--fs-sm); color: var(--text-3); letter-spacing: .08em; }
 .footer-links { display: flex; gap: 1.8rem; }
 .footer-link {
-  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  font-size: var(--fs-sm); letter-spacing: .14em; text-transform: uppercase;
   color: var(--text-3); transition: color .2s;
 }
 .footer-link:hover { color: var(--irid); }
-.footer-r { font-size: 11px; color: var(--text-3); letter-spacing: .1em; }
+.footer-r { font-size: var(--fs-sm); color: var(--text-3); letter-spacing: .1em; }
 
 /* ── SECTION LABEL ── */
 .sec-label {
-  font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+  font-size: var(--fs-sm); letter-spacing: .28em; text-transform: uppercase;
   color: var(--text-3); display: flex; align-items: center; gap: .8rem;
 }
 .sec-label::after { content: ''; width: 28px; height: .5px; background: var(--text-3); }
@@ -228,7 +298,7 @@ body::after {
   stroke: var(--text-3); fill: none; stroke-width: 1;
 }
 .drawer-media-placeholder span {
-  font-size: 11px; letter-spacing: .22em;
+  font-size: var(--fs-sm); letter-spacing: .22em;
   text-transform: uppercase; color: var(--text-3);
 }
 
@@ -237,7 +307,7 @@ body::after {
   align-items: flex-start; margin-bottom: 2.2rem;
 }
 .drawer-cat {
-  font-size: 11px; letter-spacing: .25em;
+  font-size: var(--fs-sm); letter-spacing: .25em;
   text-transform: uppercase; color: var(--irid); margin-bottom: .4rem;
 }
 .drawer-title {
@@ -259,25 +329,25 @@ body::after {
   display: grid; grid-template-columns: 1fr 300px; gap: 3.5rem;
 }
 .drawer-desc {
-  font-size: 14.5px; line-height: 2.12; color: var(--text-2);
+  font-size: var(--fs-lg); line-height: 2.12; color: var(--text-2);
 }
 .drawer-meta { display: flex; flex-direction: column; gap: 1.1rem; }
 .meta-block { padding-bottom: 1rem; border-bottom: var(--hair-mid); }
 .meta-k {
-  font-size: 10px; letter-spacing: .24em;
+  font-size: var(--fs-2xs); letter-spacing: .24em;
   text-transform: uppercase; color: var(--text-3); margin-bottom: .3rem;
 }
-.meta-v { font-size: 13px; color: var(--text-1); line-height: 1.75; }
+.meta-v { font-size: var(--fs-md); color: var(--text-1); line-height: 1.75; }
 .meta-tools { display: flex; flex-wrap: wrap; gap: 4px; margin-top: .4rem; }
 .meta-tool {
-  font-size: 10px; letter-spacing: .08em;
+  font-size: var(--fs-2xs); letter-spacing: .08em;
   background: rgba(90,191,176,0.07);
   border: .5px solid rgba(90,191,176,0.22);
   color: var(--deep); padding: 2px 7px; border-radius: 1px;
 }
 .drawer-ext {
   display: inline-flex; align-items: center; gap: .6rem;
-  margin-top: 1.2rem; font-size: 11px; letter-spacing: .18em;
+  margin-top: 1.2rem; font-size: var(--fs-sm); letter-spacing: .18em;
   text-transform: uppercase; color: var(--irid);
   border: .5px solid rgba(90,191,176,0.3);
   padding: .6rem 1.2rem; border-radius: 1px;
@@ -302,10 +372,10 @@ body::after {
   background: rgba(245,245,243,.92);
   position: sticky; top: var(--nav-h); z-index: 50;
 }
-.csh-roman { font-family: var(--serif); font-size: 13px; font-style: italic; color: var(--text-3); width: 20px; }
-.csh-name  { font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--text-2); }
+.csh-roman { font-family: var(--serif); font-size: var(--fs-md); font-style: italic; color: var(--text-3); width: 20px; }
+.csh-name  { font-size: var(--fs-sm); letter-spacing: .26em; text-transform: uppercase; color: var(--text-2); }
 .csh-rule  { flex: 1; height: .5px; background: rgba(14,30,28,.1); }
-.csh-count { font-size: 11px; letter-spacing: .14em; color: var(--text-3); }
+.csh-count { font-size: var(--fs-sm); letter-spacing: .14em; color: var(--text-3); }
 
 /* Grid wrapper — 3 cols default, 2 cols on narrow */
 .card-grid {
@@ -353,7 +423,7 @@ body::after {
   align-items: center; justify-content: center; gap: .55rem;
 }
 .card-media-ph svg { width: 26px; height: 26px; stroke: var(--text-3); fill: none; stroke-width: .8; }
-.card-media-ph span { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); line-height: 1.6; text-align: center; }
+.card-media-ph span { font-size: var(--fs-2xs); letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); line-height: 1.6; text-align: center; }
 
 /* video play badge */
 .card-media-badge {
@@ -361,7 +431,7 @@ body::after {
   display: flex; align-items: center; gap: .35rem;
   background: rgba(245,245,243,.88);
   padding: 3px 7px; border-radius: 1px;
-  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  font-size: var(--fs-2xs); letter-spacing: .14em; text-transform: uppercase;
   color: var(--ink); pointer-events: none;
 }
 .card-media-badge svg { width: 8px; height: 8px; stroke: var(--ink); fill: none; stroke-width: 2; }
@@ -380,11 +450,11 @@ body::after {
   align-items: center; gap: .5rem;
 }
 .card-cat {
-  font-size: 10px; letter-spacing: .2em;
+  font-size: var(--fs-2xs); letter-spacing: .2em;
   text-transform: uppercase; color: var(--irid);
 }
 .card-year {
-  font-size: 10px; letter-spacing: .1em;
+  font-size: var(--fs-2xs); letter-spacing: .1em;
   color: var(--text-3); font-variant-numeric: tabular-nums;
 }
 
@@ -398,12 +468,12 @@ body::after {
 
 .card-latin {
   font-family: var(--serif);
-  font-size: 13.5px; font-style: italic;
+  font-size: var(--fs-md); font-style: italic;
   color: var(--text-2); line-height: 1.3;
 }
 
 .card-desc {
-  font-size: 12px; color: var(--text-2);
+  font-size: var(--fs-md); color: var(--text-2);
   line-height: 1.85; margin-top: .2rem;
   /* clamp to 3 lines — enough context without crowding */
   display: -webkit-box;
@@ -417,7 +487,7 @@ body::after {
   margin-top: .4rem;
 }
 .card-tag {
-  font-size: 10px; letter-spacing: .09em;
+  font-size: var(--fs-2xs); letter-spacing: .09em;
   background: rgba(90,191,176,.07);
   border: .5px solid rgba(90,191,176,.2);
   color: var(--deep); padding: 2px 6px; border-radius: 1px;
@@ -433,7 +503,7 @@ body::after {
 .cs-dot.active   { background: var(--irid); }
 .cs-dot.archived { background: var(--text-3); }
 .cs-dot.thesis   { background: #C4A84A; }
-.cs-txt { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+.cs-txt { font-size: var(--fs-2xs); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
 .cs-txt.thesis { color: #A08830; }
 
 /* hover arrow — bottom right of card */

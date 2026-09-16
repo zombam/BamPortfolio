@@ -10,32 +10,12 @@
 
 <style>
 /* ╔═══════════════════════════════════════════════════════════════╗
-   ║  0. TOKENS — same as homepage, keep in sync                   ║
-   ╚═══════════════════════════════════════════════════════════════╝ */
-:root {
-  --aur-ground-start-r:255;--aur-ground-start-g:255;--aur-ground-start-b:255;
-  --aur-cursor-start-r:148;--aur-cursor-start-g:237;--aur-cursor-start-b:255;
-  --aur-band-start-r:221;  --aur-band-start-g:242;  --aur-band-start-b:253;
-  --aur-overlap-start-r:120;--aur-overlap-start-g:130;--aur-overlap-start-b:255;
-  --aur-ground-end-r:214;  --aur-ground-end-g:219;  --aur-ground-end-b:255;
-  --aur-cursor-end-r:255;  --aur-cursor-end-g:255;  --aur-cursor-end-b:255;
-  --aur-band-end-r:255;    --aur-band-end-g:255;    --aur-band-end-b:255;
-  --aur-overlap-end-r:60;  --aur-overlap-end-g:60;  --aur-overlap-end-b:255;
-  --aur-cursor-radius:180; --aur-band-width:120;
-  --aur-speed:8;           --aur-overlap-blend:1.4;
-  --aur-noise-mix:0.225;
-  --mark-blue:#0000FF;
-  --font-display:'Space Grotesk',sans-serif;
-  --font-accent:'Cormorant Garamond',serif;
-  --font-body:'Space Grotesk',sans-serif;
-  --font-mono:'IBM Plex Mono',monospace;
-  --font-thai:'Noto Sans Thai',sans-serif;
-  --text-primary:rgba(14,30,28,0.90);
-  --text-secondary:rgba(14,30,28,0.70);
-  --text-dim:rgba(14,30,28,0.65);
-  --text-accent:rgba(60,68,210,1);
-  --nav-h:52px;
-}
+   ║  0. TOKENS                                                     ║
+   ╚═══════════════════════════════════════════════════════════════╝
+   All colour, font-family, and font-size tokens for this page now
+   live in shared.css (AURORA PALETTE + TYPE SCALE sections) so they
+   share one source with index.html instead of two hand-synced
+   copies. Edit them there — this page just consumes the variables. */
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  1. BASE                                                      ║
@@ -43,7 +23,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:var(--font-body);font-size:14px;font-weight:400;
+  font-family:var(--font-body);font-size:var(--fs-lg);font-weight:400;
   color:var(--text-primary);cursor:none;overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
   background:rgb(255,255,255);
@@ -73,7 +53,7 @@ a{text-decoration:none;color:inherit}
 .nav-logo-link svg{width:100%;height:100%;display:block}
 .nav-links{flex:1;display:flex;align-items:center;justify-content:center}
 .nav-link{
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;
   color:var(--text-dim);padding:0 1.2rem;height:var(--nav-h);
   display:flex;align-items:center;
   border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s;
@@ -81,10 +61,10 @@ a{text-decoration:none;color:inherit}
 .nav-link:hover{color:var(--text-primary);border-bottom-color:var(--text-accent)}
 .nav-link.active{color:var(--text-primary);border-bottom-color:var(--mark-blue)}
 .nav-right{display:flex;align-items:center;gap:1.2rem;padding:0 1.4rem;border-left:0.5px solid rgba(14,30,28,0.08);}
-.nav-pip{display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);}
+.nav-pip{display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);}
 .pip-dot{width:4px;height:4px;border-radius:50%;background:var(--text-accent);animation:pipPulse 2.6s ease-in-out infinite}
 @keyframes pipPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
-.nav-cta{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--mark-blue);padding:6px 14px;border-radius:1px;border:none;transition:opacity .2s;cursor:none}
+.nav-cta{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--mark-blue);padding:6px 14px;border-radius:1px;border:none;transition:opacity .2s;cursor:none}
 .nav-cta:hover{opacity:.82}
 #progress-bar{position:fixed;top:var(--nav-h);left:0;right:0;height:1.5px;z-index:699;background:rgba(120,130,255,0.08)}
 #progress-fill{height:100%;background:var(--text-accent);width:0%;transition:width .1s linear}
@@ -93,13 +73,13 @@ a{text-decoration:none;color:inherit}
    ║  3. SHARED MOTIFS                                             ║
    ╚═══════════════════════════════════════════════════════════════╝ */
 .eyebrow-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
-.eyebrow-mark{font-family:var(--font-thai);font-size:13px;font-weight:600;color:var(--mark-blue);letter-spacing:.04em;flex-shrink:0}
+.eyebrow-mark{font-family:var(--font-thai);font-size:var(--fs-md);font-weight:600;color:var(--mark-blue);letter-spacing:.04em;flex-shrink:0}
 .eyebrow-strokes{display:flex;flex-direction:column;gap:3px;flex-shrink:0}
 .eyebrow-strokes span{display:block;height:1.5px;border-radius:1px;background:var(--mark-blue)}
 .eyebrow-strokes span:nth-child(1){width:14px;opacity:.9}
 .eyebrow-strokes span:nth-child(2){width:10px;opacity:.55}
 .eyebrow-strokes span:nth-child(3){width:6px;opacity:.3}
-.eyebrow-label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--text-accent)}
+.eyebrow-label{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.28em;text-transform:uppercase;color:var(--text-accent)}
 .section-sep{border-top:0.5px solid rgba(14,30,28,0.07)}
 .si{padding:5rem 2.5rem}
 .glass{background:rgba(255,255,255,0.48);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
@@ -120,7 +100,7 @@ a{text-decoration:none;color:inherit}
 /* cursor */
 .cur-dot{position:fixed;z-index:9999;pointer-events:none;width:5px;height:5px;border-radius:50%;background:var(--text-accent);transform:translate(-50%,-50%)}
 .cur-ring{position:fixed;z-index:9998;pointer-events:none;width:30px;height:30px;border-radius:50%;border:0.5px solid rgba(120,130,255,0.35);transform:translate(-50%,-50%);transition:width .22s,height .22s,border-color .22s}
-.cur-label{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);transform:translate(14px,-50%);opacity:0;transition:opacity .18s;white-space:nowrap}
+.cur-label{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);transform:translate(14px,-50%);opacity:0;transition:opacity .18s;white-space:nowrap}
 .cur-label.show{opacity:1}
 
 /* ╔═══════════════════════════════════════════════════════════════╗
@@ -136,7 +116,7 @@ a{text-decoration:none;color:inherit}
 
 .hero-back{
   display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.2em;text-transform:uppercase;
   color:var(--text-dim);margin-bottom:2rem;
   transition:color .2s;opacity:0;animation:riseIn .6s ease .1s forwards;
 }
@@ -161,13 +141,13 @@ a{text-decoration:none;color:inherit}
   opacity:0;animation:riseIn .85s ease .6s forwards;
 }
 .hero-bio{
-  font-size:14px;line-height:2;color:var(--text-secondary);
+  font-size:var(--fs-lg);line-height:2;color:var(--text-secondary);
   max-width:480px;margin-bottom:2.5rem;
   opacity:0;animation:riseIn .85s ease .8s forwards;
 }
 .hero-tags{display:flex;flex-wrap:wrap;gap:.5rem;opacity:0;animation:riseIn .8s ease 1s forwards}
 .hero-tag{
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.14em;text-transform:uppercase;
   border:0.5px solid rgba(14,30,28,0.18);color:var(--text-secondary);
   padding:4px 10px;border-radius:1px;transition:all .2s;
 }
@@ -178,7 +158,7 @@ a{text-decoration:none;color:inherit}
 .scroll-track{width:.5px;height:52px;background:rgba(14,30,28,0.12);position:relative;overflow:hidden}
 .scroll-fill{position:absolute;top:0;left:0;width:100%;background:var(--text-accent);animation:scrollFlow 2.2s ease-in-out 1.3s infinite}
 @keyframes scrollFlow{0%{height:0%;top:0}50%{height:100%;top:0}51%{height:100%;top:0}100%{height:0%;top:100%}}
-.scroll-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim);writing-mode:vertical-rl}
+.scroll-lbl{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim);writing-mode:vertical-rl}
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  5. FEATURED PROJECT (H.A.N.D.)                              ║
@@ -195,7 +175,7 @@ a{text-decoration:none;color:inherit}
 .feat-media img,.feat-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .feat-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem}
 .feat-ph svg{width:32px;height:32px;stroke:rgba(14,30,28,0.14);fill:none;stroke-width:.8}
-.feat-ph span{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(14,30,28,0.14)}
+.feat-ph span{font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.22em;text-transform:uppercase;color:rgba(14,30,28,0.14)}
 
 .feat-info{
   padding:4rem 2.5rem;display:flex;flex-direction:column;
@@ -204,7 +184,7 @@ a{text-decoration:none;color:inherit}
 }
 .feat-badge{
   display:inline-flex;align-items:center;gap:.6rem;
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.25em;text-transform:uppercase;
   color:var(--text-accent);
 }
 .feat-badge::before{content:'';width:20px;height:.5px;background:var(--text-accent)}
@@ -214,16 +194,16 @@ a{text-decoration:none;color:inherit}
   font-weight:700;color:var(--text-primary);line-height:1.05;
 }
 .feat-title em{font-family:var(--font-accent);font-style:italic;font-weight:300;color:var(--text-secondary)}
-.feat-desc{font-size:14px;color:var(--text-secondary);line-height:2.05;max-width:420px}
+.feat-desc{font-size:var(--fs-lg);color:var(--text-secondary);line-height:2.05;max-width:420px}
 .feat-tools{display:flex;flex-wrap:wrap;gap:4px}
 .feat-tool{
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.09em;
+  font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.09em;
   background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);
   color:rgba(60,65,220,0.85);padding:2px 7px;border-radius:1px;
 }
 .feat-cta{
   display:inline-flex;align-items:center;gap:.7rem;
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.18em;text-transform:uppercase;
   color:#fff;background:var(--mark-blue);
   padding:.75rem 1.6rem;border-radius:1px;align-self:flex-start;border:none;
   transition:opacity .2s;cursor:none;
@@ -240,7 +220,7 @@ a{text-decoration:none;color:inherit}
 .proj-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem}
 .proj-header-title{font-family:var(--font-display);font-size:clamp(22px,3vw,36px);font-weight:600;color:var(--text-primary);line-height:1.1}
 .proj-header-title em{font-family:var(--font-accent);font-style:italic;font-weight:300;color:var(--text-secondary)}
-.proj-count{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
+.proj-count{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
 
 /* card grid — 3 columns */
 .card-grid{
@@ -260,20 +240,20 @@ a{text-decoration:none;color:inherit}
 .proj-card:hover .card-media img,.proj-card:hover .card-media video{transform:scale(1.04)}
 .card-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
 .card-ph svg{width:22px;height:22px;stroke:rgba(14,30,28,0.13);fill:none;stroke-width:.8}
-.card-ph span{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(14,30,28,0.13)}
+.card-ph span{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.16em;text-transform:uppercase;color:rgba(14,30,28,0.13)}
 
 /* info */
 .card-sep{height:.5px;background:rgba(14,30,28,0.07);flex-shrink:0}
 .card-info{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.3rem}
 .card-meta{display:flex;justify-content:space-between;align-items:center}
-.card-cat{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-accent)}
-.card-year{font-family:var(--font-mono);font-size:10px;color:var(--text-dim)}
+.card-cat{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.2em;text-transform:uppercase;color:var(--text-accent)}
+.card-year{font-family:var(--font-mono);font-size:var(--fs-2xs);color:var(--text-dim)}
 .card-title{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--text-primary);line-height:1.1;transition:color .2s}
 .proj-card:hover .card-title{color:rgba(60,65,220,0.9)}
-.card-latin{font-family:var(--font-accent);font-size:13px;font-style:italic;color:var(--text-secondary)}
-.card-desc{font-size:12px;color:var(--text-secondary);line-height:1.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:.2rem}
+.card-latin{font-family:var(--font-accent);font-size:var(--fs-md);font-style:italic;color:var(--text-secondary)}
+.card-desc{font-size:var(--fs-md);color:var(--text-secondary);line-height:1.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:.2rem}
 .card-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:.4rem}
-.card-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);color:rgba(60,65,220,0.85);padding:2px 6px;border-radius:1px}
+.card-tag{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.08em;background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);color:rgba(60,65,220,0.85);padding:2px 6px;border-radius:1px}
 
 /* arrow */
 .card-arrow{position:absolute;bottom:.9rem;right:.9rem;width:28px;height:28px;border-radius:50%;border:.5px solid rgba(14,30,28,0.12);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:all .22s}
@@ -292,9 +272,9 @@ a{text-decoration:none;color:inherit}
 .about-r{padding:5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.4rem}
 .about-hed{font-family:var(--font-display);font-size:clamp(26px,3.5vw,46px);font-weight:600;line-height:1.1;color:var(--text-primary);margin-bottom:1.6rem}
 .about-hed em{font-family:var(--font-accent);font-style:italic;font-weight:300;color:var(--text-secondary)}
-.about-body{font-size:14px;line-height:2.1;color:var(--text-secondary)}
+.about-body{font-size:var(--fs-lg);line-height:2.1;color:var(--text-secondary)}
 .about-body p+p{margin-top:1em}
-.about-link{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);border-bottom:.5px solid rgba(120,130,255,0.3);padding-bottom:4px;transition:border-color .2s}
+.about-link{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);border-bottom:.5px solid rgba(120,130,255,0.3);padding-bottom:4px;transition:border-color .2s}
 .about-link:hover{border-color:var(--text-accent)}
 .about-link svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5}
 
@@ -302,14 +282,14 @@ a{text-decoration:none;color:inherit}
 .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .skill-card{padding:1.2rem;border:.5px solid rgba(14,30,28,0.08);background:rgba(255,255,255,0.35);backdrop-filter:blur(12px);border-radius:1px;transition:border-color .3s,background .3s}
 .skill-card:hover{border-color:rgba(120,130,255,0.4);background:rgba(255,255,255,0.55)}
-.skill-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-accent);margin-bottom:.6rem;display:block}
+.skill-label{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.2em;text-transform:uppercase;color:var(--text-accent);margin-bottom:.6rem;display:block}
 .skill-items{display:flex;flex-direction:column;gap:.25rem}
-.skill-item{font-size:13px;color:var(--text-secondary)}
+.skill-item{font-size:var(--fs-md);color:var(--text-secondary)}
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  8. FOOTER                                                    ║
    ╚═══════════════════════════════════════════════════════════════╝ */
-.footer{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 2.5rem;border-top:.5px solid rgba(14,30,28,0.08);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+.footer{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 2.5rem;border-top:.5px solid rgba(14,30,28,0.08);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
 .footer-links{display:flex;gap:1.8rem}
 .footer-link{transition:color .2s}
 .footer-link:hover{color:var(--text-accent)}
@@ -322,21 +302,21 @@ a{text-decoration:none;color:inherit}
 .drawer{position:fixed;bottom:0;left:0;right:0;z-index:801;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(120,130,255,0.3);transform:translateY(100%);transition:transform .46s cubic-bezier(.23,1,.32,1);max-height:78vh;overflow-y:auto;padding:2.5rem 2.5rem 3.5rem}
 .drawer.open{transform:translateY(0)}
 .drawer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem}
-.drawer-cat{font-family:var(--font-mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-accent);margin-bottom:.4rem}
+.drawer-cat{font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.25em;text-transform:uppercase;color:var(--text-accent);margin-bottom:.4rem}
 .drawer-title{font-family:var(--font-display);font-size:clamp(24px,4vw,48px);font-weight:600;color:var(--text-primary);line-height:1.1}
 .drawer-title em{font-family:var(--font-accent);font-style:italic;font-weight:300;color:var(--text-secondary);font-size:.72em}
 .drawer-close{background:none;border:.5px solid rgba(14,30,28,0.15);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:none;transition:border-color .2s}
 .drawer-close:hover{border-color:rgba(120,130,255,0.6)}
 .drawer-close svg{width:14px;height:14px;stroke:var(--text-secondary);fill:none;stroke-width:1.5}
 .drawer-body{display:grid;grid-template-columns:1fr 280px;gap:3rem}
-.drawer-desc{font-size:14px;line-height:2.1;color:var(--text-secondary)}
+.drawer-desc{font-size:var(--fs-lg);line-height:2.1;color:var(--text-secondary)}
 .drawer-meta{display:flex;flex-direction:column;gap:1rem}
 .meta-block{padding-bottom:1rem;border-bottom:.5px solid rgba(14,30,28,0.06)}
-.meta-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.3rem}
-.meta-v{font-size:13px;color:var(--text-primary);line-height:1.7}
+.meta-k{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.3rem}
+.meta-v{font-size:var(--fs-md);color:var(--text-primary);line-height:1.7}
 .meta-tools{display:flex;flex-wrap:wrap;gap:4px;margin-top:.4rem}
-.meta-tool{font-family:var(--font-mono);font-size:10px;letter-spacing:.09em;background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);color:rgba(60,65,220,0.85);padding:2px 7px;border-radius:1px}
-.drawer-ext{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);border:.5px solid rgba(120,130,255,0.35);padding:.6rem 1.1rem;border-radius:1px;transition:all .2s}
+.meta-tool{font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.09em;background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);color:rgba(60,65,220,0.85);padding:2px 7px;border-radius:1px}
+.drawer-ext{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);border:.5px solid rgba(120,130,255,0.35);padding:.6rem 1.1rem;border-radius:1px;transition:all .2s}
 .drawer-ext:hover{background:rgba(120,130,255,0.08)}
 .drawer-ext svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5}
 
@@ -541,17 +521,17 @@ a{text-decoration:none;color:inherit}
           Let's build<br>
           <span style="font-family:var(--font-accent);font-style:italic;font-weight:300;color:var(--text-secondary)">something alive.</span>
         </h2>
-        <p style="font-size:14px;color:var(--text-secondary);line-height:2.1;max-width:380px;margin-bottom:2rem">Whether you have a brief, a half-formed idea, or just want to talk about decentralised nervous systems — I'm interested.</p>
+        <p style="font-size:var(--fs-lg);color:var(--text-secondary);line-height:2.1;max-width:380px;margin-bottom:2rem">Whether you have a brief, a half-formed idea, or just want to talk about decentralised nervous systems — I'm interested.</p>
         <div style="display:flex;flex-direction:column">
-          <a href="mailto:n.watcharawittayakul@icloud.com" style="display:flex;align-items:center;gap:.8rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding:.65rem 0;border-bottom:.5px solid rgba(14,30,28,0.06);transition:color .2s" onmouseover="this.style.color='rgba(50,55,220,1)'" onmouseout="this.style.color='rgba(14,30,28,0.52)'">
+          <a href="mailto:n.watcharawittayakul@icloud.com" style="display:flex;align-items:center;gap:.8rem;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding:.65rem 0;border-bottom:.5px solid rgba(14,30,28,0.06);transition:color .2s" onmouseover="this.style.color='rgba(50,55,220,1)'" onmouseout="this.style.color='rgba(14,30,28,0.52)'">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             n.watcharawittayakul@icloud.com
           </a>
-          <a href="https://www.linkedin.com/in/natcha-watcharawittayakul" target="_blank" style="display:flex;align-items:center;gap:.8rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding:.65rem 0;border-bottom:.5px solid rgba(14,30,28,0.06);transition:color .2s" onmouseover="this.style.color='rgba(50,55,220,1)'" onmouseout="this.style.color='rgba(14,30,28,0.52)'">
+          <a href="https://www.linkedin.com/in/natcha-watcharawittayakul" target="_blank" style="display:flex;align-items:center;gap:.8rem;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding:.65rem 0;border-bottom:.5px solid rgba(14,30,28,0.06);transition:color .2s" onmouseover="this.style.color='rgba(50,55,220,1)'" onmouseout="this.style.color='rgba(14,30,28,0.52)'">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             linkedin.com/in/natcha-watcharawittayakul
           </a>
-          <a href="https://www.behance.net/zombam" target="_blank" style="display:flex;align-items:center;gap:.8rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding:.65rem 0;transition:color .2s" onmouseover="this.style.color='rgba(50,55,220,1)'" onmouseout="this.style.color='rgba(14,30,28,0.52)'">
+          <a href="https://www.behance.net/zombam" target="_blank" style="display:flex;align-items:center;gap:.8rem;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding:.65rem 0;transition:color .2s" onmouseover="this.style.color='rgba(50,55,220,1)'" onmouseout="this.style.color='rgba(14,30,28,0.52)'">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
             behance.net/zombam
           </a>
@@ -561,19 +541,19 @@ a{text-decoration:none;color:inherit}
         <form onsubmit="handleForm(event)" style="display:flex;flex-direction:column;gap:.7rem">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
             <div style="display:flex;flex-direction:column;gap:.32rem">
-              <label style="font-family:var(--font-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)">Name</label>
-              <input type="text" placeholder="Your name" required style="background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);border:.5px solid rgba(14,30,28,0.12);color:var(--text-primary);font-family:var(--font-mono);font-size:13px;padding:.8rem 1rem;outline:none;border-radius:1px;width:100%;transition:border-color .22s">
+              <label style="font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)">Name</label>
+              <input type="text" placeholder="Your name" required style="background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);border:.5px solid rgba(14,30,28,0.12);color:var(--text-primary);font-family:var(--font-mono);font-size:var(--fs-md);padding:.8rem 1rem;outline:none;border-radius:1px;width:100%;transition:border-color .22s">
             </div>
             <div style="display:flex;flex-direction:column;gap:.32rem">
-              <label style="font-family:var(--font-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)">Email</label>
-              <input type="email" placeholder="your@email.com" required style="background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);border:.5px solid rgba(14,30,28,0.12);color:var(--text-primary);font-family:var(--font-mono);font-size:13px;padding:.8rem 1rem;outline:none;border-radius:1px;width:100%;transition:border-color .22s">
+              <label style="font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)">Email</label>
+              <input type="email" placeholder="your@email.com" required style="background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);border:.5px solid rgba(14,30,28,0.12);color:var(--text-primary);font-family:var(--font-mono);font-size:var(--fs-md);padding:.8rem 1rem;outline:none;border-radius:1px;width:100%;transition:border-color .22s">
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:.32rem">
-            <label style="font-family:var(--font-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)">Message</label>
-            <textarea placeholder="Tell me about your project or idea." required style="background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);border:.5px solid rgba(14,30,28,0.12);color:var(--text-primary);font-family:var(--font-mono);font-size:13px;padding:.8rem 1rem;outline:none;border-radius:1px;width:100%;min-height:110px;resize:vertical;transition:border-color .22s"></textarea>
+            <label style="font-family:var(--font-mono);font-size:var(--fs-2xs);letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)">Message</label>
+            <textarea placeholder="Tell me about your project or idea." required style="background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);border:.5px solid rgba(14,30,28,0.12);color:var(--text-primary);font-family:var(--font-mono);font-size:var(--fs-md);padding:.8rem 1rem;outline:none;border-radius:1px;width:100%;min-height:110px;resize:vertical;transition:border-color .22s"></textarea>
           </div>
-          <button type="submit" id="fsub" style="display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(120,130,255,0.9);border:none;padding:.85rem 2rem;border-radius:1px;transition:background .2s;align-self:flex-start;cursor:none">
+          <button type="submit" id="fsub" style="display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(120,130,255,0.9);border:none;padding:.85rem 2rem;border-radius:1px;transition:background .2s;align-self:flex-start;cursor:none">
             Send message
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </button>
@@ -909,7 +889,7 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
     .catch(err=>{\n      console.warn('portfolio.json not found — using static fallback.', err);
       // static fallback: just show placeholder text
       const c=document.getElementById('projects-container');
-      if(c) c.innerHTML='<p style="padding:2rem;font-family:var(--font-mono);color:var(--text-dim);font-size:13px">Place portfolio.json in the portfolio folder to load projects.</p>';
+      if(c) c.innerHTML='<p style="padding:2rem;font-family:var(--font-mono);color:var(--text-dim);font-size:var(--fs-md)">Place portfolio.json in the portfolio folder to load projects.</p>';
     });
 })();
 </script>

@@ -37,41 +37,39 @@ Each project has: id, title, latin, cat, year, src, srcType, desc, shortDesc, to
 
 Blocks (for project-template.html) can be: text | image | image-pair | video | pullquote | stats | divider
 
-## Design system tokens (in each page's :root)
-- `--mark-blue: #0000FF` — logo accent, used sparingly
-- `--font-display: 'Space Grotesk'` — headings
-- `--font-accent: 'Cormorant Garamond'` — italic em accents
-- `--font-mono: 'IBM Plex Mono'` — labels, CTAs
-- `--font-thai: 'Noto Sans Thai'` — Thai eyebrow marks
-- Aurora aurora is a fixed canvas background — colours driven by CSS tokens `--aur-*`
+## Design system — ONE place to adjust colours & font sizes
+`shared.css` is linked by **every** page (index, systems, about, graphics,
+project-hand, project-template) and holds all shared tokens in its `:root`
+blocks, top of the file. **To retheme or resize anything site-wide, edit
+`shared.css` — you don't need to touch individual page files.**
 
-## Aurora colour tokens (top of each page's :root)
+- **TYPE SCALE** section: `--fs-2xs` (10px) through `--fs-xl` (15px) — the
+  full range used for nav links, tags, labels, and body copy across every
+  page. Change one value here and every page using that size updates.
+  Headings/hero titles are deliberately NOT in this scale — they're sized
+  per-page (fixed px or responsive `clamp()`) since they're already large
+  enough and meant to differ page-to-page. To resize a specific heading,
+  search that page for its class name (e.g. `.hero-h1`, `.card-title`) and
+  edit its `font-size` directly.
+- **IRIDOPHORE PALETTE** section: colours/fonts for `about.html`,
+  `graphics.html`, `project-hand.html`, `project-template.html`
+  (`--ground`, `--irid`, `--text-1/2/3`, `--serif`, `--mono`, etc).
+- **AURORA PALETTE** section: colours/fonts for `index.html` and
+  `systems.html` only (`--aur-*`, `--mark-blue`, `--text-primary/secondary/
+  dim/accent`, `--font-display/accent/mono/thai`). This used to be
+  copy-pasted separately into both pages' own `<style>` blocks — a
+  "keep in sync by hand" hazard flagged in git history — now lives here once.
+
+Each page's own `<style>` block only has page-local layout tokens that
+genuinely don't need to match anything else (e.g. `project-template.html`'s
+`--pad`/`--col`).
+
+## Aurora colour tokens (in shared.css's AURORA PALETTE section)
 START = scroll position 0 (top), END = scroll position 1 (bottom)
 - ground-start: 255,255,255 (white)
 - ground-end: 214,219,255 (soft indigo)
-Change these to retheme the background without touching JS.
-
-## Font sizes — where to adjust
-There's no central size token — every `font-size` is a hardcoded px value on its own
-selector, inline in each page's `<style>` block (or in `shared.css` for
-about/graphics/project-hand). To change a specific piece of text, search that file
-for the class name (e.g. `.nav-link`, `.pj-desc`, `.wip-tag`) and edit its
-`font-size:` directly.
-
-Base body copy size (affects any text that doesn't set its own font-size):
-| File | Line | Current |
-|------|------|---------|
-| `index.html` | `body {` ~L77 | 14px |
-| `systems.html` | `body{` ~L45 | 14px |
-| `shared.css` (about/graphics/project-hand) | `body {` ~L38 | 15px |
-| `project-template.html` | its own `body{}`/base rule near top of `<style>` | ~14px |
-
-Rough scale used across the site (Sep 2026 pass, bumped everything except
-headings/hero titles by ~+2px for legibility):
-- ~8px small mono labels/tags → 10px
-- ~9px nav links / captions → 11px
-- ~11-12px body copy → 13-14px
-- Headings use `clamp(...)` (responsive) or are 16px+ — left untouched, already large enough.
+Change these to retheme the background without touching JS. Used by
+index.html and systems.html.
 
 ## Pages still needing rebuild
 - `graphics.html` — old Iridophore palette, needs rewrite to match systems.html
@@ -85,6 +83,9 @@ headings/hero titles by ~+2px for legibility):
 - `portfolio.json` structure — adding fields is fine, renaming top-level keys (wip/systems/graphics) breaks all pages
 - Aurora canvas JS in each page — the render loop is sensitive, test after any changes
 - `--mark-blue` token — used throughout for the くB彡 logo accent
+- Don't re-copy colour/font/font-size tokens back into an individual page's
+  `<style>` block — they live in `shared.css` now specifically to avoid
+  drift between pages. Add new shared values there, not per-page.
 
 ## Git workflow
 - Work on `main` branch for small fixes
