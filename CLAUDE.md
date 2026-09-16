@@ -6,13 +6,13 @@ Static portfolio website for Natcha "Bam" Watcharawittayakul, London-based Creat
 ## How to run locally
 ```bash
 python3 -m http.server 8000
-# Then open: http://localhost:8000/index3.html
+# Then open: http://localhost:8000/index.html
 ```
 
 ## Key files
 | File | Purpose |
 |------|---------|
-| `index3.html` | Homepage — do not rename until ready to go live |
+| `index.html` | Homepage |
 | `systems.html` | Systems & Computation portfolio page |
 | `graphics.html` | Graphics & Motion portfolio page (needs rebuild) |
 | `about.html` | About / CV page (needs rebuild to new style) |
