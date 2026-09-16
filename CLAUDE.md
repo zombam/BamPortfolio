@@ -43,14 +43,25 @@ project-hand, project-template) and holds all shared tokens in its `:root`
 blocks, top of the file. **To retheme or resize anything site-wide, edit
 `shared.css` — you don't need to touch individual page files.**
 
-- **TYPE SCALE** section: `--fs-2xs` (10px) through `--fs-xl` (15px) — the
-  full range used for nav links, tags, labels, and body copy across every
-  page. Change one value here and every page using that size updates.
+- **TYPE SCALE** section: just 3 tokens now — `--fs-xs` (~11px, nav links/
+  tags/labels/meta), `--fs-sm` (~13px, default body copy), `--fs-md` (~15px,
+  larger/lead body copy). Down from 6 near-duplicate steps (10/10.5/11/13/
+  14/15) that read as noisy rather than a real hierarchy. Each is a
+  `clamp(min, preferred, max)` — fluid, so it shrinks a little on phones and
+  grows a little on large desktop monitors instead of staying a fixed px
+  value; the current numbers hold near common laptop widths (~1280–1440px).
   Headings/hero titles are deliberately NOT in this scale — they're sized
-  per-page (fixed px or responsive `clamp()`) since they're already large
-  enough and meant to differ page-to-page. To resize a specific heading,
-  search that page for its class name (e.g. `.hero-h1`, `.card-title`) and
-  edit its `font-size` directly.
+  per-page (fixed px or their own responsive `clamp()`) since they're
+  already large enough and meant to differ page-to-page. To resize a
+  specific heading, search that page for its class name (e.g. `.hero-h1`,
+  `.card-title`) and edit its `font-size` directly.
+- **Fonts**: 3 total — `Space Grotesk` (display/body sans), `Cormorant
+  Garamond` (italic serif accent), `IBM Plex Mono` (labels/CTAs/nav — used
+  by both design systems below; `DM Mono` was dropped as a duplicate).
+  Plus `Noto Sans Thai`, used ONLY for the Thai "eyebrow mark" motif
+  (แมงกะพรุน, ระบบ, ติดต่อ, etc.) since none of the other 3 fonts contain
+  Thai glyphs — this one doesn't count toward "how many fonts," it's a
+  script requirement, not a style choice.
 - **IRIDOPHORE PALETTE** section: colours/fonts for `about.html`,
   `graphics.html`, `project-hand.html`, `project-template.html`
   (`--ground`, `--irid`, `--text-1/2/3`, `--serif`, `--mono`, etc).
