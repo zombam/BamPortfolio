@@ -56,7 +56,8 @@
 }
 
 /* ╔═══════════════════════════════════════════════════════════════╗
-   ║  AURORA PALETTE — index.html, systems.html only.               ║
+   ║  AURORA PALETTE (default, blue) — index.html, systems.html.    ║
+   ║  graphics.html uses the CORAL VARIANT further down instead.    ║
    ║  Was previously copy-pasted into both pages' own <style>      ║
    ║  blocks (a "keep in sync by hand" hazard) — now lives here     ║
    ║  once. AURORA SCROLL JOURNEY: scroll=0 (top) uses the START    ║
@@ -101,7 +102,169 @@
   --text-primary:   rgba(14,30,28,0.90);
   --text-secondary: rgba(14,30,28,0.70);
   --text-dim:       rgba(14,30,28,0.65);
-  --text-accent:    rgba(60,68,210,1);             /* periwinkle blue accent, darkened for legibility */
+  --text-accent:    rgb(0, 13, 255);             /* periwinkle blue accent, darkened for legibility */
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  AURORA PALETTE — CORAL VARIANT — graphics.html only.          ║
+   ║  Same aurora mechanism/JS as above, different accent hue so    ║
+   ║  Graphics reads as a distinct-but-related space from Systems.  ║
+   ║  ONE PLACE TO ADJUST: change the RGB triplets below to retheme ║
+   ║  graphics.html's aurora + accent colour — nothing else to      ║
+   ║  touch. Add `class="aurora-coral"` to a page's <html> tag to   ║
+   ║  use this (must be <html>, not <body> — the aurora script      ║
+   ║  reads these vars via getComputedStyle(document.documentElement)). ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+:root.aurora-coral {
+  /* ── START palette (top of page, scroll = 0) — WHITE ────── */
+  --aur-ground-start-r: 255; --aur-ground-start-g: 255; --aur-ground-start-b: 255; /* #FFFFFF white          */
+  --aur-cursor-start-r: 255; --aur-cursor-start-g: 205; --aur-cursor-start-b: 195; /* #FFCDC3 pale coral     */
+  --aur-band-start-r:   253; --aur-band-start-g:   225; --aur-band-start-b:   220; /* #FDE1DC coral cream    */
+  --aur-overlap-start-r:255; --aur-overlap-start-g: 120; --aur-overlap-start-b:140; /* #FF788C coral-pink    */
+
+  /* ── END palette (bottom of page, scroll = 1) — SOFT ROSE  */
+  --aur-ground-end-r: 255; --aur-ground-end-g: 222; --aur-ground-end-b: 222; /* #FFDEDE soft rose      */
+  --aur-cursor-end-r: 255; --aur-cursor-end-g: 255; --aur-cursor-end-b: 255; /* #FFFFFF white          */
+  --aur-band-end-r:   255; --aur-band-end-g:   255; --aur-band-end-b:   255; /* #FFFFFF white          */
+  --aur-overlap-end-r: 230; --aur-overlap-end-g:  55; --aur-overlap-end-b: 80; /* #E63750 deep rose     */
+
+  /* ── Site accent ──────────────────────────────────────────── */
+  --mark-blue:      #ff4060;              /* "mark" accent — coral instead of blue on this page */
+  --mark-blue-soft: rgba(255,64,96,0.08);
+  --mark-blue-line: rgba(255,64,96,0.35);
+
+  /* ── Text on aurora ground ────────────────────────────────── */
+  --text-accent: rgba(190,35,60,1);       /* coral accent, darkened for legibility (6:1 on white, 4.8:1 on the rose ground) */
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  AURORA PALETTE — EMERALD VARIANT — systems.html only.         ║
+   ║  Same aurora mechanism/JS as the default, different accent hue ║
+   ║  so Systems reads as its own space, distinct from both the     ║
+   ║  homepage's blue and graphics.html's coral.                    ║
+   ║  ONE PLACE TO ADJUST: change the RGB triplets below to retheme ║
+   ║  systems.html's aurora + accent colour — nothing else to       ║
+   ║  touch. Add `class="aurora-emerald"` to a page's <html> tag to ║
+   ║  use this (must be <html>, not <body> — the aurora script      ║
+   ║  reads these vars via getComputedStyle(document.documentElement)). ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+:root.aurora-emerald {
+  /* ── START palette (top of page, scroll = 0) — WHITE ────── */
+  --aur-ground-start-r: 255; --aur-ground-start-g: 255; --aur-ground-start-b: 255; /* #FFFFFF white          */
+  --aur-cursor-start-r: 148; --aur-cursor-start-g: 255; --aur-cursor-start-b: 217; /* #94FFD9 pale mint      */
+  --aur-band-start-r:   220; --aur-band-start-g:   253; --aur-band-start-b:   240; /* #DCFDF0 mint ice       */
+  --aur-overlap-start-r: 40; --aur-overlap-start-g: 220; --aur-overlap-start-b: 150; /* #28DC96 vivid emerald */
+
+  /* ── END palette (bottom of page, scroll = 1) — SOFT SAGE  */
+  --aur-ground-end-r: 216; --aur-ground-end-g: 245; --aur-ground-end-b: 230; /* #D8F5E6 soft mint      */
+  --aur-cursor-end-r: 255; --aur-cursor-end-g: 255; --aur-cursor-end-b: 255; /* #FFFFFF white          */
+  --aur-band-end-r:   255; --aur-band-end-g:   255; --aur-band-end-b:   255; /* #FFFFFF white          */
+  --aur-overlap-end-r: 10;  --aur-overlap-end-g: 130; --aur-overlap-end-b: 85;  /* #0A8255 deep emerald  */
+
+  /* ── Site accent ──────────────────────────────────────────── */
+  --mark-blue:      #047857;              /* "mark" accent — emerald instead of blue on this page */
+  --mark-blue-soft: rgba(4,120,87,0.08);
+  --mark-blue-line: rgba(4,120,87,0.35);
+
+  /* ── Text on aurora ground ────────────────────────────────── */
+  --text-accent: rgb(5,100,63);           /* emerald accent, darkened for legibility (7.2:1 on white, 6.3:1 on the mint ground) */
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  AURORA NAV — index.html, systems.html, graphics.html,        ║
+   ║  project-template.html. Scoped under .aurora-nav (put that     ║
+   ║  class on the <nav> alongside .nav) so it can't collide with   ║
+   ║  the plain .nav/.nav-link/etc used by the Iridophore nav below ║
+   ║  (about.html, project-hand.html) regardless of source order.   ║
+   ║  ONE PLACE TO ADJUST: edit here and every aurora page's top    ║
+   ║  bar — logo size, hairlines, and the swim animation — updates  ║
+   ║  together.                                                     ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+.nav.aurora-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 700;
+  height: var(--nav-h);
+  display: flex; align-items: stretch; justify-content: space-between;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  border-bottom: 0.5px solid rgba(14,30,28,0.08);
+  transition: background 0.4s;
+}
+.aurora-nav .nav-logo {
+  display: flex; align-items: center;
+  padding: 0 1.6rem;
+  border-right: 0.5px solid rgba(14,30,28,0.08);
+}
+/* outer link: continuous "swimming" bob — up+tilt one way, down+tilt
+   the other — independent of the hover reveal below, so hovering
+   never interrupts the swim cycle. */
+.aurora-nav .nav-logo-link {
+  display: block; width: 48px; height: 48px;
+  color: rgba(14,30,28,0.85);
+  animation: navSwim 4.6s ease-in-out infinite;
+  transition: color 0.3s ease;
+}
+.aurora-nav .nav-logo-link:hover { color: var(--mark-blue); }
+@keyframes navSwim {
+  0%   { transform: translateY(0)    rotate(0deg); }
+  25%  { transform: translateY(-3px) rotate(5deg); }
+  50%  { transform: translateY(0)    rotate(0deg); }
+  75%  { transform: translateY(3px)  rotate(-5deg); }
+  100% { transform: translateY(0)    rotate(0deg); }
+}
+/* inner glyph: the original hover reveal (rotated -90deg at rest,
+   straightens to 0deg on hover) — kept on its own element so it
+   doesn't fight the parent's swim animation for the transform property. */
+.aurora-nav .nav-logo-glyph {
+  display: block; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+  transition: transform 0.55s cubic-bezier(0.34,1.56,0.64,1);
+}
+.aurora-nav .nav-logo-link:hover .nav-logo-glyph { transform: rotate(0deg); }
+.aurora-nav .nav-logo-glyph svg { width: 100%; height: 100%; display: block; }
+
+.aurora-nav .nav-links {
+  position: absolute; left: 50%; top: 0; height: 100%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; justify-content: center;
+}
+.aurora-nav .nav-link {
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text-dim); padding: 0 1.2rem; height: var(--nav-h);
+  display: flex; align-items: center;
+  border-bottom: 1.5px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.aurora-nav .nav-link:hover  { color: var(--text-primary); border-bottom-color: var(--text-accent); }
+.aurora-nav .nav-link.active { color: var(--text-primary); border-bottom-color: var(--mark-blue); }
+.aurora-nav .nav-right {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 0 1.4rem; border-left: 0.5px solid rgba(14,30,28,0.08);
+}
+.aurora-nav .nav-pip {
+  display: flex; align-items: center; gap: .4rem;
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim);
+}
+.aurora-nav .pip-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--text-accent); animation: navPipPulse 2.6s ease-in-out infinite;
+}
+@keyframes navPipPulse { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:1;transform:scale(1.5)} }
+.aurora-nav .nav-cta {
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+  letter-spacing: .18em; text-transform: uppercase;
+  color: #fff; background: var(--mark-blue);
+  padding: 6px 14px; border-radius: 1px; border: none;
+  transition: opacity .2s; cursor: none;
+}
+.aurora-nav .nav-cta:hover { opacity: 0.82; }
+
+#progress-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 1.5px; z-index: 699; background: var(--mark-blue-soft); }
+#progress-fill { height: 100%; background: var(--text-accent); width: 0%; transition: width .1s linear; }
+
+@media (max-width: 768px) {
+  .aurora-nav .nav-links { display: none; }
 }
 
 /* ── Reset ── */
@@ -262,106 +425,6 @@ body::after {
   to   { opacity: 1; }
 }
 
-/* ── DRAWER ── */
-.drawer-ov {
-  position: fixed; inset: 0;
-  background: rgba(8,40,34,0.55); z-index: 800;
-  opacity: 0; pointer-events: none;
-  transition: opacity .35s; backdrop-filter: blur(6px);
-}
-.drawer-ov.open { opacity: 1; pointer-events: all; }
-.drawer {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 801;
-  background: var(--ground);
-  border-top: .5px solid rgba(90,191,176,0.3);
-  transform: translateY(100%);
-  transition: transform .46s cubic-bezier(.23,1,.32,1);
-  max-height: 82vh; overflow-y: auto;
-}
-.drawer.open { transform: translateY(0); }
-
-.drawer-inner { padding: 2.5rem var(--page-pad) 3.5rem; }
-
-/* drawer media — hero image/video area */
-.drawer-media {
-  width: 100%; aspect-ratio: 16/7;
-  background: var(--ground-2);
-  border: var(--hair); border-radius: 2px;
-  overflow: hidden; margin-bottom: 2.5rem;
-  position: relative;
-}
-.drawer-media img,
-.drawer-media video {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.drawer-media-placeholder {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: .6rem;
-}
-.drawer-media-placeholder svg {
-  width: 28px; height: 28px;
-  stroke: var(--text-3); fill: none; stroke-width: 1;
-}
-.drawer-media-placeholder span {
-  font-size: var(--fs-xs); letter-spacing: .22em;
-  text-transform: uppercase; color: var(--text-3);
-}
-
-.drawer-top {
-  display: flex; justify-content: space-between;
-  align-items: flex-start; margin-bottom: 2.2rem;
-}
-.drawer-cat {
-  font-size: var(--fs-xs); letter-spacing: .25em;
-  text-transform: uppercase; color: var(--irid); margin-bottom: .4rem;
-}
-.drawer-title {
-  font-family: var(--serif);
-  font-size: clamp(26px, 3.8vw, 50px);
-  font-weight: 300; color: var(--ink); line-height: 1.1;
-}
-.drawer-title em { font-style: italic; color: var(--text-2); font-size: .72em; }
-.drawer-close {
-  background: none; border: .5px solid var(--text-4);
-  width: 36px; height: 36px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: border-color .2s;
-}
-.drawer-close:hover { border-color: var(--irid); }
-.drawer-close svg { width: 13px; height: 13px; stroke: var(--text-2); fill: none; stroke-width: 1.5; }
-
-.drawer-body {
-  display: grid; grid-template-columns: 1fr 300px; gap: 3.5rem;
-}
-.drawer-desc {
-  font-size: var(--fs-md); line-height: 2.12; color: var(--text-2);
-}
-.drawer-meta { display: flex; flex-direction: column; gap: 1.1rem; }
-.meta-block { padding-bottom: 1rem; border-bottom: var(--hair-mid); }
-.meta-k {
-  font-size: var(--fs-xs); letter-spacing: .24em;
-  text-transform: uppercase; color: var(--text-3); margin-bottom: .3rem;
-}
-.meta-v { font-size: var(--fs-sm); color: var(--text-1); line-height: 1.75; }
-.meta-tools { display: flex; flex-wrap: wrap; gap: 4px; margin-top: .4rem; }
-.meta-tool {
-  font-size: var(--fs-xs); letter-spacing: .08em;
-  background: rgba(90,191,176,0.07);
-  border: .5px solid rgba(90,191,176,0.22);
-  color: var(--deep); padding: 2px 7px; border-radius: 1px;
-}
-.drawer-ext {
-  display: inline-flex; align-items: center; gap: .6rem;
-  margin-top: 1.2rem; font-size: var(--fs-xs); letter-spacing: .18em;
-  text-transform: uppercase; color: var(--irid);
-  border: .5px solid rgba(90,191,176,0.3);
-  padding: .6rem 1.2rem; border-radius: 1px;
-  transition: all .2s;
-}
-.drawer-ext:hover { background: rgba(90,191,176,0.07); }
-.drawer-ext svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
 /* ── SHARED CURSOR JS HOOK ── */
 /* cursor.js handles all three pages */
@@ -477,16 +540,7 @@ body::after {
   font-family: var(--serif);
   font-size: var(--fs-md); font-style: italic;
   color: var(--text-2); line-height: 1.3;
-}
-
-.card-desc {
-  font-size: var(--fs-md); color: var(--text-2);
-  line-height: 1.75; margin-top: .2rem;
-  /* clamp to 3 lines — enough context without crowding */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  margin-top: .2rem;
 }
 
 .card-tags {
@@ -527,3 +581,81 @@ body::after {
   border-color: var(--irid);
 }
 .card-arrow svg { width: 11px; height: 11px; stroke: var(--irid); fill: none; stroke-width: 1.5; }
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  CONTENT BLOCKS — project-template.html's flexible block list ║
+   ║  (text / image / image-pair / video / pullquote / divider /   ║
+   ║  stats). This is the ONE place to adjust how project content  ║
+   ║  looks, regardless of which project or which block type it    ║
+   ║  is — was previously only in project-template.html's own      ║
+   ║  <style>, moved here so it sits with everything else that's   ║
+   ║  meant to be edited in one central spot.                      ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+/* all blocks share this wrapper */
+.block { padding: 4rem var(--pad); }
+.block + .block { border-top: .5px solid var(--border); }
+.block-inner { max-width: var(--col); margin: 0 auto; }
+
+/* ── text block ── */
+.block-text .block-heading {
+  font-family: var(--font-display); font-size: clamp(20px,2.5vw,30px);
+  font-weight: 600; color: var(--text-primary); margin-bottom: 1.2rem; line-height: 1.15;
+}
+.block-text .block-heading em { font-family: var(--font-accent); font-style: italic; font-weight: 300; color: var(--text-secondary); }
+.block-text .block-body {
+  font-size: var(--fs-md); line-height: 2.15; color: var(--text-secondary);
+}
+.block-text .block-body p+p { margin-top: 1.1em; }
+
+/* ── image block ── */
+.block-image figure { display: flex; flex-direction: column; gap: .8rem; }
+.block-image figure img, .block-image figure video {
+  width: 100%; border-radius: 2px; display: block;
+  background: rgba(14,30,28,.04);
+}
+.block-image figcaption {
+  font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--text-dim);
+}
+
+/* ── image-pair block ── */
+.block-image-pair .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+.block-image-pair figure { display: flex; flex-direction: column; gap: .6rem; background: rgba(255,255,255,1); padding-bottom: .6rem; }
+.block-image-pair figure img, .block-image-pair figure video { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.block-image-pair figcaption { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); padding: 0 .5rem; }
+
+/* ── video block ── */
+.block-video .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 2px; }
+.block-video .video-wrap iframe, .block-video .video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.block-video .video-caption { margin-top: .8rem; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ── pullquote block ── */
+.block-pullquote { background: rgba(120,130,255,.04); border-left: 3px solid var(--mark-blue); }
+.block-pullquote .pq-text {
+  font-family: var(--font-accent); font-style: italic; font-weight: 300;
+  font-size: clamp(24px,3.5vw,42px); line-height: 1.3; color: var(--text-primary);
+}
+.block-pullquote .pq-source {
+  font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-dim); margin-top: 1rem;
+}
+
+/* ── divider block ── */
+.block-divider { padding: 2rem var(--pad); }
+.divider-inner { display: flex; align-items: center; gap: 1.2rem; }
+.divider-line { flex: 1; height: .5px; background: var(--border); }
+.divider-label { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .28em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0; }
+
+/* ── stats block ── */
+.block-stats .stats-row { display: grid; gap: 1px; background: var(--border); }
+.stat-cell { background: rgba(255,255,255,.5); backdrop-filter: blur(12px); padding: 1.6rem 1.8rem; }
+.stat-n { font-family: var(--font-display); font-size: clamp(32px,4vw,52px); font-weight: 700; color: var(--text-primary); line-height: 1; margin-bottom: .3rem; }
+.stat-l { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ── wide modifier (full bleed) ── */
+.block.wide .block-inner { max-width: 100%; }
+.block.wide { padding-left: 0; padding-right: 0; }
+
+@media (max-width: 768px) {
+  .block-image-pair .pair-grid { grid-template-columns: 1fr; }
+}

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Natcha (Bam) Watcharawittayakul — Creative Technologist & Motion Designer</title>
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="css/shared.css">
 
 <!-- ╔═══════════════════════════════════════════════╗
      ║  FONT IMPORTS                                 ║
@@ -43,99 +43,11 @@ a { text-decoration: none; color: inherit; }
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  2. NAVIGATION                                                ║
-   ╚═══════════════════════════════════════════════════════════════╝ */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: var(--nav-h); z-index: 700;
-  display: flex; align-items: stretch; justify-content: space-between;
-  /* background & border update via JS to match aurora scroll colour;
-     this is the scroll=0 (top of page) colour — white — so it's correct
-     before the scroll listener's first run */
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border-bottom: 0.5px solid rgba(14,30,28,0.08);
-  transition: background 0.4s;
-}
-
-/* ── Logo mark (the くB彡 SVG glyph) ── */
-.nav-logo {
-  display: flex; align-items: center;
-  padding: 0 1.6rem;
-  border-right: 0.5px solid rgba(14,30,28,0.08);
-}
-.nav-logo-link {
-  display: block;
-  width: 28px; height: 28px;
-  /* starts rotated 90° anti-clockwise so it reads like a letter/abstract mark */
-  transform: rotate(-90deg);
-  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-  color: var(--nav-logo-colour, rgba(14,30,28,0.85));
-  /* colour also updated by JS scroll listener */
-}
-.nav-logo-link:hover {
-  /* reveal the octopus on hover */
-  transform: rotate(0deg);
-}
-.nav-logo-link svg { width: 100%; height: 100%; display: block; }
-
-/* ── Navigation links ──
-   Centred on the nav bar itself (absolute + translateX), not on the
-   leftover space between the logo and right-side controls — those two
-   sides are different widths, so a flex:1 centered box would drift
-   off true centre depending on how wide "OPEN TO WORK" / the CTA are. */
-.nav-links {
-  position: absolute; left: 50%; top: 0; height: 100%;
-  transform: translateX(-50%);
-  display: flex; align-items: center;
-  justify-content: center; gap: 0;
-}
-.nav-link {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs); letter-spacing: .2em; text-transform: uppercase;
-  color: var(--text-dim);
-  padding: 0 1.2rem; height: var(--nav-h);
-  display: flex; align-items: center;
-  border-bottom: 1.5px solid transparent;
-  transition: color .2s, border-color .2s;
-}
-.nav-link:hover { color: var(--text-primary); border-bottom-color: var(--text-accent); }
-.nav-link.active { color: var(--text-primary); border-bottom-color: var(--text-accent); }
-
-/* ── Right slot ── */
-.nav-right {
-  display: flex; align-items: center; gap: 1.2rem;
-  padding: 0 1.4rem;
-  border-left: 0.5px solid rgba(14,30,28,0.08);
-}
-.nav-pip {
-  display: flex; align-items: center; gap: .4rem;
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs); letter-spacing: .14em; text-transform: uppercase;
-  color: var(--text-dim);
-}
-.pip-dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--text-accent);
-  animation: pipPulse 2.6s ease-in-out infinite;
-}
-@keyframes pipPulse { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:1;transform:scale(1.5)} }
-.nav-cta {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs); letter-spacing: .18em; text-transform: uppercase;
-  color: #fff;
-  background: var(--mark-blue);
-  padding: 6px 14px; border-radius: 1px; border: none;
-  transition: opacity .2s; cursor: none;
-}
-.nav-cta:hover { opacity: 0.82; }
-
-/* ── Scroll progress bar ── */
-#progress-bar {
-  position: fixed; top: var(--nav-h); left: 0; right: 0;
-  height: 1.5px; z-index: 699; background: rgba(120,130,255,0.08);
-}
-#progress-fill { height: 100%; background: var(--text-accent); width: 0%; transition: width .1s linear; }
+   ╚═══════════════════════════════════════════════════════════════╝
+   The whole top bar (incl. logo size, hairlines, swim animation) now
+   lives in css/shared.css under .aurora-nav — this page just puts
+   that class on <nav> and the shared block does the rest. Edit
+   shared.css to change the nav on every aurora page at once. */
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  3. SHARED MOTIFS (くB彡 mark system)                         ║
@@ -201,13 +113,13 @@ a { text-decoration: none; color: inherit; }
 .cur-dot {
   position: fixed; z-index: 9999; pointer-events: none;
   width: 5px; height: 5px; border-radius: 50%;
-  background: var(--text-accent);
+  background: var(--mark-blue);
   transform: translate(-50%,-50%); transition: width .18s, height .18s;
 }
 .cur-ring {
   position: fixed; z-index: 9998; pointer-events: none;
   width: 30px; height: 30px; border-radius: 50%;
-  border: 0.5px solid rgba(120,130,255,0.35);
+  border: 0.5px solid var(--mark-blue);
   transform: translate(-50%,-50%);
   transition: width .22s, height .22s, border-color .22s;
 }
@@ -239,21 +151,22 @@ a { text-decoration: none; color: inherit; }
 .hero-copy { position: relative; z-index: 2; max-width: 700px; }
 
 .hero-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(58px, 8.5vw, 108px);
-  font-weight: 700; line-height: .88; letter-spacing: -.025em;
+  font-family: var(--font-primary);
+  font-size: clamp(58px, 8.5vw, 90px);
+  font-weight: 700; line-height: .8; letter-spacing: -.025em;
   color: var(--text-primary); margin-bottom: .5rem;
   opacity: 0; animation: riseIn .95s ease .5s forwards;
 }
 .hero-h1 em {
   font-family: var(--font-accent);
-  font-style: italic; font-weight: 300;
-  color: var(--text-secondary);
-  font-size: .58em; display: block; margin-top: .2em;
+  font-style: italic; font-weight: 500;
+  line-height: .8;
+  color: var(--text-primary);
+  font-size: .78em; display: block; margin-top: .2em;
 }
 .hero-tagline {
   font-family: var(--font-accent);
-  font-size: clamp(18px, 1.9vw, 21px);
+  font-size: clamp(20px, 2vw, 23px);
   font-style: italic; font-weight: 300;
   color: var(--text-secondary); margin-bottom: 2rem;
   opacity: 0; animation: riseIn .85s ease .75s forwards;
@@ -279,23 +192,26 @@ a { text-decoration: none; color: inherit; }
 }
 .btn-primary {
   display: inline-flex; align-items: center; gap: .6rem;
-  font-family: var(--font-mono); font-size: var(--fs-xs);
+  font-family: var(--font-mono); font-size: var(--fs-sm);
   letter-spacing: .18em; text-transform: uppercase;
-  color: #fff; background: var(--mark-blue);
-  padding: .8rem 1.8rem; border-radius: 1px; border: none;
-  transition: opacity .2s; cursor: none;
-}
-.btn-primary:hover { opacity: .82; }
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: .6rem;
-  font-family: var(--font-mono); font-size: var(--fs-xs);
-  letter-spacing: .18em; text-transform: uppercase;
-  color: var(--text-secondary);
+  background: var(--mark-blue);
+  color: white;
   border: 0.5px solid rgba(14,30,28,0.2);
   padding: .8rem 1.8rem; border-radius: 1px;
   transition: all .2s; cursor: none;
 }
-.btn-secondary:hover { border-color: rgba(14,30,28,0.45); color: var(--text-primary); }
+.btn-primary:hover { color: white;}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--font-mono); font-size: var(--fs-sm);
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text-primary);
+  background: transparent;
+  border: 0.5px solid rgba(14,30,28,0.3);
+  padding: .8rem 1.8rem; border-radius: 1px;
+  transition: all .2s; cursor: none;
+}
+.btn-secondary:hover { color: var(--mark-blue); border-color: var(--mark-blue); }
 .btn-icon { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.8; }
 
 /* scroll cue */
@@ -439,8 +355,7 @@ a { text-decoration: none; color: inherit; }
 .pj-cat { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--text-accent); }
 .pj-year { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .1em; color: var(--text-dim); }
 .pj-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text-primary); line-height: 1.1; }
-.pj-latin { font-family: var(--font-accent); font-size: var(--fs-md); font-style: italic; color: var(--text-secondary); }
-.pj-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: .2rem; }
+.pj-latin { font-family: var(--font-accent); font-size: var(--fs-md); font-style: italic; color: var(--text-secondary); margin-top: .2rem; }
 .pj-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: .4rem; }
 .pj-tag {
   font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .09em;
@@ -555,12 +470,6 @@ a { text-decoration: none; color: inherit; }
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── Active nav link highlight for current section ── */
-.nav-link.active {
-  color: var(--text-primary);
-  border-bottom-color: var(--mark-blue);
-}
-
 /* ── Section inner consistent max-width + padding ── */
 .section-inner { padding: 5rem 2.5rem; }
 #about-strip .about-l,
@@ -576,7 +485,6 @@ a { text-decoration: none; color: inherit; }
 /* ── Project hero card: more prominent title at full width ── */
 .pj-a .pj-title { font-size: 26px; }
 .pj-a .pj-info { padding: 1.4rem 1.6rem 1.6rem; }
-.pj-a .pj-desc { -webkit-line-clamp: 3; }
 
 /* ── 2×2 cards: equal media height ── */
 .pj-b .pj-media,
@@ -634,7 +542,6 @@ a { text-decoration: none; color: inherit; }
   .pj-split { flex-direction: column !important; }
   .pj-split-divider { width: 100% !important; height: .5px !important; }
   .hero-h1 { font-size: clamp(42px, 12vw, 72px); }
-  .nav-links { display: none; }
 }
 
 /* ╔═══════════════════════════════════════════════════════════════╗
@@ -653,33 +560,7 @@ a { text-decoration: none; color: inherit; }
 .footer-link:hover { color: var(--text-accent); }
 
 /* ╔═══════════════════════════════════════════════════════════════╗
-   ║  11. PROJECT DRAWER                                           ║
-   ╚═══════════════════════════════════════════════════════════════╝ */
-.drawer-ov { position: fixed; inset: 0; background: rgba(14,30,28,0.22); z-index: 800; opacity: 0; pointer-events: none; transition: opacity .35s; backdrop-filter: blur(6px); }
-.drawer-ov.open { opacity: 1; pointer-events: all; }
-.drawer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 801; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); border-top: .5px solid rgba(120,130,255,0.3); transform: translateY(100%); transition: transform .46s cubic-bezier(.23,1,.32,1); max-height: 78vh; overflow-y: auto; padding: 2.5rem 2.5rem 3.5rem; }
-.drawer.open { transform: translateY(0); }
-.drawer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
-.drawer-cat { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .25em; text-transform: uppercase; color: var(--text-accent); margin-bottom: .4rem; }
-.drawer-title { font-family: var(--font-display); font-size: clamp(26px,4vw,50px); font-weight: 600; color: var(--text-primary); line-height: 1.1; }
-.drawer-title em { font-family: var(--font-accent); font-style: italic; font-weight: 300; color: var(--text-secondary); font-size: .72em; }
-.drawer-close { background: none; border: .5px solid rgba(14,30,28,0.15); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color .2s; cursor: none; }
-.drawer-close:hover { border-color: rgba(120,130,255,0.6); }
-.drawer-close svg { width: 14px; height: 14px; stroke: var(--text-secondary); fill: none; stroke-width: 1.5; }
-.drawer-body { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; }
-.drawer-desc { font-size: var(--fs-md); line-height: 2.1; color: var(--text-secondary); }
-.drawer-meta { display: flex; flex-direction: column; gap: 1rem; }
-.meta-block { padding-bottom: 1rem; border-bottom: .5px solid rgba(14,30,28,0.06); }
-.meta-k { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .24em; text-transform: uppercase; color: var(--text-dim); margin-bottom: .3rem; }
-.meta-v { font-size: var(--fs-sm); color: var(--text-primary); line-height: 1.7; }
-.meta-tools { display: flex; flex-wrap: wrap; gap: 4px; margin-top: .4rem; }
-.meta-tool { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .09em; background: rgba(120,130,255,0.08); border: .5px solid rgba(120,130,255,0.25); color: rgba(65,70,225,0.85); padding: 2px 7px; border-radius: 1px; }
-.drawer-ext { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.2rem; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: .18em; text-transform: uppercase; color: var(--text-accent); border: .5px solid rgba(120,130,255,0.35); padding: .6rem 1.1rem; border-radius: 1px; transition: all .2s; }
-.drawer-ext:hover { background: rgba(120,130,255,0.08); }
-.drawer-ext svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-
-/* ╔═══════════════════════════════════════════════════════════════╗
-   ║  12. OCEAN FLOAT (homepage only)                              ║
+   ║  11. OCEAN FLOAT (homepage only)                              ║
    ╚═══════════════════════════════════════════════════════════════╝
    Two effects, both intentionally tiny:
    1. A slow, staggered bob on a few surfaces (role pills, project
@@ -716,6 +597,7 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 0 calc(var(--water-glow) * 22px) calc(var(--water-glow) * 3px) rgba(120,180,255, calc(var(--water-glow) * 0.4));
 }
 </style>
+<script src="js/sanity-data.js"></script>
 </head>
 <body>
 <a href="#hero" class="skip-link">Skip to content</a>
@@ -740,28 +622,30 @@ a { text-decoration: none; color: inherit; }
 <!-- ╔═══════════════════════════════════════════════╗
      ║  NAVIGATION                                   ║
      ╚═══════════════════════════════════════════════╝ -->
-<nav class="nav">
+<nav class="nav aurora-nav">
   <!-- Logo: starts rotated -90°, hover reveals octopus -->
   <div class="nav-logo">
     <a href="index.html" class="nav-logo-link" title="Back to homepage">
-      <svg viewBox="0 0 801 801" fill-rule="evenodd">
-        <path d="M489,551 L490,573 L493,594 L504,628 L511,641 L522,656 L537,671 L547,678
-          L561,659 L574,638 L569,635 L557,623 L546,605 L539,581 L537,551 Z
-          M376,551 L377,575 L383,607 L390,626 L398,641 L408,655 L423,670 L434,678
-          L454,650 L461,638 L457,636 L443,622 L433,605 L426,581 L424,551 Z
-          M263,551 L263,563 L266,590 L270,607 L276,624 L283,638 L294,654 L311,671
-          L321,678 L348,639 L338,631 L329,621 L319,603 L312,576 L311,551 Z
-          M263,335 L263,437 L266,453 L281,482 L309,504 L333,511 L355,511 L384,501
-          L400,488 L427,506 L446,511 L468,511 L489,505 L506,495 L521,480 L531,463
-          L537,441 L537,335 Z
-          M425,383 L488,383 L489,384 L489,438 L487,444 L482,452 L474,459 L468,462
-          L460,463 L459,464 L449,463 L438,458 L428,447 L424,436 L424,384 Z
-          M312,383 L375,383 L376,384 L376,438 L374,444 L369,452 L361,459 L355,462
-          L347,463 L346,464 L336,463 L325,458 L316,449 L311,437 L311,384 Z
-          M222,272 L260,301 L368,158 L393,144 L415,146 L434,160 L540,301 L578,271
-          L460,118 L425,99 L391,96 L364,103 L334,124 Z"
-          fill="currentColor"/>
-      </svg>
+      <span class="nav-logo-glyph">
+        <svg viewBox="0 0 801 801" fill-rule="evenodd">
+          <path d="M489,551 L490,573 L493,594 L504,628 L511,641 L522,656 L537,671 L547,678
+            L561,659 L574,638 L569,635 L557,623 L546,605 L539,581 L537,551 Z
+            M376,551 L377,575 L383,607 L390,626 L398,641 L408,655 L423,670 L434,678
+            L454,650 L461,638 L457,636 L443,622 L433,605 L426,581 L424,551 Z
+            M263,551 L263,563 L266,590 L270,607 L276,624 L283,638 L294,654 L311,671
+            L321,678 L348,639 L338,631 L329,621 L319,603 L312,576 L311,551 Z
+            M263,335 L263,437 L266,453 L281,482 L309,504 L333,511 L355,511 L384,501
+            L400,488 L427,506 L446,511 L468,511 L489,505 L506,495 L521,480 L531,463
+            L537,441 L537,335 Z
+            M425,383 L488,383 L489,384 L489,438 L487,444 L482,452 L474,459 L468,462
+            L460,463 L459,464 L449,463 L438,458 L428,447 L424,436 L424,384 Z
+            M312,383 L375,383 L376,384 L376,438 L374,444 L369,452 L361,459 L355,462
+            L347,463 L346,464 L336,463 L325,458 L316,449 L311,437 L311,384 Z
+            M222,272 L260,301 L368,158 L393,144 L415,146 L434,160 L540,301 L578,271
+            L460,118 L425,99 L391,96 L364,103 L334,124 Z"
+            fill="currentColor"/>
+        </svg>
+      </span>
     </a>
   </div>
 
@@ -773,10 +657,6 @@ a { text-decoration: none; color: inherit; }
     <a href="#contact"      class="nav-link">Contact</a>
   </div>
 
-  <!-- Right slot -->
-  <div class="nav-right">
-    <a href="mailto:n.watcharawittayakul@icloud.com" class="nav-cta">Get in touch</a>
-  </div>
 </nav>
 
 <!-- ╔═══════════════════════════════════════════════════════════════╗
@@ -802,21 +682,21 @@ a { text-decoration: none; color: inherit; }
     <div class="hero-copy">
       <!-- Eyebrow: Thai word + strokes + English label -->
       <div class="eyebrow-row">
-        <span class="eyebrow-mark">แมงกะพรุน</span>
+        <span class="eyebrow-mark"> แบม</span>
         <div class="eyebrow-strokes"><span></span><span></span><span></span></div>
-        <span class="eyebrow-label">London · 2025</span>
+        <span class="eyebrow-label">London · 2026</span>
       </div>
 
       <h1 class="hero-h1">
-        Natcha
-        <em>Watcharawittayakul</em>
+        Bam
+        <em>Natcha</em>
       </h1>
-      <p class="hero-tagline">Making systems that feel alive.</p>
+      <p class="hero-tagline">Creative Technologist building data-driven systems and interactive experiences inspired by natural dynamics.</p>
 
       <div class="hero-roles">
-        <span class="hero-role primary">Creative Technologist</span>
-        <span class="hero-role">Motion Designer</span>
-        <span class="hero-role">Interaction Designer</span>
+        <span class="hero-role">INTERACTION</span>
+        <span class="hero-role">DATA VISUALIZATION</span>
+        <span class="hero-role">PROCEDURAL DESIGN</span>
       </div>
 
       <div class="hero-ctas">
@@ -869,127 +749,20 @@ a { text-decoration: none; color: inherit; }
       <div class="feat-header reveal">
         <div>
           <div class="eyebrow-row">
-            <span class="eyebrow-mark">ตัวอย่าง</span>
+            <span class="eyebrow-mark">ไฮไลท์</span>
             <div class="eyebrow-strokes"><span></span><span></span><span></span></div>
-            <span class="eyebrow-label">Selected work</span>
+
           </div>
           <h2 class="feat-title">Selected<br><em>specimens</em></h2>
         </div>
-        <a href="systems.html" class="feat-all">Systems ↗</a>
       </div>
 
-      <div class="proj-grid">
-
-        <!-- ── Hero card — full width ── -->
-        <article class="pj pj-a" data-cat="systems"
-          data-title="The H.A.N.D." data-latin="Hybrid Autonomous Neural Digits"
-          data-year="2025"
-          data-desc="An experiment in biological logic — the decentralised neural architecture of the cephalopod translated into a responsive soft-robotic artifact. Each silicone digit operates its own state logic via a distributed finite state machine, communicating laterally rather than reporting to a central brain."
-          data-tools="Houdini,Blender,TouchDesigner,C++,Arduino Mega 2560,Ecoflex™ Silicone,LDR Network"
-          data-role="Solo research — UAL Thesis, Distinction, Dec 2025."
-          data-link="project-hand.html">
-          <div class="pj-media"><div class="pj-media-ph">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
-            <span>Add media</span>
-          </div></div>
-          <div class="pj-sep"></div>
-          <div class="pj-info">
-            <div class="pj-meta"><span class="pj-cat">Soft Robotics · Thesis 2025</span><span class="pj-year">2025</span></div>
-            <div class="pj-title">The H.A.N.D.</div>
-            <div class="pj-latin">Hybrid Autonomous Neural Digits</div>
-            <div class="pj-desc">Distributed intelligence in soft robotics — silicone skin that computes.</div>
-            <div class="pj-tags"><span class="pj-tag">Embodied AI</span><span class="pj-tag">TouchDesigner</span><span class="pj-tag">C++</span></div>
-          </div>
-          <div class="pj-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        </article>
-
-        <!-- ── 2×2 equal grid ── -->
-        <article class="pj pj-b" data-cat="systems"
-          data-title="Marine Pulse" data-latin="A breathing globe driven by ocean data"
-          data-year="2024"
-          data-desc="An interactive installation reimagining ocean waves as breath. Visitors place a marker on a map and a glowing globe reacts with waveforms shaped by real-time marine data — wave height, direction, period, and current modulate the globe's motion and colour via TouchDesigner over OSC/WebSocket."
-          data-tools="TouchDesigner,Python,Open-Meteo Marine API,Projector-mapped globe,OSC/WebSocket"
-          data-role="Solo — concept, API pipeline, real-time visual system, on-site installation."
-          data-link="systems.html">
-          <div class="pj-media"><div class="pj-media-ph">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
-            <span>Add media</span>
-          </div></div>
-          <div class="pj-sep"></div>
-          <div class="pj-info">
-            <div class="pj-meta"><span class="pj-cat">Live API · Projection</span><span class="pj-year">2024</span></div>
-            <div class="pj-title">Marine Pulse</div>
-            <div class="pj-latin">A breathing globe driven by ocean data</div>
-            <div class="pj-desc">Real-time ocean data made physically present.</div>
-            <div class="pj-tags"><span class="pj-tag">TouchDesigner</span><span class="pj-tag">Python</span><span class="pj-tag">Live API</span></div>
-          </div>
-          <div class="pj-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        </article>
-
-        <article class="pj pj-c" data-cat="graphics"
-          data-title="SPILL" data-latin="Aura Collective — OFFF Festival"
-          data-year="2024"
-          data-desc="FLIP fluid dynamics and a custom Karma thin-film interference shader create the hypnotic iridescence of an oil spill — beautiful and suffocating simultaneously. Submitted to the OFFF Festival screen mapping open call as part of the Aura Collective's ocean exploration."
-          data-tools="Houdini,FLIP Fluid Dynamics,Karma Shader,Thin Film Interference,Procedural Shading"
-          data-role="Solo contribution within Aura Collective — fluid simulation and shader development."
-          data-link="graphics.html">
-          <div class="pj-media"><div class="pj-media-ph">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
-            <span>Add media</span>
-          </div></div>
-          <div class="pj-sep"></div>
-          <div class="pj-info">
-            <div class="pj-meta"><span class="pj-cat">3D Motion · OFFF</span><span class="pj-year">2024</span></div>
-            <div class="pj-title">SPILL</div>
-            <div class="pj-latin">Aura Collective — OFFF Festival open call</div>
-            <div class="pj-desc">Thin-film interference shader. Beautiful and suffocating.</div>
-            <div class="pj-tags"><span class="pj-tag">Houdini</span><span class="pj-tag">FLIP Fluids</span><span class="pj-tag">Karma</span></div>
-          </div>
-          <div class="pj-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        </article>
-
-        <article class="pj pj-d" data-cat="systems"
-          data-title="The Multi-Minded Shape" data-latin="Generative Meshes from Octopus Logic"
-          data-year="2024"
-          data-desc="A CNN classifies texture images into conceptual categories — probabilities like 70% Flowing, 30% Gridded — locating a position in the latent space of a 3D mesh autoencoder. The mesh morphs between learned forms via a live camera feed triggering shader distortions in TouchDesigner."
-          data-tools="Python,CNN Classifier,3D Autoencoder,ComfyUI,Blender,TouchDesigner"
-          data-role="Solo — full ML pipeline, 3D visualisation, interactive installation. UAL 2024."
-          data-link="systems.html">
-          <div class="pj-media"><div class="pj-media-ph">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
-            <span>Add media</span>
-          </div></div>
-          <div class="pj-sep"></div>
-          <div class="pj-info">
-            <div class="pj-meta"><span class="pj-cat">ML / AI · Generative</span><span class="pj-year">2024</span></div>
-            <div class="pj-title">The Multi-Minded Shape</div>
-            <div class="pj-latin">Generative Meshes from Octopus Logic</div>
-            <div class="pj-tags"><span class="pj-tag">CNN</span><span class="pj-tag">3D Autoencoder</span><span class="pj-tag">ComfyUI</span></div>
-          </div>
-          <div class="pj-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        </article>
-
-        <article class="pj pj-e" data-cat="systems"
-          data-title="Coral Bleaching — The Silent Decay" data-latin="Interactive gesture installation"
-          data-year="2024"
-          data-desc="Visitors grow coral formations from hand gestures — and watch them bleach and die. A generative p5.js system driven by MediaPipe hand-tracking maps gesture velocity and shape to coral growth rate, colour temperature, and bleaching progression in real time."
-          data-tools="p5.js,MediaPipe,JavaScript,WebGL,Generative Art"
-          data-role="Solo — concept, gesture system, generative visuals, on-site installation. UAL 2024."
-          data-link="systems.html">
-          <div class="pj-media"><div class="pj-media-ph">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
-            <span>Add media</span>
-          </div></div>
-          <div class="pj-sep"></div>
-          <div class="pj-info">
-            <div class="pj-meta"><span class="pj-cat">Interactive · Generative</span><span class="pj-year">2024</span></div>
-            <div class="pj-title">Coral Bleaching</div>
-            <div class="pj-latin">The Silent Decay</div>
-            <div class="pj-desc">Grow coral from your hands. Watch it die.</div>
-            <div class="pj-tags"><span class="pj-tag">p5.js</span><span class="pj-tag">MediaPipe</span><span class="pj-tag">WebGL</span></div>
-          </div>
-          <div class="pj-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        </article>
+      <div class="proj-grid" id="proj-grid">
+        <!-- Cards populated by JS (data-loader script) from Sanity:
+             systems.featured (as the big pj-a hero) + graphics.featured +
+             any project with featuredHome:true, inserted before this
+             static "more" row. Curate what shows here by toggling
+             featuredHome per project in the Sanity Studio. -->
 
         <!-- ── Full-width split link row ── -->
         <div class="pj pj-f pj-more pj-split">
@@ -1132,30 +905,6 @@ a { text-decoration: none; color: inherit; }
   </div>
   <span>Interaction · Data · Nature · Code</span>
 </footer>
-
-<!-- ── PROJECT DRAWER ── -->
-<div class="drawer-ov" id="dOv"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-top">
-    <div>
-      <div class="drawer-cat" id="dCat"></div>
-      <div class="drawer-title" id="dTitle"></div>
-    </div>
-    <button class="drawer-close" id="dClose">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div class="drawer-body">
-    <div>
-      <div class="drawer-desc" id="dDesc"></div>
-      <a class="drawer-ext" id="dLink" target="_blank">
-        View project
-        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-    </div>
-    <div class="drawer-meta" id="dMeta"></div>
-  </div>
-</div>
 
 <!-- ╔═══════════════════════════════════════════════════════════════╗
      ║  SCRIPTS                                                      ║
@@ -1311,33 +1060,11 @@ a { text-decoration: none; color: inherit; }
 <!-- ── B. NAV: logo colour + background track scroll ── -->
 <script>
 (function() {
-  const nav     = document.querySelector('.nav');
-  const logoLink = document.querySelector('.nav-logo-link');
   const fill    = document.getElementById('progress-fill');
-
-  // interpolate two RGB values by scroll
-  function lerp(a, b, t) { return Math.round(a + (b-a)*t); }
-
-  // Start ground = 255,255,255 (top) / End ground = 214,219,255 (bottom)
-  const GRS=[255,255,255], GRE=[214,219,255];
 
   function updateNav() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const s   = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-
-    // nav background tracks ground colour at current scroll
-    const r = lerp(GRS[0], GRE[0], s);
-    const g = lerp(GRS[1], GRE[1], s);
-    const b = lerp(GRS[2], GRE[2], s);
-    nav.style.background = `rgba(${r},${g},${b},0.78)`;
-
-    // logo colour: at scroll=0 it's on indigo ground so needs contrast;
-    // at scroll=1 on white ground. Both are light, so dark ink works throughout.
-    // We shift from a slightly deeper blue to near-black as ground lightens.
-    const lr = lerp(30,  14, s);
-    const lg = lerp(30,  30, s);
-    const lb = lerp(120, 28, s);
-    logoLink.style.color = `rgb(${lr},${lg},${lb})`;
 
     // progress bar
     if (fill) fill.style.width = (s * 100) + '%';
@@ -1374,11 +1101,9 @@ a { text-decoration: none; color: inherit; }
 <!-- ── C. WIP FEED ── -->
 <script>
 (function() {
-  fetch('portfolio.json')
-    .then(r => r.json())
+  PORTFOLIO_DATA.fetchPortfolio()
     .then(data => {
-      // support both portfolio.json (data.wip) and old wip.json (data.items)
-      const items = data.wip || data.items || [];
+      const items = data.wip || [];
       const upEl = document.getElementById('wip-updated');
       if (upEl) upEl.textContent = items.length ? `${items.length} items` : '';
 
@@ -1408,10 +1133,10 @@ a { text-decoration: none; color: inherit; }
       });
     })
     .catch(() => {
-      // fallback placeholders when wip.json unavailable (local file:// restriction)
+      // fallback placeholders when Sanity is unreachable
       const grid = document.getElementById('wip-grid');
       const upEl = document.getElementById('wip-updated');
-      if (upEl) upEl.textContent = 'Add WIP items in admin.html';
+      if (upEl) upEl.textContent = 'Add WIP items in the Sanity Studio';
       if (!grid) return;
       grid.innerHTML = [1,2,3,4].map(n => `
         <div class="wip-card glass">
@@ -1421,50 +1146,14 @@ a { text-decoration: none; color: inherit; }
           </div></div>
           <div class="wip-info">
             <div class="wip-meta"><span class="wip-tag">Tag</span><span class="wip-date">Date</span></div>
-            <div class="wip-caption">Caption from portfolio.json</div>
+            <div class="wip-caption">Caption from Sanity</div>
           </div>
         </div>`).join('');
     });
 })();
 </script>
 
-<!-- ── D. PROJECT DRAWER ── -->
-<script>
-(function() {
-  const ov    = document.getElementById('dOv');
-  const drw   = document.getElementById('drawer');
-  const dCl   = document.getElementById('dClose');
-  const catMap = { systems:'Systems & Computation', graphics:'Graphics & Motion' };
-
-  function openDrawer(row) {
-    document.getElementById('dCat').textContent   = catMap[row.dataset.cat] || '';
-    document.getElementById('dTitle').innerHTML   = row.dataset.title + '<br><em>' + row.dataset.latin + '</em>';
-    document.getElementById('dDesc').textContent  = row.dataset.desc || '';
-    document.getElementById('dLink').href         = row.dataset.link || '#';
-    const tools = (row.dataset.tools||'').split(',').map(t=>t.trim()).filter(Boolean);
-    document.getElementById('dMeta').innerHTML =
-      `<div class="meta-block"><div class="meta-k">Year</div><div class="meta-v">${row.dataset.year}</div></div>` +
-      `<div class="meta-block"><div class="meta-k">My role</div><div class="meta-v">${row.dataset.role||'—'}</div></div>` +
-      `<div class="meta-block"><div class="meta-k">Tools</div><div class="meta-tools">${tools.map(t=>`<span class="meta-tool">${t}</span>`).join('')}</div></div>`;
-    ov.classList.add('open');
-    drw.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDrawer() {
-    ov.classList.remove('open');
-    drw.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.pj[data-title]').forEach(el => el.addEventListener('click', () => openDrawer(el)));
-  dCl.addEventListener('click', closeDrawer);
-  ov.addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-})();
-</script>
-
-<!-- ── E. CUSTOM CURSOR ── -->
+<!-- ── D. CUSTOM CURSOR ── -->
 <script>
 (function() {
   const dot  = document.querySelector('.cur-dot');
@@ -1484,20 +1173,9 @@ a { text-decoration: none; color: inherit; }
     requestAnimationFrame(loop);
   })();
 
-  // enlarge on interactive elements
-  document.querySelectorAll('.wip-card, .pj').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width='46px'; ring.style.height='46px';
-      ring.style.borderColor='rgba(120,130,255,0.5)';
-      if (lbl) { lbl.textContent='View'; lbl.classList.add('show'); }
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width='30px'; ring.style.height='30px';
-      ring.style.borderColor='rgba(120,130,255,0.35)';
-      if (lbl) lbl.classList.remove('show');
-    });
-  });
-
+  // .pj hover-enlarge is wired in the homepage projects loader below
+  // instead of here, since those cards don't exist yet at this point
+  // — they're rendered later, after the Sanity fetch resolves.
   document.querySelectorAll('a, button').forEach(el => {
     el.addEventListener('mouseenter', () => {
       ring.style.width='40px'; ring.style.height='40px';
@@ -1512,7 +1190,7 @@ a { text-decoration: none; color: inherit; }
 })();
 </script>
 
-<!-- ── F. CONTACT FORM ── -->
+<!-- ── E. CONTACT FORM ── -->
 <script>
 function handleForm(e) {
   e.preventDefault();
@@ -1523,13 +1201,13 @@ function handleForm(e) {
 }
 </script>
 
-<!-- ── G. OCEAN FLOAT: mouse-proximity glow ── -->
+<!-- ── F. OCEAN FLOAT: mouse-proximity glow ── -->
 <script>
 (function() {
   // Brightens a soft blue glow (--water-glow, 0–1) on role pills, project
   // cards and WIP thumbnails as the cursor nears them — re-queried each
-  // frame since WIP cards render asynchronously after the portfolio.json
-  // fetch. Kept separate from the ambient bob animation (CSS, section 12)
+  // frame since WIP cards render asynchronously after the Sanity fetch.
+  // Kept separate from the ambient bob animation (CSS, section 12)
   // which is the only part gated on prefers-reduced-motion — this glow is
   // a colour change, not movement, so it stays on for everyone.
   const RADIUS = 220; // px — distance at which the glow starts to appear
@@ -1554,6 +1232,100 @@ function handleForm(e) {
   document.addEventListener('mouseleave', () => {
     document.querySelectorAll('.hero-role, .pj:not(.pj-more), .wip-card').forEach(el => el.style.setProperty('--water-glow', 0));
   });
+})();
+</script>
+
+<!-- ── G. HOMEPAGE PROJECTS: systems.featured (as the big hero card) +
+     graphics.featured + any project with featuredHome:true from either
+     portfolio's groups. Curate what shows here by toggling featuredHome
+     per project in the Sanity Studio — no page code to touch. ── -->
+<script>
+(function() {
+  const PH = `<div class="pj-media-ph">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/>
+      <path d="M3 17l4-4 3 3 4-5 7 6"/></svg>
+    <span>Add media</span>
+  </div>`;
+
+  // Hero video/gif plays on hover (wired in wireCards below), not on load —
+  // autoplay is reserved for a single large spotlight, not these previews.
+  function mediaEl(p) {
+    if (!p.src) return `<div class="pj-media">${PH}</div>`;
+    if (p.srcType === 'video') {
+      return `<div class="pj-media"><video src="${p.src}" muted loop playsinline preload="metadata"></video></div>`;
+    }
+    if (p.srcType === 'gif') {
+      const poster = p.poster || p.src;
+      return `<div class="pj-media"><img src="${poster}" data-gif="${p.src}" data-poster="${poster}" alt="${p.title}" onerror="this.parentElement.innerHTML='${PH.replace(/"/g,"'")}'"></div>`;
+    }
+    return `<div class="pj-media"><img src="${p.src}" alt="${p.title}" onerror="this.parentElement.innerHTML='${PH.replace(/"/g,"'")}'"></div>`;
+  }
+
+  function cardHTML(p, isHero) {
+    const link = p.link || 'index.html';
+    const external = /^https?:\/\//.test(link);
+    return `
+      <a class="pj ${isHero?'pj-a':'pj-b'}" href="${link}" ${external?'target="_blank" rel="noopener"':''}>
+        ${mediaEl(p)}
+        <div class="pj-sep"></div>
+        <div class="pj-info">
+          <div class="pj-meta"><span class="pj-cat">${p.cat||''}</span><span class="pj-year">${p.year||''}</span></div>
+          <div class="pj-title">${p.title}</div>
+          ${p.latin?`<div class="pj-latin">${p.latin}</div>`:''}
+          <div class="pj-tags">${(p.tags||[]).map(t=>`<span class="pj-tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="pj-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+      </a>`;
+  }
+
+  // featured entries don't carry `cat`/`tags` the same way group projects do —
+  // adapt them to the same shape cardHTML expects.
+  function fromFeatured(f, catLabel) {
+    if (!f) return null;
+    return { ...f, cat: f.badge || catLabel, tags: (f.tools||[]).slice(0,3) };
+  }
+
+  function wireCards(root) {
+    const ring = document.querySelector('.cur-ring'), lbl = document.querySelector('.cur-label');
+    root.querySelectorAll('.pj[href]').forEach(el => {
+      const v = el.querySelector('video');
+      if (v) {
+        el.addEventListener('mouseenter', () => v.play().catch(()=>{}));
+        el.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+      }
+      const gifImg = el.querySelector('img[data-gif]');
+      if (gifImg) {
+        el.addEventListener('mouseenter', () => { gifImg.src = gifImg.dataset.gif; });
+        el.addEventListener('mouseleave', () => { gifImg.src = gifImg.dataset.poster; });
+      }
+      el.addEventListener('mouseenter',()=>{if(ring){ring.style.width='46px';ring.style.height='46px';ring.style.borderColor='rgba(120,130,255,0.5)'}if(lbl){lbl.textContent='View';lbl.classList.add('show')}});
+      el.addEventListener('mouseleave',()=>{if(ring){ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(120,130,255,0.35)'}if(lbl)lbl.classList.remove('show')});
+    });
+  }
+
+  PORTFOLIO_DATA.fetchPortfolio()
+    .then(data => {
+      const grid = document.getElementById('proj-grid');
+      if (!grid) return;
+
+      const hero = fromFeatured(data.systems && data.systems.featured, 'Systems');
+      const spotlight = fromFeatured(data.graphics && data.graphics.featured, 'Graphics');
+      const picks = [];
+      ['systems','graphics'].forEach(key => {
+        (data[key]?.groups||[]).forEach(g => {
+          (g.projects||[]).forEach(p => { if (p.featuredHome && p.visible !== false) picks.push(p); });
+        });
+      });
+
+      const cards = [];
+      if (hero) cards.push(cardHTML(hero, true));
+      picks.forEach(p => cards.push(cardHTML(p, false)));
+      if (spotlight) cards.push(cardHTML(spotlight, false));
+
+      grid.insertAdjacentHTML('afterbegin', cards.join(''));
+      wireCards(grid);
+    })
+    .catch(err => console.warn('Could not reach Sanity — homepage project cards left empty.', err));
 })();
 </script>
 

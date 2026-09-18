@@ -10,10 +10,6 @@
 *.swp
 *.swo
 
-# Local-only CMS tooling (edits portfolio.json, not needed by the live site)
-admin.html
-project-admin.html
-
 # Large media (track with Git LFS or host elsewhere)
 # media/*.mp4
 # media/wip/*.mp4

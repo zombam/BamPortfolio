@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="aurora-emerald">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Systems & Computation — Natcha (Bam) Watcharawittayakul</title>
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="css/shared.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+<script src="js/sanity-data.js"></script>
 
 <style>
 /* ╔═══════════════════════════════════════════════════════════════╗
@@ -34,40 +35,11 @@ a{text-decoration:none;color:inherit}
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  2. NAVIGATION                                                ║
-   ╚═══════════════════════════════════════════════════════════════╝ */
-.nav{
-  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:700;
-  display:flex;align-items:stretch;justify-content:space-between;
-  background:rgba(255,255,255,0.78);
-  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
-  border-bottom:0.5px solid rgba(14,30,28,0.08);transition:background 0.4s;
-}
-.nav-logo{display:flex;align-items:center;padding:0 1.6rem;border-right:0.5px solid rgba(14,30,28,0.08);}
-.nav-logo-link{
-  display:block;width:28px;height:28px;
-  transform:rotate(-90deg);
-  transition:transform 0.55s cubic-bezier(0.34,1.56,0.64,1);
-  color:rgba(14,30,28,0.85);
-}
-.nav-logo-link:hover{transform:rotate(0deg)}
-.nav-logo-link svg{width:100%;height:100%;display:block}
-.nav-links{position:absolute;left:50%;top:0;height:100%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center}
-.nav-link{
-  font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--text-dim);padding:0 1.2rem;height:var(--nav-h);
-  display:flex;align-items:center;
-  border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s;
-}
-.nav-link:hover{color:var(--text-primary);border-bottom-color:var(--text-accent)}
-.nav-link.active{color:var(--text-primary);border-bottom-color:var(--mark-blue)}
-.nav-right{display:flex;align-items:center;gap:1.2rem;padding:0 1.4rem;border-left:0.5px solid rgba(14,30,28,0.08);}
-.nav-pip{display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);}
-.pip-dot{width:4px;height:4px;border-radius:50%;background:var(--text-accent);animation:pipPulse 2.6s ease-in-out infinite}
-@keyframes pipPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
-.nav-cta{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--mark-blue);padding:6px 14px;border-radius:1px;border:none;transition:opacity .2s;cursor:none}
-.nav-cta:hover{opacity:.82}
-#progress-bar{position:fixed;top:var(--nav-h);left:0;right:0;height:1.5px;z-index:699;background:rgba(120,130,255,0.08)}
-#progress-fill{height:100%;background:var(--text-accent);width:0%;transition:width .1s linear}
+   ╚═══════════════════════════════════════════════════════════════╝
+   The whole top bar (incl. logo size, hairlines, swim animation) now
+   lives in css/shared.css under .aurora-nav — this page just puts
+   that class on <nav> and the shared block does the rest. Edit
+   shared.css to change the nav on every aurora page at once. */
 
 /* ╔═══════════════════════════════════════════════════════════════╗
    ║  3. SHARED MOTIFS                                             ║
@@ -108,20 +80,11 @@ a{text-decoration:none;color:inherit}
    ╚═══════════════════════════════════════════════════════════════╝ */
 #hero{
   min-height:calc(100vh - var(--nav-h));
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 2.5rem 5rem;position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:7rem 2.5rem 5rem;position:relative;
 }
 @keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-.hero-back{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--text-dim);margin-bottom:2rem;
-  transition:color .2s;opacity:0;animation:riseIn .6s ease .1s forwards;
-}
-.hero-back:hover{color:var(--text-accent)}
-.hero-back svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:1.8}
 
 .hero-h1{
   font-family:var(--font-display);
@@ -250,8 +213,7 @@ a{text-decoration:none;color:inherit}
 .card-year{font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--text-dim)}
 .card-title{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--text-primary);line-height:1.1;transition:color .2s}
 .proj-card:hover .card-title{color:rgba(60,65,220,0.9)}
-.card-latin{font-family:var(--font-accent);font-size:var(--fs-md);font-style:italic;color:var(--text-secondary)}
-.card-desc{font-size:var(--fs-md);color:var(--text-secondary);line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:.2rem}
+.card-latin{font-family:var(--font-accent);font-size:var(--fs-md);font-style:italic;color:var(--text-secondary);margin-top:.2rem}
 .card-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:.4rem}
 .card-tag{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.08em;background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);color:rgba(60,65,220,0.85);padding:2px 6px;border-radius:1px}
 
@@ -294,32 +256,6 @@ a{text-decoration:none;color:inherit}
 .footer-link{transition:color .2s}
 .footer-link:hover{color:var(--text-accent)}
 
-/* ╔═══════════════════════════════════════════════════════════════╗
-   ║  9. DRAWER                                                    ║
-   ╚═══════════════════════════════════════════════════════════════╝ */
-.drawer-ov{position:fixed;inset:0;background:rgba(14,30,28,0.22);z-index:800;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(6px)}
-.drawer-ov.open{opacity:1;pointer-events:all}
-.drawer{position:fixed;bottom:0;left:0;right:0;z-index:801;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(120,130,255,0.3);transform:translateY(100%);transition:transform .46s cubic-bezier(.23,1,.32,1);max-height:78vh;overflow-y:auto;padding:2.5rem 2.5rem 3.5rem}
-.drawer.open{transform:translateY(0)}
-.drawer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem}
-.drawer-cat{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.25em;text-transform:uppercase;color:var(--text-accent);margin-bottom:.4rem}
-.drawer-title{font-family:var(--font-display);font-size:clamp(24px,4vw,48px);font-weight:600;color:var(--text-primary);line-height:1.1}
-.drawer-title em{font-family:var(--font-accent);font-style:italic;font-weight:300;color:var(--text-secondary);font-size:.72em}
-.drawer-close{background:none;border:.5px solid rgba(14,30,28,0.15);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:none;transition:border-color .2s}
-.drawer-close:hover{border-color:rgba(120,130,255,0.6)}
-.drawer-close svg{width:14px;height:14px;stroke:var(--text-secondary);fill:none;stroke-width:1.5}
-.drawer-body{display:grid;grid-template-columns:1fr 280px;gap:3rem}
-.drawer-desc{font-size:var(--fs-md);line-height:2.1;color:var(--text-secondary)}
-.drawer-meta{display:flex;flex-direction:column;gap:1rem}
-.meta-block{padding-bottom:1rem;border-bottom:.5px solid rgba(14,30,28,0.06)}
-.meta-k{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.3rem}
-.meta-v{font-size:var(--fs-sm);color:var(--text-primary);line-height:1.7}
-.meta-tools{display:flex;flex-wrap:wrap;gap:4px;margin-top:.4rem}
-.meta-tool{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.09em;background:rgba(120,130,255,0.07);border:.5px solid rgba(120,130,255,0.22);color:rgba(60,65,220,0.85);padding:2px 7px;border-radius:1px}
-.drawer-ext{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--text-accent);border:.5px solid rgba(120,130,255,0.35);padding:.6rem 1.1rem;border-radius:1px;transition:all .2s}
-.drawer-ext:hover{background:rgba(120,130,255,0.08)}
-.drawer-ext svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5}
-
 /* ── Mobile ── */
 @media(max-width:768px){
   .si{padding:3.5rem 1.2rem}
@@ -328,8 +264,6 @@ a{text-decoration:none;color:inherit}
   #about{grid-template-columns:1fr}
   .about-l{border-right:none;border-bottom:.5px solid rgba(14,30,28,0.07)}
   .card-grid{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .drawer-body{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -342,30 +276,31 @@ a{text-decoration:none;color:inherit}
 <div id="progress-bar"><div id="progress-fill"></div></div>
 
 <!-- ── NAV ── -->
-<nav class="nav">
+<nav class="nav aurora-nav">
   <div class="nav-logo">
-    <a href="index.html" class="nav-logo-link" title="Homepage">
-      <svg viewBox="0 0 801 801" fill-rule="evenodd">
-        <path d="M489,551 L490,573 L493,594 L504,628 L511,641 L522,656 L537,671 L547,678
-          L561,659 L574,638 L569,635 L557,623 L546,605 L539,581 L537,551 Z
-          M376,551 L377,575 L383,607 L390,626 L398,641 L408,655 L423,670 L434,678
-          L454,650 L461,638 L457,636 L443,622 L433,605 L426,581 L424,551 Z
-          M263,551 L263,563 L266,590 L270,607 L276,624 L283,638 L294,654 L311,671
-          L321,678 L348,639 L338,631 L329,621 L319,603 L312,576 L311,551 Z
-          M263,335 L263,437 L266,453 L281,482 L309,504 L333,511 L355,511 L384,501
-          L400,488 L427,506 L446,511 L468,511 L489,505 L506,495 L521,480 L531,463
-          L537,441 L537,335 Z
-          M425,383 L488,383 L489,384 L489,438 L487,444 L482,452 L474,459 L468,462
-          L460,463 L459,464 L449,463 L438,458 L428,447 L424,436 L424,384 Z
-          M312,383 L375,383 L376,384 L376,438 L374,444 L369,452 L361,459 L355,462
-          L347,463 L346,464 L336,463 L325,458 L316,449 L311,437 L311,384 Z
-          M222,272 L260,301 L368,158 L393,144 L415,146 L434,160 L540,301 L578,271
-          L460,118 L425,99 L391,96 L364,103 L334,124 Z" fill="currentColor"/>
-      </svg>
+    <a href="index.html" class="nav-logo-link" title="Back to homepage">
+      <span class="nav-logo-glyph">
+        <svg viewBox="0 0 801 801" fill-rule="evenodd">
+          <path d="M489,551 L490,573 L493,594 L504,628 L511,641 L522,656 L537,671 L547,678
+            L561,659 L574,638 L569,635 L557,623 L546,605 L539,581 L537,551 Z
+            M376,551 L377,575 L383,607 L390,626 L398,641 L408,655 L423,670 L434,678
+            L454,650 L461,638 L457,636 L443,622 L433,605 L426,581 L424,551 Z
+            M263,551 L263,563 L266,590 L270,607 L276,624 L283,638 L294,654 L311,671
+            L321,678 L348,639 L338,631 L329,621 L319,603 L312,576 L311,551 Z
+            M263,335 L263,437 L266,453 L281,482 L309,504 L333,511 L355,511 L384,501
+            L400,488 L427,506 L446,511 L468,511 L489,505 L506,495 L521,480 L531,463
+            L537,441 L537,335 Z
+            M425,383 L488,383 L489,384 L489,438 L487,444 L482,452 L474,459 L468,462
+            L460,463 L459,464 L449,463 L438,458 L428,447 L424,436 L424,384 Z
+            M312,383 L375,383 L376,384 L376,438 L374,444 L369,452 L361,459 L355,462
+            L347,463 L346,464 L336,463 L325,458 L316,449 L311,437 L311,384 Z
+            M222,272 L260,301 L368,158 L393,144 L415,146 L434,160 L540,301 L578,271
+            L460,118 L425,99 L391,96 L364,103 L334,124 Z" fill="currentColor"/>
+        </svg>
+      </span>
     </a>
   </div>
   <div class="nav-links">
-    <a href="index.html"  class="nav-link">Home</a>
     <a href="systems.html" class="nav-link active">Systems</a>
     <a href="graphics.html"class="nav-link">Graphics</a>
     <a href="about.html"   class="nav-link">About</a>
@@ -389,11 +324,6 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <div class="hero-copy" style="position:relative;z-index:2;max-width:700px">
-    <a href="index.html" class="hero-back">
-      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      All work
-    </a>
-
     <div class="eyebrow-row">
       <span class="eyebrow-mark">ระบบ</span>
       <div class="eyebrow-strokes"><span></span><span></span><span></span></div>
@@ -426,10 +356,10 @@ a{text-decoration:none;color:inherit}
 </section>
 
 <!-- ══════════════════════════════════════
-     SECTION 02 — FEATURED (from portfolio.json → featured)
+     SECTION 02 — FEATURED (from Sanity → featured)
 ══════════════════════════════════════ -->
 <section id="featured" class="section-sep">
-  <!-- populated by Script F from portfolio.json -->
+  <!-- populated by Script F from Sanity -->
 </section>
 
 <!-- ══════════════════════════════════════
@@ -438,7 +368,7 @@ a{text-decoration:none;color:inherit}
 <section id="projects" class="section-sep">
 
   <div class="si" id="projects-container">
-    <!-- populated by Script F from portfolio.json -->
+    <!-- populated by Script F from Sanity -->
   </div>
 
 <!-- ══════════════════════════════════════
@@ -576,27 +506,6 @@ a{text-decoration:none;color:inherit}
   <span>Interaction · Data · Nature · Code</span>
 </footer>
 
-<!-- ── DRAWER ── -->
-<div class="drawer-ov" id="dOv"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-top">
-    <div><div class="drawer-cat" id="dCat"></div><div class="drawer-title" id="dTitle"></div></div>
-    <button class="drawer-close" id="dClose">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div class="drawer-body">
-    <div>
-      <div class="drawer-desc" id="dDesc"></div>
-      <a class="drawer-ext" id="dLink" target="_blank">
-        View project
-        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-    </div>
-    <div class="drawer-meta" id="dMeta"></div>
-  </div>
-</div>
-
 <!-- ╔═══════════════════════════════════════════════════════════════╗
      ║  SCRIPTS                                                      ║
      ╚═══════════════════════════════════════════════════════════════╝ -->
@@ -674,13 +583,10 @@ a{text-decoration:none;color:inherit}
 <!-- B. NAV SCROLL -->
 <script>
 (function(){
-  const nav=document.querySelector('.nav'),logo=document.querySelector('.nav-logo-link'),fill=document.getElementById('progress-fill');
-  const lp=(a,b,t)=>Math.round(a+(b-a)*t);
+  const fill=document.getElementById('progress-fill');
   window.addEventListener('scroll',()=>{
     const m=document.documentElement.scrollHeight-window.innerHeight;
     const s=m>0?Math.min(window.scrollY/m,1):0;
-    nav.style.background=`rgba(${lp(255,214,s)},${lp(255,219,s)},${lp(255,255,s)},0.78)`;
-    logo.style.color=`rgb(${lp(14,14,s)},${lp(30,30,s)},${lp(28,80,s)})`;
     if(fill)fill.style.width=(s*100)+'%';
   },{passive:true});
   // reveal on scroll
@@ -689,40 +595,13 @@ a{text-decoration:none;color:inherit}
 })();
 </script>
 
-<!-- C. DRAWER -->
-<script>
-(function(){
-  const ov=document.getElementById('dOv'),drw=document.getElementById('drawer'),dCl=document.getElementById('dClose');
-  function open(row){
-    document.getElementById('dCat').textContent=row.dataset.cat||'';
-    document.getElementById('dTitle').innerHTML=row.dataset.title+'<br><em>'+row.dataset.latin+'</em>';
-    document.getElementById('dDesc').textContent=row.dataset.desc||'';
-    document.getElementById('dLink').href=row.dataset.link||'#';
-    const tools=(row.dataset.tools||'').split(',').map(t=>t.trim()).filter(Boolean);
-    document.getElementById('dMeta').innerHTML=
-      `<div class="meta-block"><div class="meta-k">Year</div><div class="meta-v">${row.dataset.year||''}</div></div>`+
-      `<div class="meta-block"><div class="meta-k">My role</div><div class="meta-v">${row.dataset.role||'—'}</div></div>`+
-      `<div class="meta-block"><div class="meta-k">Tools</div><div class="meta-tools">${tools.map(t=>`<span class="meta-tool">${t}</span>`).join('')}</div></div>`;
-    ov.classList.add('open');drw.classList.add('open');document.body.style.overflow='hidden';
-  }
-  function close(){ov.classList.remove('open');drw.classList.remove('open');document.body.style.overflow='';}
-  document.querySelectorAll('.proj-card[data-title]').forEach(el=>el.addEventListener('click',()=>open(el)));
-  dCl.addEventListener('click',close);ov.addEventListener('click',close);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-})();
-</script>
-
-<!-- D. CURSOR -->
+<!-- C. CURSOR -->
 <script>
 (function(){
   const dot=document.querySelector('.cur-dot'),ring=document.querySelector('.cur-ring'),lbl=document.querySelector('.cur-label');
   let rx=0,ry=0,cx=0,cy=0;
   document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';if(lbl){lbl.style.left=cx+'px';lbl.style.top=cy+'px'}});
   (function loop(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-  document.querySelectorAll('.proj-card,.feat-media').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{ring.style.width='46px';ring.style.height='46px';ring.style.borderColor='rgba(120,130,255,0.5)';if(lbl){lbl.textContent='View';lbl.classList.add('show')}});
-    el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(120,130,255,0.35)';if(lbl)lbl.classList.remove('show')});
-  });
   document.querySelectorAll('a,button').forEach(el=>{
     el.addEventListener('mouseenter',()=>{ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(120,130,255,0.5)'});
     el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(120,130,255,0.35)';if(lbl)lbl.classList.remove('show')});
@@ -730,12 +609,12 @@ a{text-decoration:none;color:inherit}
 })();
 </script>
 
-<!-- E. FORM -->
+<!-- D. FORM -->
 <script>
 function handleForm(e){e.preventDefault();const b=document.getElementById('fsub');b.textContent='Sent ✓';b.style.background='rgba(120,130,255,1)';b.disabled=true}
 </script>
 
-<!-- F. SYSTEMS DATA LOADER (reads portfolio.json, renders featured + project grid) -->
+<!-- E. SYSTEMS DATA LOADER (reads from Sanity, renders featured + project grid) -->
 <script>
 (function(){
   // ── Helpers ─────────────────────────────────────────────────
@@ -745,12 +624,19 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
     <span>Add media</span>
   </div>`;
 
+  // Card media: video/gif hero plays on hover (wired in wireCards below),
+  // not on load — autoplay is reserved for the single large featured
+  // spotlight, not these small grid previews.
   function mediaEl(p, cls) {
     if (!p.src) return `<div class="${cls}">${PH}</div>`;
-    const tag = p.srcType === 'video'
-      ? `<video src="${p.src}" autoplay loop muted playsinline></video>`
-      : `<img src="${p.src}" alt="${p.title}" onerror="this.parentElement.innerHTML='${PH.replace(/"/g,"'")}'">`;
-    return `<div class="${cls}">${tag}</div>`;
+    if (p.srcType === 'video') {
+      return `<div class="${cls}"><video src="${p.src}" muted loop playsinline preload="metadata"></video></div>`;
+    }
+    if (p.srcType === 'gif') {
+      const poster = p.poster || p.src;
+      return `<div class="${cls}"><img src="${poster}" data-gif="${p.src}" data-poster="${poster}" alt="${p.title}" onerror="this.parentElement.innerHTML='${PH.replace(/"/g,"'")}'"></div>`;
+    }
+    return `<div class="${cls}"><img src="${p.src}" alt="${p.title}" onerror="this.parentElement.innerHTML='${PH.replace(/"/g,"'")}'"></div>`;
   }
 
   // ── Render featured ─────────────────────────────────────────
@@ -785,16 +671,14 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
     reobserve(sec);
   }
 
-  // ── Render a project card ────────────────────────────────────
+  // ── Render a project card — a real <a>, no drawer: click goes ─
+  // ── straight to the project page (or opens external links in a
+  //    new tab, since those lead off-site). ────────────────────
   function cardHTML(p) {
+    const link = p.link || 'systems.html';
+    const external = /^https?:\/\//.test(link);
     return `
-      <article class="proj-card"
-        data-cat="${p.cat}" data-year="${p.year}"
-        data-title="${p.title}" data-latin="${p.latin||''}"
-        data-desc="${(p.desc||'').replace(/"/g,'&quot;')}"
-        data-tools="${(p.tools||[]).join(',')}"
-        data-role="${(p.role||'').replace(/"/g,'&quot;')}"
-        data-link="${p.link||'systems.html'}">
+      <a class="proj-card" href="${link}" ${external ? 'target="_blank" rel="noopener"' : ''}>
         ${mediaEl(p,'card-media')}
         <div class="card-sep"></div>
         <div class="card-info">
@@ -804,7 +688,6 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
           </div>
           <div class="card-title">${p.title}</div>
           ${p.latin?`<div class="card-latin">${p.latin}</div>`:''}
-          <div class="card-desc">${p.shortDesc||p.desc||''}</div>
           <div class="card-tags">
             ${(p.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}
           </div>
@@ -812,7 +695,7 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
         <div class="card-arrow">
           <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
-      </article>`;
+      </a>`;
   }
 
   // ── Render project groups ────────────────────────────────────
@@ -834,34 +717,24 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
           </div>
         </div>`;
     }).join('');
-    // wire drawer + reveal on newly created cards
-    wireDrawer(container);
+    wireCards(container);
     reobserve(container);
   }
 
-  // ── Wire drawer clicks ───────────────────────────────────────
-  function wireDrawer(root) {
-    const ov  = document.getElementById('dOv');
-    const drw = document.getElementById('drawer');
-    root.querySelectorAll('.proj-card[data-title]').forEach(el => {
-      el.addEventListener('click', () => {
-        document.getElementById('dCat').textContent   = el.dataset.cat||'';
-        document.getElementById('dTitle').innerHTML   = el.dataset.title+'<br><em>'+(el.dataset.latin||'')+'</em>';
-        document.getElementById('dDesc').textContent  = el.dataset.desc||'';
-        document.getElementById('dLink').href         = el.dataset.link||'#';
-        const tools=(el.dataset.tools||'').split(',').map(t=>t.trim()).filter(Boolean);
-        document.getElementById('dMeta').innerHTML =
-          `<div class="meta-block"><div class="meta-k">Year</div><div class="meta-v">${el.dataset.year||''}</div></div>`+
-          `<div class="meta-block"><div class="meta-k">My role</div><div class="meta-v">${el.dataset.role||'—'}</div></div>`+
-          `<div class="meta-block"><div class="meta-k">Tools</div><div class="meta-tools">${tools.map(t=>`<span class="meta-tool">${t}</span>`).join('')}</div></div>`;
-        if(ov)ov.classList.add('open');
-        if(drw)drw.classList.add('open');
-        document.body.style.overflow='hidden';
-      });
-    });
-    // cursor expand on cards
-    root.querySelectorAll('.proj-card').forEach(el=>{
-      const ring=document.querySelector('.cur-ring'), lbl=document.querySelector('.cur-label');
+  // ── Wire card hover behaviour: play video/gif hero, enlarge cursor ─
+  function wireCards(root) {
+    const ring = document.querySelector('.cur-ring'), lbl = document.querySelector('.cur-label');
+    root.querySelectorAll('.proj-card').forEach(el => {
+      const v = el.querySelector('video');
+      if (v) {
+        el.addEventListener('mouseenter', () => v.play().catch(()=>{}));
+        el.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+      }
+      const gifImg = el.querySelector('img[data-gif]');
+      if (gifImg) {
+        el.addEventListener('mouseenter', () => { gifImg.src = gifImg.dataset.gif; });
+        el.addEventListener('mouseleave', () => { gifImg.src = gifImg.dataset.poster; });
+      }
       el.addEventListener('mouseenter',()=>{if(ring){ring.style.width='46px';ring.style.height='46px';ring.style.borderColor='rgba(120,130,255,0.5)'}if(lbl){lbl.textContent='View';lbl.classList.add('show')}});
       el.addEventListener('mouseleave',()=>{if(ring){ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(120,130,255,0.35)'}if(lbl)lbl.classList.remove('show')});
     });
@@ -879,17 +752,16 @@ function handleForm(e){e.preventDefault();const b=document.getElementById('fsub'
   }
 
   // ── Fetch and render ─────────────────────────────────────────
-  fetch('portfolio.json')
-    .then(r=>r.json())
+  PORTFOLIO_DATA.fetchPortfolio()
     .then(data=>{
-      const sd = data.systems || data; // fallback for old portfolio.json
+      const sd = data.systems;
       renderFeatured(sd.featured);
       renderProjects(sd.groups);
     })
-    .catch(err=>{\n      console.warn('portfolio.json not found — using static fallback.', err);
+    .catch(err=>{ console.warn('Could not reach Sanity — using static fallback.', err);
       // static fallback: just show placeholder text
       const c=document.getElementById('projects-container');
-      if(c) c.innerHTML='<p style="padding:2rem;font-family:var(--font-mono);color:var(--text-dim);font-size:var(--fs-sm)">Place portfolio.json in the portfolio folder to load projects.</p>';
+      if(c) c.innerHTML='<p style="padding:2rem;font-family:var(--font-mono);color:var(--text-dim);font-size:var(--fs-sm)">Could not load project data from Sanity.</p>';
     });
 })();
 </script>
